@@ -1,0 +1,9 @@
+import sys
+sys.path.append("../../lib/networkx-1.7-py2.7.egg")
+import networkx as nx
+
+class BayesNet(object):
+    graph = nx.Graph()
+
+    def __init__(self):
+        print "lol"
