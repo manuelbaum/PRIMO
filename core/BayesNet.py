@@ -4,6 +4,7 @@ sys.path.append("lib/networkx-1.7-py2.7.egg")
 import networkx as nx
 from core.Node import Node
 
+
 class BayesNet(object):
     graph = nx.DiGraph()
     node_lookup = {}
@@ -11,7 +12,6 @@ class BayesNet(object):
     def __init__(self):
         pass
 
-    
     def add_node(self, node):
         if isinstance(node, Node):
             if node.name in self.node_lookup.keys():
@@ -66,4 +66,3 @@ class BayesNet(object):
         import matplotlib.pyplot as plt
         nx.draw(self.graph)
         plt.show() 
- 
