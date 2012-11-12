@@ -47,8 +47,13 @@ class BayesNet(object):
             raise Exception("There is no node with name "+node_name+" in the bayesnet")        
 
     def get_nodes(self, node_names):
-        for node_name in node_names:
-            yield self.get_node(node_name)
+        nodes = []
+        if not node_names:
+            nodes = self.bn.nodes()
+        else:
+            for node_name in node_names:
+                nodes.append(self.get_node(node_name))
+        return nodes
 
     def get_parents(self, node):
         raise Exception("Called unimplemented function")
