@@ -1,2 +1,5 @@
 class Node(object):
-    name = "SomeNode"
+    name = "UninitializedName"
+
+    def __init__(self, node_name):
+        self.name = node_name
