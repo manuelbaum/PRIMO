@@ -18,10 +18,16 @@ ns = bn.get_nodes(["Node2","Node1"])
 for n in ns:
     print n.name
 
+print bn.get_parents(n2)
+
+
 print "Removing existing edge"
 bn.remove_edge(n1, n2)
+
+print "nach edge remove"
+print bn.get_parents(n2)
+
 print "Removing not existing edge"
 bn.remove_edge(n1, n2)
-
 
 bn.draw()

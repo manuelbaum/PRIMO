@@ -31,7 +31,14 @@ class BayesNet(object):
             raise Exception("Tried to add an Edge between two Nodes of which at least one was not contained in the Bayesnet")
 
     def remove_node(self, node):
-        raise Exception("Called unimplemented function")
+        if node.name not in self.node_lookup.keys():
+            raise Exception("Node " + node.name + "does not exists")
+        else :
+            try:
+                self.graph.remove_node(node)
+            except nx.exception.NetworkXError:
+                raise Exception("Tried to remove a node which does not exists")
+            del self.node_lookup[node.name]
 
     def remove_edge(self, node_from, node_to):
         try:
@@ -44,22 +51,30 @@ class BayesNet(object):
         try:
             return self.node_lookup[node_name]
         except KeyError:
-            raise Exception("There is no node with name "+node_name+" in the bayesnet")        
+            raise Exception("There is no node with name "+node_name+" in the bayesnet")
 
     def get_nodes(self, node_names):
         nodes = []
         if not node_names:
-            nodes = self.bn.nodes()
+            nodes = self.graph.nodes()
         else:
             for node_name in node_names:
                 nodes.append(self.get_node(node_name))
         return nodes
 
     def get_parents(self, node):
-        raise Exception("Called unimplemented function")
+        if node.name not in self.node_lookup.keys():
+            raise Exception("Node " + node.name + "does not exists")
+        else:
+            return self.graph.predecessors(node)
+
 
     def get_children(self, node):
-        raise Exception("Called unimplemented function")
+        if node.name not in self.node_lookup.keys():
+            raise Exception("Node " + node.name + "does not exists")
+        else:
+            return self.graph.successors(node)
+
 
     def get_markov_blanket(self, node):
         raise Exception("Called unimplemented function")
@@ -70,4 +85,4 @@ class BayesNet(object):
     def draw(self):
         import matplotlib.pyplot as plt
         nx.draw(self.graph)
-        plt.show() 
+        plt.show()
