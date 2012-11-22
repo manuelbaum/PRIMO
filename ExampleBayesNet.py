@@ -21,6 +21,7 @@ bn.add_edge(earthquake, alarm)
 bn.add_edge(alarm, john_calls)
 bn.add_edge(alarm, mary_calls)
 
+
 burglary.set_probability(0.2,[(burglary,"Intruder")])
 
 alarm.set_probability(0.1,[(alarm,"Ringing"),(burglary,"Safe"),(earthquake,"Calm")])
