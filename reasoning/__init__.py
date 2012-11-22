@@ -1,4 +1,3 @@
-from AbstractCPD import AbstractCPD
-from CPT import CPT
-from Gauss import Gauss
-from RandomNode import RandomNode
+from DiscreteNode import DiscreteNode
+from GaussNode import GaussNode
+from RandomNode import AbstractRandomNode

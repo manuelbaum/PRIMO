@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from reasoning.AbstractCPD import AbstractCPD
-from numpy import array
 
-class CPT(AbstractCPD):
+from numpy import array
+from reasoning.CPD import CPD
+
+
+class CPT(CPD):
     '''TODO: write doc'''
 
     self.values = numpy.array(0)

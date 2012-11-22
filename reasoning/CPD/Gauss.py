@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from reasoning.AbstractCPD import AbstractCPD
+from reasoning.CPD import CPD
 
 
-class Gauss(AbstractCPD):
+class Gauss(CPD):
     '''TODO: write doc'''
 
     def __init__(self):
