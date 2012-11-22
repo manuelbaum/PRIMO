@@ -1,3 +1,3 @@
-from CPD import AbstractCPD
+from CPD import CPD
 from CPT import CPT
 from Gauss import Gauss

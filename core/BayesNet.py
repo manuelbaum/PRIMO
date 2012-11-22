@@ -24,9 +24,7 @@ class BayesNet(object):
     def add_edge(self, node_from, node_to):
         if node_from in self.graph.nodes() and node_to in self.graph.nodes():
             self.graph.add_edge(node_from, node_to)
-
-            #raise Exception("Fixme: Adapt CPD of child-node")
-
+            node_to.announce_parent(node_from)
         else:
             raise Exception("Tried to add an Edge between two Nodes of which at least one was not contained in the Bayesnet")
 

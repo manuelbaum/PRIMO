@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-class AbstractCPD(object):
+class CPD(object):
     '''TODO: write doc'''
 
     def __init__(self):
-        super(AbstractCPD, self).__init__()
+        super(CPD, self).__init__()

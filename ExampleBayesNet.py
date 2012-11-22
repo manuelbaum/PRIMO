@@ -1,27 +1,29 @@
 from  core.BayesNet import *
-from  core.Node import *
+from  reasoning.DiscreteNode import DiscreteNode
 
 bn = BayesNet()
-n1 = Node("Node1")
-n2 = Node("Node2")
-n3 = Node("Node3")
+burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
+alarm = DiscreteNode("Alarm", ["Ringing", "Silent","Kaputt"])
+earthquake = DiscreteNode("Earthquake", ["Shaking", "Calm"])
+john_calls = DiscreteNode("John calls", ["Calling", "Not Calling"])
+mary_calls = DiscreteNode("Mary calls", ["Calling", "Not Calling"])
 
-bn.add_node(n1)
-bn.add_node(n2)
 
-bn.add_edge(n1,n2)
+bn.add_node(burglary)
+bn.add_node(alarm)
+bn.add_node(earthquake)
+bn.add_node(john_calls)
+bn.add_node(mary_calls)
 
-n = bn.get_node("Node1")
-print n.name
 
-ns = bn.get_nodes(["Node2","Node1"])
-for n in ns:
-    print n.name
+bn.add_edge(burglary,alarm)
+bn.add_edge(earthquake, alarm)
+bn.add_edge(alarm, john_calls)
+bn.add_edge(alarm, mary_calls)
 
-print "Removing existing edge"
-bn.remove_edge(n1, n2)
-print "Removing not existing edge"
-bn.remove_edge(n1, n2)
+burglary.set_probability(0.2,[(burglary,"Intruder")])
+
+alarm.set_probability(0.1,[(alarm,"Ringing"),(burglary,"Safe"),(earthquake,"Calm")])
 
 
 bn.draw()
