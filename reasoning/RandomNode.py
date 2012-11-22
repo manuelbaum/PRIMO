@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from core.Node import Node
-from reasoning.AbstractCPD import AbstractCPD
+from reasoning.CPD import CPD
 
 
-class RandomNode(Node):
+class AbstractRandomNode(Node):
     '''TODO: write doc'''
 
-    cpd = AbstractCPD()
+    cpd = CPD()
 
     def __init__(self):
-        super(RandomNode, self).__init__()
+        super(AbstractRandomNode, self).__init__()
