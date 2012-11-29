@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-class CPD(object):
+class Density(object):
     '''TODO: write doc'''
 
     def __init__(self):
-        super(CPD, self).__init__()
+        super(Density, self).__init__()

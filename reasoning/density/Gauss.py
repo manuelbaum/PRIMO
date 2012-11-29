@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from reasoning.CPD import CPD
+from reasoning.density import Density
 
 
-class Gauss(CPD):
+class Gauss(Density):
     '''TODO: write doc'''
 
     def __init__(self):

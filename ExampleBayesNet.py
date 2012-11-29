@@ -1,5 +1,6 @@
 from  core.BayesNet import *
 from  reasoning.DiscreteNode import DiscreteNode
+import numpy
 
 bn = BayesNet()
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
@@ -26,5 +27,10 @@ burglary.set_probability(0.2,[(burglary,"Intruder")])
 
 alarm.set_probability(0.1,[(alarm,"Ringing"),(burglary,"Safe"),(earthquake,"Calm")])
 
+cpt = numpy.array([[0.1,0.9],[0.5,0.5],[0.4,0.6]])
+john_calls.set_probability_table(cpt, [alarm, john_calls])
+
+print john_calls.is_valid()
+print alarm.is_valid()
 
 bn.draw()
