@@ -1,6 +1,5 @@
 import sys
 
-sys.path.append("lib/networkx-1.7-py2.7.egg")
 import networkx as nx
 from core.Node import Node
 
@@ -117,7 +116,7 @@ class BayesNet(object):
 
     def clear(self):
         '''Remove all nodes and edges from the graph.
-        This also removes the name, and all graph, node, and edge attributes.'''
+        This also removes the name, and all graph, node and edge attributes.'''
         self.graph.clear()
         self.node_lookup.clear()
 
