@@ -3,8 +3,9 @@
 from reasoning.RandomNode import RandomNode
 from reasoning.CPD.CPT import CPT
 
+
 class DiscreteNode(RandomNode):
-    '''TODO: write doc'''
+    '''#TODO: write doc'''
 
     def __init__(self, name, value_range):
         super(DiscreteNode, self).__init__(name)

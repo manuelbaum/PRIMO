@@ -1,5 +1,6 @@
 import abc
 
+
 class Node(object):
     __metaclass__ = abc.ABCMeta
 
@@ -10,8 +11,9 @@ class Node(object):
 
     @abc.abstractmethod
     def announce_parent(self, node):
-        """This method will be called by the graph-management to inform nodes which just
-            became children of other nodes, so they can adapt themselves (e.g. their cpt)"""
+        """This method will be called by the graph-management to inform nodes
+        which just became children of other nodes, so they can adapt themselves
+        (e.g. their cpt)"""
         return
 
     def __str__(self):
