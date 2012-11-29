@@ -35,21 +35,21 @@ class BayesNet(object):
             try:
                 self.graph.remove_node(node)
             except nx.exception.NetworkXError:
-                raise Exception("Tried to remove a node which does not exists")
+                raise Exception("Tried to remove a node which does not exist.")
             del self.node_lookup[node.name]
 
     def remove_edge(self, node_from, node_to):
         try:
             self.graph.remove_edge(node_from, node_to)
         except nx.exception.NetworkXError:
-            raise Exception("Tried to remove an Edge which does not exist in the BayesNet")
+            raise Exception("Tried to remove an edge which does not exist in the BayesNet")
         #raise Exception("Fixme: Adapt CPD of child-node")
 
     def get_node(self, node_name):
         try:
             return self.node_lookup[node_name]
         except KeyError:
-            raise Exception("There is no node with name "+node_name+" in the bayesnet")
+            raise Exception("There is no node with name "+node_name+" in the BayesNet")
 
     def get_nodes(self, node_names):
         nodes = []
@@ -84,3 +84,47 @@ class BayesNet(object):
         import matplotlib.pyplot as plt
         nx.draw(self.graph)
         plt.show()
+
+    def is_valid(self):
+        '''Check if graph structure is valid.
+        Returns true if graph is directed and acyclic, false otherwiese'''
+
+        if self.graph.number_of_selfloops() > 0:
+            return False
+
+        for node in self.graph.nodes():
+            if self.has_loop(node):
+                return False
+
+        return True
+
+    def has_loop(self, node, origin=None):
+        '''Check if any path from node leads back to node.
+
+        Keyword arguments:
+        node -- the start node
+        origin -- same as node for internal recursive loop (default: None)
+
+        Returns true on succes, false otherwise.'''
+        if not origin:
+            origin = node
+
+        for successor in self.graph.successors(node):
+            if successor == origin:
+                return True
+            else:
+                return self.has_loop(successor, origin)
+
+    def clear(self):
+        '''Remove all nodes and edges from the graph.
+        This also removes the name, and all graph, node, and edge attributes.'''
+        self.graph.clear()
+        self.node_lookup.clear()
+
+    def number_of_nodes(self):
+        '''Return the number of nodes in the graph.'''
+        return len(self)
+
+    def __len__(self):
+        '''Return the number of nodes in the graph.'''
+        return len(self.graph)
