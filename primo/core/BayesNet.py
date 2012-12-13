@@ -1,7 +1,7 @@
 import sys
 
 import networkx as nx
-from core.Node import Node
+from primo.core import Node
 
 
 class BayesNet(object):
@@ -81,7 +81,7 @@ class BayesNet(object):
 
     def draw(self):
         import matplotlib.pyplot as plt
-        nx.draw(self.graph)
+        nx.draw_circular(self.graph)
         plt.show()
 
     def is_valid(self):
@@ -102,7 +102,7 @@ class BayesNet(object):
 
         Keyword arguments:
         node -- the start node
-        origin -- same as node for internal recursive loop (default: None)
+        origin -- for internal recursive loop (default: None)
 
         Returns true on succes, false otherwise.'''
         if not origin:

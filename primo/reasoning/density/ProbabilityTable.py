@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy
-from reasoning.density import Density
+from primo.reasoning.density import Density
 
 class ProbabilityTable(Density):
     '''TODO: write doc'''

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from core.Node import Node
+from primo.core import Node
 
 
 class UtilityNode(Node):

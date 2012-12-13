@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from reasoning.RandomNode import RandomNode
-from reasoning.density.ProbabilityTable import ProbabilityTable
+from primo.reasoning import RandomNode
+from primo.reasoning.density import ProbabilityTable
 
 
 class DiscreteNode(RandomNode):

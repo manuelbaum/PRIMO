@@ -1,5 +1,7 @@
-from  core.BayesNet import *
-from  reasoning.DiscreteNode import DiscreteNode
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from  primo.core import BayesNet
+from  primo.reasoning import DiscreteNode
 import numpy
 
 bn = BayesNet()

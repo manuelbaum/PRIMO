@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from  core.BayesNet import *
-from  reasoning.DiscreteNode import DiscreteNode
+from primo.core import DynamicBayesNet
+from primo.reasoning import DiscreteNode
 
-bn = BayesNet()
+bn = DynamicBayesNet()
 burglary = DiscreteNode("Burglary", ["Intruder", "Safe"])
 alarm = DiscreteNode("Alarm", ["Ringing", "Silent", "Kaputt"])
 earthquake = DiscreteNode("Earthquake", ["Shaking", "Calm"])
@@ -24,5 +24,9 @@ bn.add_edge(earthquake, alarm)
 bn.add_edge(alarm, john_calls)
 bn.add_edge(alarm, mary_calls)
 
+bn.add_edge(alarm, alarm, True)
+
+
+print(bn.is_valid())
 
 bn.draw()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from reasoning.RandomNode import RandomNode
+from primo.reasoning import RandomNode
 
 
 class GaussNode(RandomNode):

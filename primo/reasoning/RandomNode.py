@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from core.Node import Node
-from reasoning.density import Density
+from primo.core import Node
+from primo.reasoning.density import Density
 
 
 class RandomNode(Node):

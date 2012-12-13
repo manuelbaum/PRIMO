@@ -1,7 +1,7 @@
 import unittest
 
-from core.BayesNet import BayesNet
-from reasoning.DiscreteNode import DiscreteNode
+from primo.core import BayesNet
+from primo.reasoning import DiscreteNode
 
 
 class NodeAddAndRemoveTestCase(unittest.TestCase):

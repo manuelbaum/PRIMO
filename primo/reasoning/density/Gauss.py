@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from reasoning.density import Density
+from primo.reasoning.density import Density
 
 
 class Gauss(Density):
