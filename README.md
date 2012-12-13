@@ -1,4 +1,4 @@
-PRIMO - PRobabilistic Inference MOdule
+PRIMO - PRobabilistic Inference MOdules
 ========
 
 This is a probabilistic inference module for Python. The aim 
