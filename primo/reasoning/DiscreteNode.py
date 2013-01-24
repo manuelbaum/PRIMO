@@ -25,6 +25,12 @@ class DiscreteNode(RandomNode):
 
     def set_probability_table(self, table, nodes):
         self.cpd.set_probability_table(table, nodes)
+        
+    def get_cpd_reduced(self, evidence):
+        return self.cpd.reduction(evidence)
+        
+    def get_cpd(self):
+        return self.cpd
 
     def is_valid(self):
         return self.cpd.is_normalized_as_cpt(self)

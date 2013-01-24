@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy
+import copy
 from primo.reasoning.density import Density
 
 class ProbabilityTable(Density):
@@ -69,8 +70,24 @@ class ProbabilityTable(Density):
     def marginalization(self, variable):
         raise Exception("Called unimplemented function")       
         
-    def reduction(self):
-        raise Exception("Called unimplemented function")
+    def reduction(self, evidence):
+        '''Returns a reduced version of this ProbabilityTable, evidence is a list of pairs.
+            Important: This node is not being changed!'''
+        reduced = ProbabilityTable()
+        reduced.variables = copy.copy(self.variables)
+        reduced.table = self.table
+        for node,value in evidence:
+
+            axis=reduced.variables.index(node)
+            position=node.value_range.index(value)
+            reduced.table = numpy.take(reduced.table,[position],axis=axis)
+            
+            reduced.table=reduced.table.squeeze()
+            reduced.variables.remove(node)
+            
+        return reduced
+            
+            
 
     def division(self, factor):
         raise Exception("Called unimplemented function")
