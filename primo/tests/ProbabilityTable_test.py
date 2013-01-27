@@ -56,6 +56,28 @@ class MultiplicationTest(unittest.TestCase):
         cptN = numpy.array([[20, 28, 36],[45, 63, 81]])        
         numpy.testing.assert_array_equal(c3.table,cptN)
         
+class MarginalizationTest(unittest.TestCase):
+    
+    def test_easy_marginalize(self):
+        n1 = DiscreteNode("Some Node", [True, False])
+        n2 = DiscreteNode("Second Node" , [True, False, "other"])
+        
+        cpt1 = numpy.array([2,3])
+        cpt2 = numpy.array([5,7,3])
+        
+        n1.set_probability_table(cpt1,[n1])
+        n2.set_probability_table(cpt2,[n2])
+        
+        s = n1.get_cpd().multiplication(n2.get_cpd())
+        s =s.marginalization(n2)
+        
+        print s.table
+        
+        cptN = numpy.array([30,45])        
+        
+        numpy.testing.assert_array_equal(s.table,cptN)
+        self.asserEqual(s.variables[0],n1)
+        
         
 
 

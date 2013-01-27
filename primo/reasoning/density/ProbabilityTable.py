@@ -65,6 +65,9 @@ class ProbabilityTable(Density):
         return numpy.sum(self.table) == 1.0
 
     def multiplication(self, inputFactor):
+        '''This method returns a unified ProbabilityTable which contains the variables of both; the inputFactor
+            and this factor(self). The new values of the returned factor is the product of the values from the input factors
+            which are compatible to the variable instantiation of the returned value.'''
         #init a new probability tabel
         factor1 = ProbabilityTable()
 
@@ -108,7 +111,7 @@ class ProbabilityTable(Density):
 
         #pointwise multiplication
         if factor1.table.shape != factor2.table.shape:
-            raise Exception("Multiplication: The probability tables have the wrong dimensions for unification")
+            raise Exception("Multiplication: The probability tables have the wrong dimensions for unification!")
 
         factor1.table = factor1.table *factor2.table;
 
@@ -116,7 +119,23 @@ class ProbabilityTable(Density):
 
 
     def marginalization(self, variable):
-        raise Exception("Called unimplemented function")
+        '''This method returns a new instantiation with the given variable summed out.'''        
+        
+        if not variable in self.variables:        
+            raise Exception("Marginalization: The given variable isn't in the ProbabilityTable!")
+
+        #new instance for returning
+        retInstance = ProbabilityTable()
+        retInstance.table = copy.copy(self.table)
+        retInstance.variables = copy.copy(self.variables)                
+            
+        ax = retInstance.variables.index(variable)
+        
+        retInstance.table = numpy.sum(retInstance.table,ax)
+        retInstance.variables.remove(variable)
+        
+        return retInstance
+        
 
     def reduction(self, evidence):
         '''Returns a reduced version of this ProbabilityTable, evidence is a list of pairs.
