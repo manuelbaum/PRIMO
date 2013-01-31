@@ -1,5 +1,5 @@
 import random
-
+import copy
 def weighted_random(weights):
     counter = random.random() * sum(weights)
     for i,w in enumerate(weights):
@@ -57,7 +57,7 @@ class MarkovChainSampler(object):
         
     def generateMarkovChain(self, network, time_steps, transition_model, initial_state):
         state=initial_state
-        for t in range(time_steps):
+        for t in xrange(time_steps):
             yield state
             state=transition_model.transition(network, state)
         

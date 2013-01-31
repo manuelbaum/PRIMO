@@ -4,6 +4,7 @@ from  primo.core import BayesNet
 from  primo.reasoning import DiscreteNode
 from  primo.reasoning import MarkovChainSampler
 from primo.reasoning import GibbsTransitionModel
+from primo.reasoning.density import ProbabilityTable
 import numpy
 
 #Construct some simple BayesianNetwork
@@ -28,7 +29,22 @@ transition_model = GibbsTransitionModel()
 
 mcs = MarkovChainSampler()
 initial_state={burglary:"Safe",alarm:"Silent"}
-chain = mcs.generateMarkovChain(bn, 20, transition_model, initial_state)
+chain = mcs.generateMarkovChain(bn, 1000000, transition_model, initial_state)
 
-for c in chain:
-    print c
+#for c in chain:
+#    print c
+
+
+pt = ProbabilityTable()
+pt.add_variable(burglary)
+pt.add_variable(alarm)
+pt.to_jpt_by_states(chain)
+print "----joint-probability----"
+print pt
+print "----burglary----"
+print pt.marginalization(alarm)
+print "----alarm----"
+print pt.division(burglary)
+
+bn.draw()
+
