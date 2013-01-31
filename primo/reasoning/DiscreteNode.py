@@ -28,6 +28,9 @@ class DiscreteNode(RandomNode):
         
     def get_cpd_reduced(self, evidence):
         return self.cpd.reduction(evidence)
+
+    def get_value_range(self):
+        return self.value_range
         
     def get_cpd(self):
         return self.cpd

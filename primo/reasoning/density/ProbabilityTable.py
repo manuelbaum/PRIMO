@@ -20,6 +20,9 @@ class ProbabilityTable(Density):
         self.variables = []
         self.table = numpy.array(0)
 
+    def get_table(self):
+        return self.table
+
     def add_variable(self, variable):
         self.variables.append(variable)
 
@@ -63,6 +66,10 @@ class ProbabilityTable(Density):
 
     def is_normalized_as_jpt(self):
         return numpy.sum(self.table) == 1.0
+
+    def normalized_as_jpt(self):
+        '''This method returns a new ProbabilityTable which is a normalized version of this ProbabilityTable (As a joint probability).'''
+        return self.table/numpy.sum(self.table)
 
     def multiplication(self, inputFactor):
         '''This method returns a unified ProbabilityTable which contains the variables of both; the inputFactor
