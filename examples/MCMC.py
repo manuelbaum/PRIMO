@@ -29,7 +29,7 @@ transition_model = GibbsTransitionModel()
 
 mcs = MarkovChainSampler()
 initial_state={burglary:"Safe",alarm:"Silent"}
-chain = mcs.generateMarkovChain(bn, 1000000, transition_model, initial_state)
+chain = mcs.generateMarkovChain(bn, 5000, transition_model, initial_state)
 
 #for c in chain:
 #    print c
@@ -44,7 +44,7 @@ print pt
 print "----burglary----"
 print pt.marginalization(alarm)
 print "----alarm----"
-print pt.division(burglary)
+print pt.division(burglary.get_cpd())
 
 bn.draw()
 

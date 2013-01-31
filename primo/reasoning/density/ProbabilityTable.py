@@ -173,7 +173,15 @@ class ProbabilityTable(Density):
     def division(self, factor):
         '''Returns a new ProbabilityTable which is the result of dividing this one by the one given
             with the argument factor'''
-        
+        divided = ProbabilityTable()
+        variables = list(set(self.variables) | set(factor.variables))
+        for variable in variables:
+            divided.add_variable(variable)
+        for variable in variables:
+            for value in variable.get_value_range():
+                index = "lol"
+        raise Exception("Sorry, called unimplemented method ProbabilityTable.division()")
+                
 
     def __str__(self):
         return str(self.table)
