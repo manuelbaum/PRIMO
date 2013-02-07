@@ -11,7 +11,10 @@ class ProbabilityTable(Density):
     def __init__(self):
         super(ProbabilityTable, self).__init__()
         self.variables = []
-        self.table = numpy.array(0)
+        
+        #need to be 0.0 instead of 0 because of precision
+        #otherwise the function set probability doesn't work correctly
+        self.table = numpy.array(0.0)
 
             
 
