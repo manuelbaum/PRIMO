@@ -10,15 +10,13 @@ class ProbabilityTable(Density):
 
     def __init__(self):
         super(ProbabilityTable, self).__init__()
-
-        #self.owner = owner
-        #self.variables = [owner]
-
-        #size_of_range = len(owner.value_range)
-        #self.table = numpy.ones(size_of_range) / size_of_range
-
         self.variables = []
         self.table = numpy.array(0)
+
+            
+
+    def get_table(self):
+        return self.table
 
     def add_variable(self, variable):
         self.variables.append(variable)
@@ -40,9 +38,21 @@ class ProbabilityTable(Density):
         self.table = table
         self.variables = nodes
 
+    def to_jpt_by_states(self, samples):
+        '''This method uses a list of variable-instantiations to change this nodes internal
+            table to represent a joint probability table constructed from the given samples.
+            The Argument samples is a list of pairs (RandomNode, value).'''
+        
+        for state in samples:
+            index = self.get_cpt_index(state.items())
+            self.table[index]=self.table[index]+1
+
+        self.normalize_as_jpt()
+            
+
     def set_probability(self, value, node_value_pairs):
         index = self.get_cpt_index(node_value_pairs)
-        self.table[tuple(index)]=value
+        self.table[index]=value
 
     def get_cpt_index(self, node_value_pairs):
         nodes, values = zip(*node_value_pairs)
@@ -51,7 +61,7 @@ class ProbabilityTable(Density):
             index_in_values_list = nodes.index(node)
             value = values[index_in_values_list]
             index.append(node.value_range.index(value))
-        return index
+        return tuple(index)
 
 
     def is_normalized_as_cpt(self,owner):
@@ -63,6 +73,10 @@ class ProbabilityTable(Density):
 
     def is_normalized_as_jpt(self):
         return numpy.sum(self.table) == 1.0
+
+    def normalize_as_jpt(self):
+        '''This method normalizes this ProbabilityTable so it represents a valid joint probability table'''
+        self.table=self.table*1.0/numpy.sum(self.table)
 
     def multiplication(self, inputFactor):
         '''This method returns a unified ProbabilityTable which contains the variables of both; the inputFactor
@@ -157,7 +171,17 @@ class ProbabilityTable(Density):
 
 
     def division(self, factor):
-        raise Exception("Called unimplemented function")
+        '''Returns a new ProbabilityTable which is the result of dividing this one by the one given
+            with the argument factor'''
+        divided = ProbabilityTable()
+        variables = list(set(self.variables) | set(factor.variables))
+        for variable in variables:
+            divided.add_variable(variable)
+        for variable in variables:
+            for value in variable.get_value_range():
+                index = "lol"
+        raise Exception("Sorry, called unimplemented method ProbabilityTable.division()")
+                
 
     def __str__(self):
         return str(self.table)
