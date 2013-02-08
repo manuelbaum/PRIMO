@@ -20,6 +20,9 @@ class ProbabilityTable(Density):
 
     def get_table(self):
         return self.table
+        
+    def get_variables(self):
+        return self.variables
 
     def add_variable(self, variable):
         self.variables.append(variable)
