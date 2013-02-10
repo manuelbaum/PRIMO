@@ -29,3 +29,12 @@ class EasiestFactorElimination(object):
                 finCpd = finCpd.marginalization(v)
         
         return finCpd
+        
+    def calculate_PosteriorMarginal(self,variables,evidence):
+        bn = bn.copy()
+        
+        
+    def calculate_PoE(self,evidence):
+        bn = bn.copy()
+        
+        
