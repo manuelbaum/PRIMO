@@ -1,5 +1,3 @@
-import sys
-
 import networkx as nx
 from primo.core import Node
 
@@ -9,7 +7,10 @@ class BayesNet(object):
     node_lookup = {}
 
     def __init__(self):
-        pass
+        # This is IMPORTANT: without type() all children will have the same
+        # graph instance!
+        type(self).graph = nx.DiGraph()
+        type(self).node_lookup = {}
 
     def add_node(self, node):
         if isinstance(node, Node):
@@ -82,6 +83,11 @@ class BayesNet(object):
     def draw(self):
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
+        plt.show()
+        
+    def draw_graphviz(self):
+        import matplotlib.pyplot as plt
+        nx.draw_graphviz(self.graph)
         plt.show()
 
     def is_valid(self):
