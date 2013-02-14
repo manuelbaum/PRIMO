@@ -51,6 +51,9 @@ class BayesNet(object):
         except KeyError:
             raise Exception("There is no node with name "+node_name+" in the BayesNet")
 
+    def get_all_nodes(self):
+        return self.graph.nodes()
+
     def get_nodes(self, node_names):
         nodes = []
         if not node_names:

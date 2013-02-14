@@ -76,7 +76,7 @@ class MarginalizationTest(unittest.TestCase):
         cptN = numpy.array([30,45])        
         
         numpy.testing.assert_array_equal(s.table,cptN)
-        self.asserEqual(s.variables[0],n1)
+        self.assertEqual(s.variables[0],n1)
         
         
 
