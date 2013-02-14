@@ -16,20 +16,20 @@ baum_calls = DiscreteNode("Baum calls", ["Calling", "Not Calling"])
 bn.add_node(burglary)
 bn.add_node(alarm)
 bn.add_node(earthquake)
-bn.add_node(john_calls)
-bn.add_node(baum_calls)
+#bn.add_node(john_calls)
+#bn.add_node(baum_calls)
 
 
 bn.add_edge(burglary,alarm)
 bn.add_edge(earthquake, alarm)
-bn.add_edge(alarm, john_calls)
-bn.add_edge(alarm, baum_calls)
+#bn.add_edge(alarm, john_calls)
+#bn.add_edge(alarm, baum_calls)
 
 
-cpt_burglary = numpy.array([0.002,0.998])
+cpt_burglary = numpy.array([0.001,0.999])
 burglary.set_probability_table(cpt_burglary,[burglary])
 
-cpt_earthquake = numpy.array([0.001,0.999])
+cpt_earthquake = numpy.array([0.002,0.998])
 earthquake.set_probability_table(cpt_earthquake,[earthquake])
 
 alarm.set_probability(0.95,[(alarm,"Ringing"),(burglary,"Intruder"),(earthquake,"Shaking")])
@@ -52,7 +52,6 @@ john_calls.set_probability(0.01,[(alarm,"Silent"),(john_calls,"Calling")])
 john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 
 
-
 #first Elimination:
 fe = EasiestFactorElimination()
 fe.set_BayesNet(bn)
@@ -64,4 +63,8 @@ fe.set_BayesNet(bn)
 
 #print "PoE Earthquake: " + str(fe.calculate_PoE([(earthquake, "Calm")]))
 #print "PoE BaumCalls is Calling: " + str(fe.calculate_PoE([(baum_calls, "Calling")]))
+
+print "Posterior of earthquake : " + str(fe.calculate_PosteriorMarginal([burglary],[(alarm, "Ringing"),(earthquake, "Calm")]))
+
+
 

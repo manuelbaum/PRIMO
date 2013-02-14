@@ -82,7 +82,7 @@ class ProbabilityTable(Density):
 
     def normalize_as_jpt(self):
         '''This method normalizes this ProbabilityTable so it represents a valid joint probability table'''
-        self.table=self.table*1.0/numpy.sum(self.table)
+        return self.table*1.0/numpy.sum(self.table)
 
     def multiplication(self, inputFactor):
         '''This method returns a unified ProbabilityTable which contains the variables of both; the inputFactor
