@@ -173,6 +173,26 @@ class ProbabilityTable(Density):
             reduced.variables.remove(node)
 
         return reduced
+        
+    def set_evidence(self,evidence):     
+        '''Returns a new version of the ProbabilityTable with only the evidence
+        not equal zero'''
+        
+        ev = ProbabilityTable()
+        ev.variables = copy.copy(self.variables)
+        ev.table = numpy.zeros(self.table.shape) 
+        tmpCpd = self.table
+        
+        pos_variable = ev.variables.index(evidence[0])
+        pos_value = ev.variables[pos_variable].value_range.index(evidence[1])
+        
+        ev.table = numpy.rollaxis(ev.table,pos_variable,0)
+        tmpCpd = numpy.rollaxis(tmpCpd,pos_variable,0)
+        ev.variables.insert(0,ev.variables.pop(pos_variable))
+
+        ev.table[pos_value] = tmpCpd[pos_value]
+
+        return ev
 
 
 
