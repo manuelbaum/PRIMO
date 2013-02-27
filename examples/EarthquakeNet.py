@@ -3,6 +3,7 @@
 from  primo.core import BayesNet
 from  primo.reasoning import DiscreteNode
 from primo.reasoning.factorelemination import EasiestFactorElimination
+from primo.reasoning.factorelemination import FactorTreeFactory
 import numpy
 
 bn = BayesNet()
@@ -16,14 +17,14 @@ baum_calls = DiscreteNode("Baum calls", ["Calling", "Not Calling"])
 bn.add_node(burglary)
 bn.add_node(alarm)
 bn.add_node(earthquake)
-#bn.add_node(john_calls)
-#bn.add_node(baum_calls)
+bn.add_node(john_calls)
+bn.add_node(baum_calls)
 
 
 bn.add_edge(burglary,alarm)
 bn.add_edge(earthquake, alarm)
-#bn.add_edge(alarm, john_calls)
-#bn.add_edge(alarm, baum_calls)
+bn.add_edge(alarm, john_calls)
+bn.add_edge(alarm, baum_calls)
 
 
 cpt_burglary = numpy.array([0.001,0.999])
@@ -64,7 +65,11 @@ fe.set_BayesNet(bn)
 #print "PoE Earthquake: " + str(fe.calculate_PoE([(earthquake, "Calm")]))
 #print "PoE BaumCalls is Calling: " + str(fe.calculate_PoE([(baum_calls, "Calling")]))
 
-print "Posterior of earthquake : " + str(fe.calculate_PosteriorMarginal([burglary],[(alarm, "Ringing"),(earthquake, "Calm")]))
+#print "Posterior of earthquake : " + str(fe.calculate_PosteriorMarginal([burglary],[(alarm, "Ringing"),(earthquake, "Calm")]))
 
+factorTreeFactory = FactorTreeFactory()
+factorTree = factorTreeFactory.create_random_factortree(bn)
+
+#factorTree.draw()
 
 

@@ -10,6 +10,11 @@ class FactorTree(object):
         self.graph = graph
         self.rootNode = rootNode
         
+    def draw(self):
+        import matplotlib.pyplot as plt
+        nx.draw_circular(self.graph)
+        plt.show()
+            
     
     
     

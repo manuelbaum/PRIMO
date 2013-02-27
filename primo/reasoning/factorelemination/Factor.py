@@ -10,5 +10,8 @@ class Factor(object):
         self.node = node
         self.calPT = node.get_cpd()
         
+    def __str__(self):
+        return self.node.name
         
+    
     
