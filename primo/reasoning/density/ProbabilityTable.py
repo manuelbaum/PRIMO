@@ -11,16 +11,16 @@ class ProbabilityTable(Density):
     def __init__(self):
         super(ProbabilityTable, self).__init__()
         self.variables = []
-        
+
         #need to be 0.0 instead of 0 because of precision
         #otherwise the function set probability doesn't work correctly
         self.table = numpy.array(0.0)
 
-            
+
 
     def get_table(self):
         return self.table
-        
+
     def get_variables(self):
         return self.variables
 
@@ -48,13 +48,13 @@ class ProbabilityTable(Density):
         '''This method uses a list of variable-instantiations to change this nodes internal
             table to represent a joint probability table constructed from the given samples.
             The Argument samples is a list of pairs (RandomNode, value).'''
-        
+
         for state in samples:
             index = self.get_cpt_index(state.items())
-            self.table[index]=self.table[index]+1
+            self.table[index] = self.table[index] + 1
 
-        self.normalize_as_jpt()
-            
+        return self.normalize_as_jpt()
+
 
     def set_probability(self, value, node_value_pairs):
         index = self.get_cpt_index(node_value_pairs)
@@ -82,7 +82,7 @@ class ProbabilityTable(Density):
 
     def normalize_as_jpt(self):
         '''This method normalizes this ProbabilityTable so it represents a valid joint probability table'''
-        return self.table*1.0/numpy.sum(self.table)
+        return self.table * 1.0 / numpy.sum(self.table)
 
     def multiplication(self, inputFactor):
         '''This method returns a unified ProbabilityTable which contains the variables of both; the inputFactor
@@ -139,23 +139,23 @@ class ProbabilityTable(Density):
 
 
     def marginalization(self, variable):
-        '''This method returns a new instantiation with the given variable summed out.'''        
-        
-        if not variable in self.variables:        
+        '''This method returns a new instantiation with the given variable summed out.'''
+
+        if not variable in self.variables:
             raise Exception("Marginalization: The given variable isn't in the ProbabilityTable!")
 
         #new instance for returning
         retInstance = ProbabilityTable()
         retInstance.table = copy.copy(self.table)
-        retInstance.variables = copy.copy(self.variables)                
-            
+        retInstance.variables = copy.copy(self.variables)
+
         ax = retInstance.variables.index(variable)
-        
+
         retInstance.table = numpy.sum(retInstance.table,ax)
         retInstance.variables.remove(variable)
-        
+
         return retInstance
-        
+
 
     def reduction(self, evidence):
         '''Returns a reduced version of this ProbabilityTable, evidence is a list of pairs.
@@ -173,19 +173,19 @@ class ProbabilityTable(Density):
             reduced.variables.remove(node)
 
         return reduced
-        
-    def set_evidence(self,evidence):     
+
+    def set_evidence(self,evidence):
         '''Returns a new version of the ProbabilityTable with only the evidence
         not equal zero'''
-        
+
         ev = ProbabilityTable()
         ev.variables = copy.copy(self.variables)
-        ev.table = numpy.zeros(self.table.shape) 
+        ev.table = numpy.zeros(self.table.shape)
         tmpCpd = self.table
-        
+
         pos_variable = ev.variables.index(evidence[0])
         pos_value = ev.variables[pos_variable].value_range.index(evidence[1])
-        
+
         ev.table = numpy.rollaxis(ev.table,pos_variable,0)
         tmpCpd = numpy.rollaxis(tmpCpd,pos_variable,0)
         ev.variables.insert(0,ev.variables.pop(pos_variable))
@@ -207,7 +207,7 @@ class ProbabilityTable(Density):
             for value in variable.get_value_range():
                 index = "lol"
         raise Exception("Sorry, called unimplemented method ProbabilityTable.division()")
-                
+
 
     def __str__(self):
         return str(self.table)
