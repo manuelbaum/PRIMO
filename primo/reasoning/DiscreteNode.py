@@ -18,7 +18,7 @@ class DiscreteNode(RandomNode):
         self.cpd.add_variable(node)
 
     def __str__(self):
-        return self.name + "\n" + str(self.cpd)
+        return self.name # + "\n" + str(self.cpd)
 
     def set_probability(self, value, node_value_pairs):
         self.cpd.set_probability(value, node_value_pairs)

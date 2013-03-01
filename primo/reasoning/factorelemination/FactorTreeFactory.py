@@ -1,7 +1,6 @@
 
 import networkx as nx
 import copy
-from primo.core import Node
 from primo.reasoning.factorelemination import Factor
 from primo.reasoning.factorelemination import FactorTree
 from random import choice
@@ -26,8 +25,12 @@ class FactorTreeFactory(object):
         for n in allNodes[:]:
             parentNode = choice(usedNodes[:])
             newFactor = Factor(n)
-            graph.add_edge(parentNode,newFactor)
+            graph.add_edge(parentNode,newFactor, inVars=set(),outVars=set())
             usedNodes.append(newFactor)
+            
+        self.calculate_seperators_pull(rootFactor,graph)
+        self.calculate_seperators_push(rootFactor,graph,set())
+        self.inject_seperators(graph)
             
             
         return FactorTree(graph,rootFactor)
@@ -41,21 +44,18 @@ class FactorTreeFactory(object):
         for child in graph.neighbors(factor):
             s = self.calculate_seperators_pull(child,graph)
             # add s to incoming vars from child
-            if graph[factor][child]['inVars'] == None:
-                graph[factor][child]['inVars'] = copy.copy(s)                    
-            else:
-                tmp = graph[factor][child]['inVars']
-                graph[factor][child]['inVars'] = tmp | s
+            tmp = graph[factor][child]['inVars']
+            graph[factor][child]['inVars'] = tmp | s
                 
             
-            for c2 in graph.children(factor):
-                if child != c2:
-                    #TODO: add s to outgoing vars from c2
-                    if graph[factor][child]['outVars'] == None:
-                        graph[factor][child]['outVars'] = copy.copy(s)                    
-                    else:
-                        tmp = graph[factor][child]['outVars']
-                        graph[factor][child]['outVars'] = tmp | s
+#            for c2 in graph.children(factor):
+#                if child != c2:
+#                    #add s to outgoing vars from c2
+#                    if graph[factor][child]['outVars'] == None:
+#                        graph[factor][child]['outVars'] = copy.copy(s)                    
+#                    else:
+#                        tmp = graph[factor][child]['outVars']
+#                        graph[factor][child]['outVars'] = tmp | s
                     
                     #self.calculate_seperators_push(child,graph,s)
                     
@@ -66,15 +66,30 @@ class FactorTreeFactory(object):
         
     def calculate_seperators_push(self,factor,graph,setOut):
 
-        #TODO: add local vars to set
-        #setOut = 
+        #add local vars to set
+        setOut = set(factor.get_variables()) | setOut
         
-        localSet = copy.copy(setOut)
-        setOut.add(localVars)
 
-        for child in graph.children(factor):
+        for child in graph.neighbors(factor):
+            tmpSet = copy.copy(setOut)
+            for child2 in graph.neighbors(factor):
+                if (child != child2):
+                    tmpSet = tmpSet | graph[factor][child2]['inVars']
+            
             #add setOut to outgoing vars from child
-            child.calculate_seperators_push(child,graph,setOut)
+            tmp = graph[factor][child]['outVars']
+            graph[factor][child]['outVars'] = tmp | tmpSet
+                
+           
+            self.calculate_seperators_push(child,graph,tmpSet)
+            
+
+    def inject_seperators(self,graph):
+        
+        for n,nbrs in graph.adjacency_iter():
+            for nbr,eattr in nbrs.items():
+                eattr['seperator'] = eattr['inVars'] & eattr['outVars'] 
+
             
             
                         

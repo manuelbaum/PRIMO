@@ -72,4 +72,14 @@ factorTree = factorTreeFactory.create_random_factortree(bn)
 
 #factorTree.draw()
 
+for n,nbrs in factorTree.graph.adjacency_iter():
+    for nbr,eattr in nbrs.items():
+        data=eattr['seperator']
+        #print str(data)
+        print str(n) + " -> " + str(nbr)
+        for d in data:
+            print str(d)
+            
+factorTree.draw()
+
 
