@@ -1,7 +1,6 @@
 
 import networkx as nx
 import primo.reasoning.density.ProbabilityTable as ProbabilityTable
-import copy
 
 
 
@@ -11,11 +10,30 @@ class FactorTree(object):
     def __init__(self,graph,rootNode):
         self.graph = graph
         self.rootNode = rootNode
+        self.graph['messagesValid'] = False
         
     def draw(self):
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
         plt.show()
+        
+    def calculateMessages(self):
+        self.push_phase(self.rootNode,self.graph)
+        self.pull_phase(self.rootNode,self.graph,ProbabilityTable())
+        self.graph['messagesValid'] = True
+        
+        
+    def setEvidences(self,evidences):
+        self.graph['messagesValid'] = False
+        
+        evNodes = zip(*evidences)        
+        
+        for factor in self.graph.get_all_nodes():
+            if factor.get_node() in evNodes:
+                idx = evNodes.index(factor.get_node())
+                factor.set_evidence(evidences[idx])
+        
+    
         
         
     def pull_phase(self,factor,graph):
@@ -38,13 +56,10 @@ class FactorTree(object):
         return calCPD
         
     def push_phase(self,factor,graph,inCPD):
-
-        #add local vars to set
-        calCPD = inCPD.copy()
-        
+       
 
         for child in graph.neighbors(factor):
-            tmpCPD = calCPD
+            tmpCPD = inCPD.copy()
             for child2 in graph.neighbors(factor):
                 if (child != child2):
                     tmpCPD = tmpCPD.multiplication(graph[factor][child2]['inMessage'])

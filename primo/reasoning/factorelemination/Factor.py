@@ -15,6 +15,8 @@ class Factor(object):
         return self.node.name
         
     def set_evidence(self,evd):
+        #TODO: copy from originalCPD
+        # setCPD        
         self.evidence = evd
         
     def clear_evidence(self):
@@ -28,5 +30,8 @@ class Factor(object):
         
     def get_calculation_CDP(self):
         return self.calCPD;
+        
+    def get_node(self):
+        return self.node
     
     
