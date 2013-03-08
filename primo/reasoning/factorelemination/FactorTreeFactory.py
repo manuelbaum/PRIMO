@@ -30,7 +30,9 @@ class FactorTreeFactory(object):
             
         self.calculate_seperators_pull(rootFactor,graph)
         self.calculate_seperators_push(rootFactor,graph,set())
-        self.inject_seperators(graph)
+        self.intersect_seperators(graph)
+        
+        self.calculate_clusters(rootFactor,graph,set())
             
             
         return FactorTree(graph,rootFactor)
@@ -46,18 +48,6 @@ class FactorTreeFactory(object):
             # add s to incoming vars from child
             tmp = graph[factor][child]['inVars']
             graph[factor][child]['inVars'] = tmp | s
-                
-            
-#            for c2 in graph.children(factor):
-#                if child != c2:
-#                    #add s to outgoing vars from c2
-#                    if graph[factor][child]['outVars'] == None:
-#                        graph[factor][child]['outVars'] = copy.copy(s)                    
-#                    else:
-#                        tmp = graph[factor][child]['outVars']
-#                        graph[factor][child]['outVars'] = tmp | s
-                    
-                    #self.calculate_seperators_push(child,graph,s)
                     
             pullSet =  s | pullSet
             
@@ -84,11 +74,22 @@ class FactorTreeFactory(object):
             self.calculate_seperators_push(child,graph,tmpSet)
             
 
-    def inject_seperators(self,graph):
+    def intersect_seperators(self,graph):
         
         for n,nbrs in graph.adjacency_iter():
             for nbr,eattr in nbrs.items():
-                eattr['seperator'] = eattr['inVars'] & eattr['outVars'] 
+                eattr['seperator'] = eattr['inVars'] & eattr['outVars']
+                
+    def calculate_clusters(self,factor,graph,parent_seperator):
+        
+        localCluster = parent_seperator | set(factor.get_variables())
+        
+        for n in graph.neighbors(factor):
+            tmpSeperator = graph[factor][n]['seperator']
+            localCluster = localCluster | tmpSeperator
+            self.calculate_clusters(n,graph,tmpSeperator)
+            
+        factor.set_cluster(localCluster)
 
             
             

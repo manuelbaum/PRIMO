@@ -9,7 +9,7 @@ class Factor(object):
     
     def __init__(self,node):
         self.node = node
-        self.calPT = node.get_cpd()
+        self.calCPD = node.get_cpd()
         
     def __str__(self):
         return self.node.name
@@ -23,10 +23,10 @@ class Factor(object):
     def set_cluster(self,cluster):
         self.cluster = cluster
         
-    def add_to_cluster(self,node):
-        self.cluster.add(node)
-        
     def get_variables(self):
         return self.node.get_cpd().variables
+        
+    def get_calculation_CDP(self):
+        return self.calCPD;
     
     

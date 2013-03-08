@@ -193,6 +193,15 @@ class ProbabilityTable(Density):
         ev.table[pos_value] = tmpCpd[pos_value]
 
         return ev
+        
+    def copy(self):
+        '''Returns a copied version of this probabilityTable'''
+        
+        ev = ProbabilityTable()
+        ev.variables = copy.copy(self.variables)
+        ev.table = copy.copy(self.table)
+        
+        return ev
 
 
 
