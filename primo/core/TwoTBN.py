@@ -6,10 +6,10 @@ from primo.core import BayesNet
 class TwoTBN(BayesNet):
     ''' This is the implementation of a 2-time-slice Bayesian network (2-TBN).
     '''
-    
+
     def __init__(self):
-        BayesNet.__init__(self)            
-        
+        BayesNet.__init__(self)
+
 
     def add_edge(self, node_from, node_to, inter=False):
         '''Add an directed edge to the graph.
@@ -17,7 +17,7 @@ class TwoTBN(BayesNet):
         Keyword arguments:
         node_from -- from node
         node_to -- to node
-        inter -- is this edge a temporal (inter-slice) conditional dependency 
+        inter -- is this edge a temporal (inter-slice) conditional dependency
         (default: False)
         '''
         super(TwoTBN, self).add_edge(node_from, node_to)
@@ -52,3 +52,16 @@ class TwoTBN(BayesNet):
                 return True
             else:
                 return self.has_loop(successor, origin)
+
+    def get_nodes_in_topological_sort(self):
+        # Remove temporal/inter-slice edges for toplogical sort
+        inter_edges = []
+        for edge in self.graph.edges(data = True):
+            if edge[2]['inter'] == True:
+                inter_edges.append(edge)
+
+        self.graph.remove_edges_from(inter_edges)
+        ts = super(TwoTBN, self).get_nodes_in_topological_sort()
+        # Add temporal/inter-slice edges
+        self.graph.add_edges_from(inter_edges)
+        return ts

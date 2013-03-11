@@ -30,24 +30,30 @@ twoTBN.add_edge(weather, weather, True);
 
 weather0_cpt = numpy.array([.4, .6])
 weather0.set_probability_table(weather0_cpt, [weather0])
-ice_cream_eaten0_cpt = numpy.array([[.9, .1],
-                                    [.2, .8]])
+ice_cream_eaten0_cpt = numpy.array([[.2, .8],
+                                    [.9, .1]])
 ice_cream_eaten0.set_probability_table(ice_cream_eaten0_cpt, [weather0, ice_cream_eaten0])
 
-weather_cpt=numpy.array([[.7, .3],
-                         [.5, .5]])
+weather_cpt=numpy.array([[.5, .5],
+                         [.7, .3]])
 weather.set_probability_table(weather_cpt, [weather, weather])
-ice_cream_eaten_cpt = numpy.array([[.9, .1],
-                                   [.2, .8]])
+ice_cream_eaten_cpt = numpy.array([[.2, .8],
+                                   [.9, .1]])
 ice_cream_eaten.set_probability_table(ice_cream_eaten_cpt, [weather, ice_cream_eaten])
 
 dbn.set_B0(B0)
 dbn.set_TwoTBN(twoTBN)
 
-N = 20000
+#N = 20000
+#T = 2
+#evidence = [{weather:"Rain"}, {weather:"Sun"}]
+#samples = fs.sample_DBN(dbn, N, T, evidence)
+#print("P(W_1 = R, W_2 = S) = " + str(len(samples) * 1.0 / N))
+
+N = 1
 T = 2
-evidence = [{weather:"Rain"}, {weather:"Sun"}]
-samples = fs.sample_DBN(dbn, N, T, evidence)
+evidence = [{weather: "Rain"}, {ice_cream_eaten: True}]
+samples = fs.weighted_sample_DBN(dbn, N, T, evidence)
 print("P(W_1 = R, W_2 = S) = " + str(len(samples) * 1.0 / N))
 
 #pt = ProbabilityTable()
