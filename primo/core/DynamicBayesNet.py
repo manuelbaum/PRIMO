@@ -46,8 +46,21 @@ class DynamicBayesNet(BayesNet):
             
     def get_B0(self):
         ''' Get the Bayesian network representing the initial distribution.'''
-        return self.__B0;
+        return self.__B0
         
     def get_TwoTBN(self):
         ''' Get the 2-time-slice Bayesian network.'''
-        return self.__twoTBN;
+        return self.__twoTBN
+        
+    def is_valid(self):
+        '''Check if graph structure is valid. And if there is a same-named
+        inital node in towTBN for every node in BO.
+        Returns true if graph is directed and acyclic, false otherwiese'''
+        for node in self.__B0.get_nodes():
+            if not self.__twoTBN.has_initial_node_by_name(node.name):
+                print("Node with name " + str(node.name) + 
+                " not found in TwoTBN!")
+                return False;
+        
+        return super(DynamicBayesNet, self).is_valid()
+        

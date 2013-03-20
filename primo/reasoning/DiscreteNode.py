@@ -32,6 +32,9 @@ class DiscreteNode(RandomNode):
     def get_value_range(self):
         return self.value_range
         
+    def set_cpd(self, cpd):
+        self.cpd = cpd
+        
     def get_cpd(self):
         return self.cpd
 

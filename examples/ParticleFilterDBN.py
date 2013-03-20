@@ -4,8 +4,7 @@ from primo.core import BayesNet
 from primo.core import DynamicBayesNet
 from primo.core import TwoTBN
 from primo.reasoning import DiscreteNode
-import primo.reasoning.particlebased.ForwardSampling as fs
-from primo.reasoning.density import ProbabilityTable
+import primo.reasoning.particlebased.ParticleFilterDBN as pf
 import numpy
 
 
@@ -14,54 +13,45 @@ B0 = BayesNet()
 dbn = DynamicBayesNet()
 twoTBN = TwoTBN()
 
-weather0 = DiscreteNode("Weather", ["Rain", "Sun"])
-weather = DiscreteNode("Weather", ["Rain", "Sun"])
-ice_cream_eaten0 = DiscreteNode("Ice Cream eaten", [True, False])
+weather0_init = DiscreteNode("Weather0", ["Sun", "Rain"])
+weather0 = DiscreteNode("Weather0", ["Sun", "Rain"])
+weather = DiscreteNode("Weather", ["Sun", "Rain"])
 ice_cream_eaten = DiscreteNode("Ice Cream eaten", [True, False])
 
-B0.add_node(weather0)
-B0.add_node(ice_cream_eaten0)
+B0.add_node(weather0_init)
+twoTBN.add_node(weather0, True)
 twoTBN.add_node(weather)
 twoTBN.add_node(ice_cream_eaten)
 
-B0.add_edge(weather0, ice_cream_eaten0)
 twoTBN.add_edge(weather, ice_cream_eaten)
-twoTBN.add_edge(weather, weather, True);
+twoTBN.add_edge(weather0, weather);
 
-weather0_cpt = numpy.array([.4, .6])
-weather0.set_probability_table(weather0_cpt, [weather0])
-ice_cream_eaten0_cpt = numpy.array([[.2, .8],
-                                    [.9, .1]])
-ice_cream_eaten0.set_probability_table(ice_cream_eaten0_cpt, [weather0, ice_cream_eaten0])
+cpt_weather0_init = numpy.array([.6, .4])
+weather0_init.set_probability_table(cpt_weather0_init, [weather0_init])
 
-weather_cpt=numpy.array([[.5, .5],
-                         [.7, .3]])
-weather.set_probability_table(weather_cpt, [weather, weather])
-ice_cream_eaten_cpt = numpy.array([[.2, .8],
-                                   [.9, .1]])
-ice_cream_eaten.set_probability_table(ice_cream_eaten_cpt, [weather, ice_cream_eaten])
+cpt_weather = numpy.array([[.7, .3],
+                           [.5, .5]])
+weather.set_probability_table(cpt_weather, [weather0, weather])
+ice_cream_eaten.set_probability(.9, [(ice_cream_eaten, True), (weather, "Sun")])
+ice_cream_eaten.set_probability(.1, [(ice_cream_eaten, False), (weather, "Sun")])
+ice_cream_eaten.set_probability(.2, [(ice_cream_eaten, True), (weather, "Rain")])
+ice_cream_eaten.set_probability(.8, [(ice_cream_eaten, False), (weather, "Rain")])
 
 dbn.set_B0(B0)
 dbn.set_TwoTBN(twoTBN)
 
-#N = 20000
-#T = 2
-#evidence = [{weather:"Rain"}, {weather:"Sun"}]
-#samples = fs.sample_DBN(dbn, N, T, evidence)
-#print("P(W_1 = R, W_2 = S) = " + str(len(samples) * 1.0 / N))
-
-N = 1
-T = 2
-evidence = [{weather: "Rain"}, {ice_cream_eaten: True}]
-samples = fs.weighted_sample_DBN(dbn, N, T, evidence)
-print("P(W_1 = R, W_2 = S) = " + str(len(samples) * 1.0 / N))
-
-#pt = ProbabilityTable()
-#pt.add_variable(weather)
-#pt.add_variable(ice_cream_eaten)
-#print "---- Joint-Probability ----"
-#print pt.to_jpt_by_states(chain)
-#print "---- Weather --------------"
-#print pt.marginalization(ice_cream_eaten).normalize_as_jpt()
-#print "----alarm----"
-#print pt.division(weather.get_cpd())
+N = 1000
+T = 4
+evidence = [{}, {ice_cream_eaten:True}]
+def get_evidence_function():
+    return {weather0_init:"Sun"}
+samples = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function)
+w_total = 0.0
+w_hit = 0.0
+for n in samples:
+    state = samples[n]
+    #print state
+    if state[weather] == "Sun":
+        w_hit += 1
+    
+print("P(..) = " + str(w_hit / N))
