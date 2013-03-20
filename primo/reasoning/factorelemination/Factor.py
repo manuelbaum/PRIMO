@@ -3,24 +3,26 @@ from primo.core import Node
 
 class Factor(object):
 
-    evidence = ""
+
     cluster = set()
+    isEvidence = False
     
     
     def __init__(self,node):
         self.node = node
-        self.calCPD = node.get_cpd()
+        self.calCPD = node.get_cpd().copy()
         
     def __str__(self):
         return self.node.name
         
     def set_evidence(self,evd):
-        #TODO: copy from originalCPD
-        # setCPD        
-        self.evidence = evd
+        self.calCPD = self.node.get_cpd().copy()
+        self.calCPD = self.calCPD.setEvidence(evd)
+        self.isEvidene = True
         
     def clear_evidence(self):
-        self.evidence = ""
+        self.calCPD = self.node.get_cpd().copy()
+        self.isEvidence = False
         
     def set_cluster(self,cluster):
         self.cluster = cluster
@@ -33,5 +35,8 @@ class Factor(object):
         
     def get_node(self):
         return self.node
+        
+    def contains_node(self,node):
+        return self.node == node
     
     

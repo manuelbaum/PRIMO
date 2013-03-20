@@ -12,6 +12,33 @@ class FactorTree(object):
         self.rootNode = rootNode
         self.graph['messagesValid'] = False
         
+    def calculate_marginal(self,variables):
+        if not self.graph['messagesValid']:
+            self.calculateMessages()
+            
+        resPT = ProbabilityTable()
+            
+        for f in self.graph.nodes():
+            if f.get_node() in variables:
+                resPT = resPT.multiplication.calculate_marginal_forOne(f)
+                
+        return resPT
+                
+    def calculate_marginal_forOne(self,factor):
+        curCPD = factor.get_calculation_CDP().copy()
+        for p in self.graph.predecessors(factor):
+            curCPD = curCPD.multiplication(self.graph[p][factor]['inMessage'])
+            
+        for p in self.graph.neighbors(factor):
+            curCPD = curCPD.multiplication(self.graph[factor][p]['outMessage'])
+            
+        for v in curCPD.get_variables()[:]:
+            if v != factor.get_node():
+                curCPD = curCPD.marginalization(v)
+                
+        return curCPD
+        
+        
     def draw(self):
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
