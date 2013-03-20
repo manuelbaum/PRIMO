@@ -6,6 +6,12 @@ from primo.reasoning.density import Density
 class ProbabilityTable(Density):
     '''TODO: write doc'''
 
+    @staticmethod
+    def get_neutral_multiplication_PT():
+        pt = ProbabilityTable()
+        pt.set_probability_table(numpy.array(1.0),[])
+        
+        return pt
 
 
     def __init__(self):

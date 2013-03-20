@@ -16,7 +16,7 @@ class FactorTreeFactory(object):
         tn = allNodes.pop()
         rootFactor = Factor(tn)
 
-        graph = nx.DiGraph()
+        graph = nx.DiGraph(messagesValid=False)
 
         graph.add_node(rootFactor)        
         

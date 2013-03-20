@@ -56,7 +56,7 @@ john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 #first Elimination:
 fe = EasiestFactorElimination()
 fe.set_BayesNet(bn)
-#print "Alarm: " + str(fe.calculate_PriorMarginal([alarm]))
+#print "Alarm:   " + str(fe.calculate_PriorMarginal([alarm]))
 #print "John_Calls: " + str(fe.calculate_PriorMarginal([john_calls]))
 #print "Baum_Calls: " + str(fe.calculate_PriorMarginal([baum_calls]))
 #print "Burglary: " + str(fe.calculate_PriorMarginal([burglary]))
@@ -70,16 +70,18 @@ fe.set_BayesNet(bn)
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_random_factortree(bn)
 
+print "AlarmFT: " + str(factorTree.calculate_marginal([alarm]))
+
 #factorTree.draw()
 
-for n,nbrs in factorTree.graph.adjacency_iter():
-    for nbr,eattr in nbrs.items():
-        data=eattr['seperator']
-        #print str(data)
-        print str(n) + " -> " + str(nbr)
-        for d in data:
-            print str(d)
+#for n,nbrs in factorTree.graph.adjacency_iter():
+#    for nbr,eattr in nbrs.items():
+#        data=eattr['seperator']
+#        #print str(data)
+#        print str(n) + " -> " + str(nbr)
+#        for d in data:
+#            print str(d)
             
-factorTree.draw()
+#factorTree.draw()
 
 
