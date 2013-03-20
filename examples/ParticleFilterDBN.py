@@ -40,13 +40,21 @@ ice_cream_eaten.set_probability(.8, [(ice_cream_eaten, False), (weather, "Rain")
 dbn.set_B0(B0)
 dbn.set_TwoTBN(twoTBN)
 
-N = 1000
+N = 5000
 T = 4
-evidence = [{}, {ice_cream_eaten:True}]
+
+count = 0
 def get_evidence_function():
-    return {weather0_init:"Sun"}
+    global count    
+    print count
+    if count == 1:
+        count = count + 1
+        return {weather:"Sun"}
+    else:
+        count = count + 1
+        return {}
+    
 samples = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function)
-w_total = 0.0
 w_hit = 0.0
 for n in samples:
     state = samples[n]
