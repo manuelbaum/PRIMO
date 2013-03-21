@@ -12,18 +12,56 @@ class FactorTree(object):
         self.graph = graph
         self.rootNode = rootNode
         
+    def calculate_PoE(self):
+        if not self.graph.graph['messagesValid']:
+            self.calculate_messages()
+            
+        cpd = self.calculate_marginal_forOne(self.rootNode)
+        
+        for v in cpd.get_variables()[:]:
+            cpd = cpd.marginalization(v)
+            
+        return cpd
+        
     def calculate_marginal(self,variables):
         if not self.graph.graph['messagesValid']:
-            self.calculateMessages()
+            self.calculate_messages()
             
-        print "is Root Node: " + str(variables[0] == self.rootNode)
+        print "Root Node: " + str(self.rootNode)
             
         resPT = ProbabilityTable.get_neutral_multiplication_PT()
+
+#        print "Graph: "        
+        
+#        for e in self.graph.edges():
+#            print str(e[0]) + " -> " + str(e[1])
+#            print "seperator: "
+#            sep = "[ "
+#            for s in self.graph[e[0]][e[1]]['seperator']:
+#                sep += str(s) + ", "
+#            
+#            print sep + "]"
+#            
+#            print "inVars"
+#            sep = "[ "
+#            for s in self.graph[e[0]][e[1]]['inVars']:
+#                sep += str(s) + ", "
+#            
+#            print sep + "]"
+#            
+#            print "outVars"
+#            sep = "[ "
+#            for s in self.graph[e[0]][e[1]]['outVars']:
+#                sep += str(s) + ", "
+#            
+#            print sep + "]"
         
             
         for f in self.graph.nodes():
             if f.get_node() in variables:
                 resPT = resPT.multiplication(self.calculate_marginal_forOne(f))
+                
+        resPT = resPT.normalize_as_jpt()
                 
         return resPT
                 
@@ -54,20 +92,20 @@ class FactorTree(object):
         nx.draw_circular(self.graph)
         plt.show()
         
-    def calculateMessages(self):
+    def calculate_messages(self):
         self.pull_phase(self.rootNode,self.graph)
         self.push_phase(self.rootNode,self.graph,ProbabilityTable.get_neutral_multiplication_PT())
         self.graph.graph['messagesValid'] = True
         
         
-    def setEvidences(self,evidences):
+    def set_evidences(self,evidences):
         self.graph.graph['messagesValid'] = False
         
-        evNodes = zip(*evidences)        
-        
-        for factor in self.graph.get_all_nodes():
-            if factor.get_node() in evNodes:
-                idx = evNodes.index(factor.get_node())
+        evNodes = zip(*evidences)
+       
+        for factor in self.graph.nodes():
+            if factor.get_node() in evNodes[0]:
+                idx = evNodes[0].index(factor.get_node())
                 factor.set_evidence(evidences[idx])
         
     
@@ -99,8 +137,7 @@ class FactorTree(object):
        
 
         for child in graph.neighbors(factor):
-            tmpCPD = inCPD.copy()
-            print "TMPCPD: " + str(tmpCPD)
+            tmpCPD = inCPD.multiplication(factor.get_calculation_CDP())
             for child2 in graph.neighbors(factor):
                 if (child != child2):
                     tmpCPD = tmpCPD.multiplication(graph[factor][child2]['msgAgainstWay'])

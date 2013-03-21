@@ -17,7 +17,7 @@ class Factor(object):
         
     def set_evidence(self,evd):
         self.calCPD = self.node.get_cpd().copy()
-        self.calCPD = self.calCPD.setEvidence(evd)
+        self.calCPD = self.calCPD.set_evidence(evd)
         self.isEvidene = True
         
     def clear_evidence(self):

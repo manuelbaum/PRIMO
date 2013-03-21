@@ -40,18 +40,19 @@ class FactorTreeFactory(object):
     def calculate_seperators_pull(self,factor,graph):
         
         s = set()  
-        pullSet = set()
+        pullSet = set(factor.get_variables())
         
         #find all variables in outgoing edges for factor
         for child in graph.neighbors(factor):
             s = self.calculate_seperators_pull(child,graph)
             # add s to incoming vars from child
-            tmp = graph[factor][child]['inVars']
-            graph[factor][child]['inVars'] = tmp | s
+            #tmp = graph[factor][child]['inVars']
+            #graph[factor][child]['inVars'] = tmp | s
+            graph[factor][child]['inVars'] =  s
                     
             pullSet =  s | pullSet
             
-        pullSet =  s | set(factor.get_variables())    
+        #pullSet =  s | set(factor.get_variables())    
         return pullSet
         
     def calculate_seperators_push(self,factor,graph,setOut):

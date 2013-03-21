@@ -70,7 +70,21 @@ fe.set_BayesNet(bn)
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_random_factortree(bn)
 
+#print "AlarmFT: " + str(factorTree.calculate_marginal([alarm]))
+#print "John_CallsFT: " + str(factorTree.calculate_marginal([john_calls]))
+#print "Baum_CallsFT: " + str(factorTree.calculate_marginal([baum_calls]))
+#print "BurglaryFT: " + str(factorTree.calculate_marginal([burglary]))
+#print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
+
+#factorTree.set_evidences([(earthquake, "Shaking")])
+print str(factorTree.rootNode)
+print "PoE: " + str(factorTree.calculate_PoE())
+
 print "AlarmFT: " + str(factorTree.calculate_marginal([alarm]))
+print "John_CallsFT: " + str(factorTree.calculate_marginal([john_calls]))
+print "Baum_CallsFT: " + str(factorTree.calculate_marginal([baum_calls]))
+print "BurglaryFT: " + str(factorTree.calculate_marginal([burglary]))
+print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
 
 #factorTree.draw()
 
