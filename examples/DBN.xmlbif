@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>tesasdasdt</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>IceCreameaten</NAME>
+      <PROPERTY>position = (150, 300)</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Weather</NAME>
+      <PROPERTY>position = (150, 200)</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Weather0</NAME>
+      <PROPERTY>position = (150, 100)</PROPERTY>
+    </VARIABLE>
+  </NETWORK>
+</BIF>

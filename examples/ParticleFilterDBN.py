@@ -16,7 +16,7 @@ twoTBN = TwoTBN()
 weather0_init = DiscreteNode("Weather0", ["Sun", "Rain"])
 weather0 = DiscreteNode("Weather0", ["Sun", "Rain"])
 weather = DiscreteNode("Weather", ["Sun", "Rain"])
-ice_cream_eaten = DiscreteNode("Ice Cream eaten", [True, False])
+ice_cream_eaten = DiscreteNode("Ice Cream Eaten", [True, False])
 
 B0.add_node(weather0_init)
 twoTBN.add_node(weather0, True)
@@ -29,8 +29,11 @@ twoTBN.add_edge(weather0, weather);
 cpt_weather0_init = numpy.array([.6, .4])
 weather0_init.set_probability_table(cpt_weather0_init, [weather0_init])
 
-cpt_weather = numpy.array([[.7, .3],
-                           [.5, .5]])
+cpt_weather0 = numpy.array([.6, .4])
+weather0.set_probability_table(cpt_weather0, [weather0])
+
+cpt_weather = numpy.array([[.7, .5],
+                           [.3, .5]])
 weather.set_probability_table(cpt_weather, [weather0, weather])
 ice_cream_eaten.set_probability(.9, [(ice_cream_eaten, True), (weather, "Sun")])
 ice_cream_eaten.set_probability(.1, [(ice_cream_eaten, False), (weather, "Sun")])
@@ -40,20 +43,27 @@ ice_cream_eaten.set_probability(.8, [(ice_cream_eaten, False), (weather, "Rain")
 dbn.set_B0(B0)
 dbn.set_TwoTBN(twoTBN)
 
+from primo.utils.XMLBIF import XMLBIF
+network = XMLBIF.read("BN_Weather_IceCream.xmlbif")
+exit
+#xmlbif = XMLBIF(dbn.get_TwoTBN(), "BN_Weather_IceCream")
+#xmlbif.write("BN_Weather_IceCream.xmlbif")
+
 N = 5000
 T = 4
 
 count = 0
 def get_evidence_function():
-    global count    
-    print count
+    global count
+    evidence = {}
     if count == 1:
         count = count + 1
-        return {weather:"Sun"}
+        evidence = {weather:"Sun"}
     else:
         count = count + 1
-        return {}
-    
+    print "Time slice " + str(count) + " with evidence " + str(evidence)
+    return evidence
+
 samples = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function)
 w_hit = 0.0
 for n in samples:
@@ -61,5 +71,5 @@ for n in samples:
     #print state
     if state[weather] == "Sun":
         w_hit += 1
-    
+
 print("P(..) = " + str(w_hit / N))

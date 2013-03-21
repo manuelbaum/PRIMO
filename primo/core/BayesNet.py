@@ -2,6 +2,7 @@ import networkx as nx
 from primo.core import Node
 
 
+
 class BayesNet(object):
     graph = nx.DiGraph()
     node_lookup = {}
@@ -90,7 +91,7 @@ class BayesNet(object):
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
         plt.show()
-        
+
     def draw_graphviz(self):
         import matplotlib.pyplot as plt
         nx.draw_graphviz(self.graph)

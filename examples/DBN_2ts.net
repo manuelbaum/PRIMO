@@ -1,6 +1,8 @@
 net
 {
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@4b942a3c";
 	jenginegenerator6060830225489488864L = "edu.ucla.belief.inference.JoinTreeSettings@8f3eac";
+	node_size = (130 55);
 }
 
 node I1
@@ -10,16 +12,6 @@ node I1
 	excludepolicy = "include whole CPT";
 	ismapvariable = "false";
 	label = "I1";
-	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
-	diagnosistype = "AUXILIARY";
-}
-node W1
-{
-	states = ("Rain" "Sun" );
-	position = (374 -128);
-	excludepolicy = "include whole CPT";
-	ismapvariable = "false";
-	label = "W1";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	diagnosistype = "AUXILIARY";
 }
@@ -33,17 +25,27 @@ node W0
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	diagnosistype = "AUXILIARY";
 }
+node W1
+{
+	states = ("Rain" "Sun" );
+	position = (374 -128);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "W1";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
 potential ( I1 | W1 )
 {
 	data = ((	0.2	0.8	)
 		(	0.9	0.1	));
 }
+potential ( W0 | )
+{
+	data = (	0.4	0.6	);
+}
 potential ( W1 | W0 )
 {
 	data = ((	0.5	0.5	)
 		(	0.3	0.7	));
-}
-potential ( W0 | )
-{
-	data = (	0.4	0.6	);
 }

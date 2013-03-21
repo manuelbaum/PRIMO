@@ -1,13 +1,18 @@
 import abc
+import re
+
 
 
 class Node(object):
     __metaclass__ = abc.ABCMeta
 
     name = "UninitializedName"
+    position = (0, 0)
 
     def __init__(self, node_name):
-        self.name = node_name
+        # Remove all special characters and replace " " with "_"
+        name = re.sub(r"[^a-zA-Z_0-9 ]*", "", node_name)
+        self.name = name.replace(" ", "_")
 
     @abc.abstractmethod
     def announce_parent(self, node):
