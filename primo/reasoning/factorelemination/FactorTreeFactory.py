@@ -4,6 +4,7 @@ import copy
 from primo.reasoning.factorelemination import Factor
 from primo.reasoning.factorelemination import FactorTree
 from random import choice
+from operator import itemgetter
 
 class FactorTreeFactory(object):
     
@@ -17,7 +18,6 @@ class FactorTreeFactory(object):
         rootFactor = Factor(tn)
 
         graph = nx.DiGraph(messagesValid=False)
-
         graph.add_node(rootFactor)        
         
         usedNodes = [rootFactor]
@@ -36,6 +36,56 @@ class FactorTreeFactory(object):
             
             
         return FactorTree(graph,rootFactor)
+        
+    def create_greedy_factortree(self,bayesNet):
+        allNodes = bayesNet.get_all_nodes()
+        
+        if len(allNodes) == 0:
+            raise Exception("createRandomFactorTree: No nodes in given bayesNet")
+            
+        sortNodeList = []
+        
+        for n in allNodes:
+            sortNodeList.append((len(n.get_cpd().get_variables()),n))
+            
+        sortNodeList = sorted(sortNodeList,key=itemgetter(0),reverse=True)
+        
+        sortNodeList =  zip(*sortNodeList)
+        sortNodeList = list(sortNodeList[1])
+        
+        rootFactor = Factor(sortNodeList.pop(0))
+        
+        graph = nx.DiGraph(messagesValid=False)
+        graph.add_node(rootFactor) 
+        
+        for nd in sortNodeList[:]:
+            (ct,insFactor) = self.find_best_node_for_insertion(graph,rootFactor,set(nd.get_cpd().get_variables()))
+            nFactor = Factor(nd)
+            graph.add_edge(insFactor,nFactor, inVars=set(),outVars=set())
+            
+        self.calculate_seperators_pull(rootFactor,graph)
+        self.calculate_seperators_push(rootFactor,graph,set())
+        self.intersect_seperators(graph)
+        
+        self.calculate_clusters(rootFactor,graph,set())
+            
+            
+        return FactorTree(graph,rootFactor)
+        
+        
+    def find_best_node_for_insertion(self,graph,factor,nodeSet):
+        
+        curJointCount = len(set(factor.get_variables()) & nodeSet)
+        curInsertFactor = factor
+        
+        for nbs in graph.neighbors(factor):
+            (count,retFactor) = self.find_best_node_for_insertion(graph,nbs,nodeSet)
+            if count >= curJointCount:
+                curJointCount = count
+                curInsertFactor = retFactor
+                
+        return (curJointCount,curInsertFactor)
+            
         
     def calculate_seperators_pull(self,factor,graph):
         

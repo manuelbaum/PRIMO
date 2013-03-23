@@ -68,7 +68,7 @@ fe.set_BayesNet(bn)
 #print "Posterior of earthquake : " + str(fe.calculate_PosteriorMarginal([burglary],[(alarm, "Ringing"),(earthquake, "Calm")]))
 
 factorTreeFactory = FactorTreeFactory()
-factorTree = factorTreeFactory.create_random_factortree(bn)
+factorTree = factorTreeFactory.create_greedy_factortree(bn)
 
 #print "AlarmFT: " + str(factorTree.calculate_marginal([alarm]))
 #print "John_CallsFT: " + str(factorTree.calculate_marginal([john_calls]))
