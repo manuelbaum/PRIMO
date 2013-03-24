@@ -1,38 +1,46 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+This Example shows how to create a BayesNet
+
+@author: djohn
+"""
+
 from  primo.core import BayesNet
 from  primo.reasoning import DiscreteNode
-from primo.reasoning.factorelemination import EasiestFactorElimination
-from primo.reasoning.factorelemination import FactorTreeFactory
 import numpy
 
+#initialize new BayesNet
 bn = BayesNet()
+
+#create Nodes with Name and the possible values
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
 alarm = DiscreteNode("Alarm", ["Ringing", "Silent"])
 earthquake = DiscreteNode("Earthquake", ["Shaking", "Calm"])
 john_calls = DiscreteNode("John calls", ["Calling", "Not Calling"])
 baum_calls = DiscreteNode("Baum calls", ["Calling", "Not Calling"])
 
-
+# add Nodes to BayesNet
 bn.add_node(burglary)
 bn.add_node(alarm)
 bn.add_node(earthquake)
 bn.add_node(john_calls)
 bn.add_node(baum_calls)
 
-
+# Add edges to show dependencies
 bn.add_edge(burglary,alarm)
 bn.add_edge(earthquake, alarm)
 bn.add_edge(alarm, john_calls)
 bn.add_edge(alarm, baum_calls)
 
-
+#create probability tables and set them in the node
 cpt_burglary = numpy.array([0.001,0.999])
 burglary.set_probability_table(cpt_burglary,[burglary])
 
 cpt_earthquake = numpy.array([0.002,0.998])
 earthquake.set_probability_table(cpt_earthquake,[earthquake])
 
+#another possibility to set probabilities
 alarm.set_probability(0.95,[(alarm,"Ringing"),(burglary,"Intruder"),(earthquake,"Shaking")])
 alarm.set_probability(0.05,[(alarm,"Silent"),(burglary,"Intruder"),(earthquake,"Shaking")])
 alarm.set_probability(0.29,[(alarm,"Ringing"),(burglary,"Safe"),(earthquake,"Shaking")])
@@ -52,50 +60,7 @@ john_calls.set_probability(0.3,[(alarm,"Ringing"),(john_calls,"Not Calling")])
 john_calls.set_probability(0.01,[(alarm,"Silent"),(john_calls,"Calling")])
 john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 
-
-#first Elimination:
-fe = EasiestFactorElimination()
-fe.set_BayesNet(bn)
-#print "Alarm:   " + str(fe.calculate_PriorMarginal([alarm]))
-#print "John_Calls: " + str(fe.calculate_PriorMarginal([john_calls]))
-#print "Baum_Calls: " + str(fe.calculate_PriorMarginal([baum_calls]))
-#print "Burglary: " + str(fe.calculate_PriorMarginal([burglary]))
-#print "Earthquake: " + str(fe.calculate_PriorMarginal([earthquake]))
-
-#print "PoE Earthquake: " + str(fe.calculate_PoE([(earthquake, "Calm")]))
-#print "PoE BaumCalls is Calling: " + str(fe.calculate_PoE([(baum_calls, "Calling")]))
-
-#print "Posterior of earthquake : " + str(fe.calculate_PosteriorMarginal([burglary],[(alarm, "Ringing"),(earthquake, "Calm")]))
-
-factorTreeFactory = FactorTreeFactory()
-factorTree = factorTreeFactory.create_greedy_factortree(bn)
-
-#print "AlarmFT: " + str(factorTree.calculate_marginal([alarm]))
-#print "John_CallsFT: " + str(factorTree.calculate_marginal([john_calls]))
-#print "Baum_CallsFT: " + str(factorTree.calculate_marginal([baum_calls]))
-#print "BurglaryFT: " + str(factorTree.calculate_marginal([burglary]))
-#print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
-
-#factorTree.set_evidences([(earthquake, "Shaking")])
-print str(factorTree.rootNode)
-print "PoE: " + str(factorTree.calculate_PoE())
-
-print "AlarmFT: " + str(factorTree.calculate_marginal([alarm]))
-print "John_CallsFT: " + str(factorTree.calculate_marginal([john_calls]))
-print "Baum_CallsFT: " + str(factorTree.calculate_marginal([baum_calls]))
-print "BurglaryFT: " + str(factorTree.calculate_marginal([burglary]))
-print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
-
-#factorTree.draw()
-
-#for n,nbrs in factorTree.graph.adjacency_iter():
-#    for nbr,eattr in nbrs.items():
-#        data=eattr['seperator']
-#        #print str(data)
-#        print str(n) + " -> " + str(nbr)
-#        for d in data:
-#            print str(d)
-            
-#factorTree.draw()
+#Draws the BayesNet
+#bn.draw()
 
 

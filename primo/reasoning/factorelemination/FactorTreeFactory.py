@@ -95,9 +95,6 @@ class FactorTreeFactory(object):
         #find all variables in outgoing edges for factor
         for child in graph.neighbors(factor):
             s = self.calculate_seperators_pull(child,graph)
-            # add s to incoming vars from child
-            #tmp = graph[factor][child]['inVars']
-            #graph[factor][child]['inVars'] = tmp | s
             graph[factor][child]['inVars'] =  s
                     
             pullSet =  s | pullSet

@@ -3,8 +3,6 @@ import networkx as nx
 import primo.reasoning.density.ProbabilityTable as ProbabilityTable
 
 
-
-
 class FactorTree(object):
     
     
@@ -27,34 +25,8 @@ class FactorTree(object):
         if not self.graph.graph['messagesValid']:
             self.calculate_messages()
             
-        print "Root Node: " + str(self.rootNode)
             
         resPT = ProbabilityTable.get_neutral_multiplication_PT()
-
-#        print "Graph: "        
-        
-#        for e in self.graph.edges():
-#            print str(e[0]) + " -> " + str(e[1])
-#            print "seperator: "
-#            sep = "[ "
-#            for s in self.graph[e[0]][e[1]]['seperator']:
-#                sep += str(s) + ", "
-#            
-#            print sep + "]"
-#            
-#            print "inVars"
-#            sep = "[ "
-#            for s in self.graph[e[0]][e[1]]['inVars']:
-#                sep += str(s) + ", "
-#            
-#            print sep + "]"
-#            
-#            print "outVars"
-#            sep = "[ "
-#            for s in self.graph[e[0]][e[1]]['outVars']:
-#                sep += str(s) + ", "
-#            
-#            print sep + "]"
         
             
         for f in self.graph.nodes():
@@ -68,17 +40,13 @@ class FactorTree(object):
     def calculate_marginal_forOne(self,factor):
         curCPD = factor.get_calculation_CDP().copy()
         
-                
-        
         for p in self.graph.predecessors(factor):
             tmpCPD = self.graph[p][factor]['msgRightWay']
             curCPD = curCPD.multiplication(tmpCPD)
-            #print "in" + str(p) + str(tmpCPD) + "\n"            
-            
+                      
         for p in self.graph.neighbors(factor):
             tmpCPD = self.graph[factor][p]['msgAgainstWay']
             curCPD = curCPD.multiplication(tmpCPD)
-            #print "out" + str(p) + str(tmpCPD) + "\n"
             
         for v in curCPD.get_variables()[:]:
             if v != factor.get_node():
@@ -135,7 +103,6 @@ class FactorTree(object):
         
     def push_phase(self,factor,graph,inCPD):
        
-
         for child in graph.neighbors(factor):
             tmpCPD = inCPD.multiplication(factor.get_calculation_CDP())
             for child2 in graph.neighbors(factor):
