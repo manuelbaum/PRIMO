@@ -4,7 +4,6 @@ from primo.core import BayesNet
 from primo.core import Node
 from primo.reasoning import DiscreteNode
 import re
-import numpy
 
 
 class XMLBIF(object):
@@ -252,7 +251,6 @@ class XMLBIF(object):
         definition_nodes = network_nodes[0].getElementsByTagName("DEFINITION")
         for definition_node in definition_nodes:
             node = None
-            parent_count = 0
             for for_node in definition_node.getElementsByTagName("FOR"):
                 name = XMLBIF.get_node_text(for_node.childNodes)
                 node = network.get_node(name)
@@ -263,9 +261,10 @@ class XMLBIF(object):
                 parent_name = XMLBIF.get_node_text(given_node.childNodes)
                 parent_node = network.get_node(parent_name)
                 node.announce_parent(parent_node)
-                parent_count += 1
             for table_node in definition_node.getElementsByTagName("TABLE"):
-                table = XMLBIF.get_node_table_from_text(table_node.childNodes, parent_count)
+                table = XMLBIF.get_node_table_from_text(table_node.childNodes)
+                node.get_cpd().get_table().T.flat = table
+                break
 
         return network
 
@@ -302,11 +301,10 @@ class XMLBIF(object):
         return (number_list[0], number_list[1])
 
     @staticmethod
-    def get_node_table_from_text(nodelist, parent_count):
+    def get_node_table_from_text(nodelist):
         '''
         Keyword arguments:
         nodelist -- is a list of nodes (xml.dom.minidom.Node).
-        parent_count -- is the number of parents.
 
         Returns the probability table of the given nodelist as pair numpy.array.
         '''
@@ -316,7 +314,4 @@ class XMLBIF(object):
                 rc.append(node.data)
         text = ''.join(rc)
         number_list = re.findall(r"[0-9]*\.*[0-9]+", text)
-        if len(number_list)
-        for number in number_list:
-
-        return (number_list[0], number_list[1])
+        return number_list
