@@ -12,7 +12,7 @@ def weighted_random(weights):
         if counter <= 0:
             return i
 
-def wighted_sample_with_replacement(samples={}, weights=[], N=0):
+def wighted_sample_with_replacement(samples = {}, weights = [], N = 0):
     ws_sum = sum(weights)
     new_samples = {}
     #print("wighted_sample_with_replacement")
@@ -22,11 +22,11 @@ def wighted_sample_with_replacement(samples={}, weights=[], N=0):
             r -= w
             if r <= 0:    
                 #print("Winner sample: " + str(i))
-                new_samples[n] = samples[i];
+                new_samples[n] = (samples[i], w);
                 break
     return new_samples
 
-def weighted_sample(network, events={}):
+def weighted_sample(network, events = {}):
     w = 1.0
     state = {}
     if not isinstance(network, BayesNet):
@@ -43,8 +43,7 @@ def weighted_sample(network, events={}):
             reduced_cpd = node.get_cpd_reduced(evidence)
         else:
             reduced_cpd = node.get_cpd()
-        #print("Reduced CPD: " + str(reduced_cpd))
-
+        
         if node in events:
             # 'force' evidence and calculate new wight w
             w *= reduced_cpd.get_table()[node.get_value_range().index(events[node])]
@@ -58,7 +57,7 @@ def weighted_sample(network, events={}):
     return (state, w)
 
 
-def particle_filtering_DBN(network, N, T, get_evidence_function, interval=0):
+def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
     '''
     Create N samples for the given network with T time slices.
 
@@ -129,7 +128,7 @@ def sample_one_time_slice(network, samples, evidence):
     twoTBN = network.get_TwoTBN()
     N = len(samples)
     for n in xrange(N):
-        state = samples[n]
+        (state, w) = samples[n]
         (state, w) = weighted_sample(twoTBN.create_timeslice(state), evidence)
         samples[n] = copy.copy(state)
         weights.append(w)

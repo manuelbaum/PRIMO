@@ -43,33 +43,32 @@ ice_cream_eaten.set_probability(.8, [(ice_cream_eaten, False), (weather, "Rain")
 dbn.set_B0(B0)
 dbn.set_TwoTBN(twoTBN)
 
-from primo.utils.XMLBIF import XMLBIF
-network = XMLBIF.read("BN_Weather_IceCream.xmlbif")
-exit
-#xmlbif = XMLBIF(dbn.get_TwoTBN(), "BN_Weather_IceCream")
-#xmlbif.write("BN_Weather_IceCream.xmlbif")
+N = 1000
+T = 2
 
-N = 5000
-T = 4
-
-count = 0
+time_slice = 0
 def get_evidence_function():
-    global count
+    global time_slice
     evidence = {}
-    if count == 1:
-        count = count + 1
-        evidence = {weather:"Sun"}
+    if time_slice == 1:
+        time_slice = time_slice + 1
+        evidence = {weather:"Rain"}
     else:
-        count = count + 1
-    print "Time slice " + str(count) + " with evidence " + str(evidence)
+        time_slice = time_slice + 1
+    print "Time slice " + str(time_slice) + " with evidence " + str(evidence)
     return evidence
 
 samples = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function)
 w_hit = 0.0
-for n in samples:
-    state = samples[n]
+w_all = 0.0
+for i in samples:
+    (state, w) = samples[i]
     #print state
-    if state[weather] == "Sun":
-        w_hit += 1
+    if state[ice_cream_eaten] == True:
+        w_hit += w
+    w_all += w
 
-print("P(..) = " + str(w_hit / N))
+print w_all
+print w_hit
+
+print("P(..) = " + str(w_hit / w_all))
