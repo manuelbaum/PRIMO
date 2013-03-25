@@ -78,6 +78,8 @@ print "Posterior of burglary : " + str(fe.calculate_PosteriorMarginal([burglary]
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_greedy_factortree(bn)
 
+#==============================================================================
+
 print "====Factor Tree===="
 
 print "Prior Marginal:"
@@ -100,8 +102,4 @@ print "Baum_CallsFT: " + str(factorTree.calculate_marginal([baum_calls]))
 print "BurglaryFT: " + str(factorTree.calculate_marginal([burglary]))
 print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
 
-#factorTree.draw()
-
-
-            
 #factorTree.draw()

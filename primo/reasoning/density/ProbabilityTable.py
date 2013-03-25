@@ -21,7 +21,6 @@ class ProbabilityTable(Density):
         #need to be 0.0 instead of 0 because of precision
         #otherwise the function set probability doesn't work correctly
         self.table = numpy.array(0.0)
-
             
 
     def get_table(self):
