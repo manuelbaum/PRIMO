@@ -6,6 +6,12 @@ from primo.reasoning.density import Density
 class ProbabilityTable(Density):
     '''TODO: write doc'''
 
+    @staticmethod
+    def get_neutral_multiplication_PT():
+        pt = ProbabilityTable()
+        pt.set_probability_table(numpy.array(1.0),[])
+        
+        return pt
 
 
     def __init__(self):
@@ -15,8 +21,12 @@ class ProbabilityTable(Density):
         #need to be 0.0 instead of 0 because of precision
         #otherwise the function set probability doesn't work correctly
         self.table = numpy.array(0.0)
+<<<<<<< HEAD
 
 
+=======
+            
+>>>>>>> efa7bfa2fbaecb446aada22073c488977ff3d61e
 
     def get_table(self):
         return self.table
@@ -192,6 +202,15 @@ class ProbabilityTable(Density):
 
         ev.table[pos_value] = tmpCpd[pos_value]
 
+        return ev
+        
+    def copy(self):
+        '''Returns a copied version of this probabilityTable'''
+        
+        ev = ProbabilityTable()
+        ev.variables = copy.copy(self.variables)
+        ev.table = copy.copy(self.table)
+        
         return ev
 
 

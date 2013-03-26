@@ -1,1 +1,5 @@
 from EasiestFactorElimination import EasiestFactorElimination
+from Factor import Factor
+from FactorTree import FactorTree
+from FactorEdge import FactorEdge
+from FactorTreeFactory import FactorTreeFactory

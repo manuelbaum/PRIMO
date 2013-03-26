@@ -37,9 +37,7 @@ class EasiestFactorElimination(object):
         # Dann PoE berechnen und damit normalisieren
         nodes = self.bn.get_all_nodes()
         
-        ev_list = zip(*evidence)
-              
-              
+        ev_list = zip(*evidence)     
         # Special Case: First Node
         node1 = nodes.pop()
         if node1 in ev_list[0]:
