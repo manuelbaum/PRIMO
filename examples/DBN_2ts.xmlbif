@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<BIF VERSION="0.3">
+<NETWORK>
+  <NAME>Unnamed network</NAME>
+
+  <VARIABLE TYPE="nature">
+    <NAME>W1</NAME>
+    <OUTCOME>Rain</OUTCOME>
+    <OUTCOME>Sun</OUTCOME>
+    <PROPERTY>position = (597, 105)</PROPERTY>
+  </VARIABLE>
+
+  <DEFINITION>
+    <FOR>W1</FOR>
+    <GIVEN>W0</GIVEN>
+    <TABLE>0.5 0.5 0.3 0.7 </TABLE>
+  </DEFINITION>
+
+  <VARIABLE TYPE="nature">
+    <NAME>W0</NAME>
+    <OUTCOME>Rain</OUTCOME>
+    <OUTCOME>Sun</OUTCOME>
+    <PROPERTY>position = (388, 106)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>I1</NAME>
+    <OUTCOME>true</OUTCOME>
+    <OUTCOME>false</OUTCOME>
+    <PROPERTY>position = (602, 220)</PROPERTY>
+  </VARIABLE>
+
+  
+
+  <DEFINITION>
+    <FOR>W0</FOR>
+    <TABLE>0.4 0.6 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>I1</FOR>
+    <GIVEN>W1</GIVEN>
+    <TABLE>0.2 0.8 0.9 0.1 </TABLE>
+  </DEFINITION>
+
+</NETWORK>
+</BIF>

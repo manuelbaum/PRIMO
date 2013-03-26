@@ -2,6 +2,7 @@ import networkx as nx
 from primo.core import Node
 
 
+
 class BayesNet(object):
     graph = nx.DiGraph()
     node_lookup = {}
@@ -54,7 +55,7 @@ class BayesNet(object):
     def get_all_nodes(self):
         return self.graph.nodes()
 
-    def get_nodes(self, node_names):
+    def get_nodes(self, node_names=[]):
         nodes = []
         if not node_names:
             nodes = self.graph.nodes()
@@ -62,6 +63,9 @@ class BayesNet(object):
             for node_name in node_names:
                 nodes.append(self.get_node(node_name))
         return nodes
+
+    def get_nodes_in_topological_sort(self):
+        return nx.topological_sort(self.graph)
 
     def get_parents(self, node):
         if node.name not in self.node_lookup.keys():
@@ -87,7 +91,7 @@ class BayesNet(object):
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
         plt.show()
-        
+
     def draw_graphviz(self):
         import matplotlib.pyplot as plt
         nx.draw_graphviz(self.graph)

@@ -1,0 +1,111 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@41b22cc7";
+	jenginegenerator6060830225489488864L = "edu.ucla.belief.inference.JoinTreeSettings@75a340";
+	node_size = (130 55);
+}
+
+node W2
+{
+	states = ("Rain" "Sun" );
+	position = (498 -131);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "W2";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node I2
+{
+	states = ("true" "false" );
+	position = (540 -226);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "I2";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node W1
+{
+	states = ("Rain" "Sun" );
+	position = (374 -128);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "W1";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node I3
+{
+	states = ("true" "false" );
+	position = (683 -215);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "I3";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node W3
+{
+	states = ("Rain" "Sun" );
+	position = (656 -124);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "W3";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node I1
+{
+	states = ("true" "false" );
+	position = (429 -227);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "I1";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+node W0
+{
+	states = ("Rain" "Sun" );
+	position = (231 -125);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	label = "W0";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	diagnosistype = "AUXILIARY";
+}
+potential ( W2 | W1 )
+{
+	data = ((	0.5	0.5	)
+		(	0.3	0.7	));
+}
+potential ( I2 | W2 )
+{
+	data = ((	0.2	0.8	)
+		(	0.9	0.1	));
+}
+potential ( W1 | W0 )
+{
+	data = ((	0.5	0.5	)
+		(	0.3	0.7	));
+}
+potential ( I3 | W3 )
+{
+	data = ((	0.2	0.8	)
+		(	0.9	0.1	));
+}
+potential ( W3 | W2 )
+{
+	data = ((	0.5	0.5	)
+		(	0.3	0.7	));
+}
+potential ( I1 | W1 )
+{
+	data = ((	0.2	0.8	)
+		(	0.9	0.1	));
+}
+potential ( W0 | )
+{
+	data = (	0.4	0.6	);
+}
