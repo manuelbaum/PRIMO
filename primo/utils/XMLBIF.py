@@ -97,6 +97,7 @@ class XMLBIF(object):
             tag_for.appendChild(txt_for)
             tag_def.appendChild(tag_for)
 
+            # TODO: Revise! This will only work at random!
             for parent in reversed(self.network.graph.predecessors(current_node)):
                 tag_par = minidom.Element("GIVEN")
                 txt_par = minidom.Text()

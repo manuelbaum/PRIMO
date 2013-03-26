@@ -20,7 +20,7 @@ def wighted_sample_with_replacement(samples = {}, weights = [], N = 0):
         r = random.random() * ws_sum
         for i, w in enumerate(weights):
             r -= w
-            if r <= 0:    
+            if r <= 0:
                 #print("Winner sample: " + str(i))
                 new_samples[n] = (samples[i], w);
                 break
@@ -43,11 +43,11 @@ def weighted_sample(network, events = {}):
             reduced_cpd = node.get_cpd_reduced(evidence)
         else:
             reduced_cpd = node.get_cpd()
-        
+
         if node in events:
             # 'force' evidence and calculate new wight w
             w *= reduced_cpd.get_table()[node.get_value_range().index(events[node])]
-            state[node] = events[node];
+            state[node] = events[node]
         else:
             # sample from BN
             new_state = weighted_random(reduced_cpd.get_table())
@@ -56,6 +56,45 @@ def weighted_sample(network, events = {}):
     #print state
     return (state, w)
 
+def gibs_sample(network, state, events = {}):
+    w = 1.0
+    if not isinstance(network, BayesNet):
+        raise Exception("The given network is not an instance of BayesNet.")
+    nodes = network.get_nodes_in_topological_sort()
+    for node in nodes:
+        # reduce this node's cpd
+        parents = network.get_parents(node)
+        if parents:
+            evidence = [(parent, state[parent]) for parent in parents]
+            reduced_cpd = node.get_cpd_reduced(evidence)
+        else:
+            reduced_cpd = node.get_cpd()
+
+        if node in events:
+            # 'force' evidence and calculate new wight w
+            w *= reduced_cpd.get_table()[node.get_value_range().index(events[node])]
+            state[node] = events[node]
+        else:
+            #reduce the children's cpds
+            children = network.get_children(node)
+            for child in children:
+                #reduce this node's cpd
+#                print "##################################################"
+#                print "Node: " + node.name
+#                print "Reduced CPD: " + str(reduced_cpd)
+#                print "Child: " + child.name
+                parents = network.get_parents(child)
+                evidence = [(parent, state[parent]) for parent in parents if parent != node]
+                evidence.append((child, state[child]))
+                reduced_child_cpd = child.get_cpd_reduced(evidence)
+                reduced_cpd = reduced_cpd.multiplication(reduced_child_cpd)
+#                print "Evidence: " + str(evidence)
+#                print "Reduced Child CPD: " + str(reduced_child_cpd)
+#                print "Reduced Multiplied CPD: " + str(reduced_cpd)
+            # sample from BN
+            new_state = weighted_random(reduced_cpd.get_table())
+            state[node] = node.get_value_range()[new_state]
+    return (state, w)
 
 def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
     '''
@@ -75,11 +114,11 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
         raise Exception("The given network is not an instance of DynamicBayesNet.")
 
     if not network.is_valid():
-        raise Exception("The given network is not valid.")   
+        raise Exception("The given network is not valid.")
 
     # Sample from inital distribution
     samples = sample_from_inital_distribution(network, N, get_evidence_function())
-    
+
     # Sample time slices
     if T == -1:
         while True:
@@ -88,18 +127,18 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
     else:
         for t in xrange(1, T):
             samples = sample_one_time_slice(network, samples, get_evidence_function())
-        
+
     return samples
-    
+
 def sample_from_inital_distribution(network, N, evidence):
     '''
     Create samples from initial distribution.
 
     Keyword arguments:
     network -- a DynamicBayesNet
-    N -- number of samples    
+    N -- number of samples
     evidence -- dict with the following structure: {node1:evidence1, node2:evidence2, ...}
-    
+
     Returns a dict of N samples
     '''
     samples = {}
@@ -111,9 +150,9 @@ def sample_from_inital_distribution(network, N, evidence):
         weights.append(w)
     # wighted sample with replacement
     return wighted_sample_with_replacement(samples, weights, N)
-    
-    
-def sample_one_time_slice(network, samples, evidence):
+
+
+def sample_one_time_slice(network, samples, evidence, gibbs = True, gibbs_iterations = 5):
     '''
     Create samples for next time slice
 
@@ -127,11 +166,17 @@ def sample_one_time_slice(network, samples, evidence):
     weights = []
     twoTBN = network.get_TwoTBN()
     N = len(samples)
-    for n in xrange(N):
-        (state, w) = samples[n]
-        (state, w) = weighted_sample(twoTBN.create_timeslice(state), evidence)
-        samples[n] = copy.copy(state)
+    for i in xrange(N):
+        (state, w) = samples[i]
+        ts = twoTBN.create_timeslice(state)
+        (state, w) = weighted_sample(ts, evidence)
+        if gibbs:
+            for g in xrange(gibbs_iterations):
+                (state, w) = gibs_sample(ts, state, evidence)
+
+        samples[i] = copy.copy(state)
         weights.append(w)
-    
-    # wighted sample with replacement        
+
+
+    # wighted sample with replacement
     return wighted_sample_with_replacement(samples, weights, N)

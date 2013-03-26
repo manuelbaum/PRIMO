@@ -11,7 +11,7 @@ class TwoTBN(BayesNet):
 
     def __init__(self):
         BayesNet.__init__(self)
-        
+
     def create_timeslice(self, state):
         for node_x in self.__initial_nodes:
             for node_y in state:
@@ -21,8 +21,8 @@ class TwoTBN(BayesNet):
                     node_x.set_cpd(cpd)
                     node_x.set_probability(1., [(node_x, state[node_y])])
         return self
-            
-            
+
+
     def add_node(self, node, initial=False):
         super(TwoTBN, self).add_node(node)
         if initial:

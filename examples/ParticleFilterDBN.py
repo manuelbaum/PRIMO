@@ -34,11 +34,14 @@ weather0.set_probability_table(cpt_weather0, [weather0])
 
 cpt_weather = numpy.array([[.7, .5],
                            [.3, .5]])
-weather.set_probability_table(cpt_weather, [weather0, weather])
-ice_cream_eaten.set_probability(.9, [(ice_cream_eaten, True), (weather, "Sun")])
-ice_cream_eaten.set_probability(.1, [(ice_cream_eaten, False), (weather, "Sun")])
-ice_cream_eaten.set_probability(.2, [(ice_cream_eaten, True), (weather, "Rain")])
-ice_cream_eaten.set_probability(.8, [(ice_cream_eaten, False), (weather, "Rain")])
+weather.set_probability_table(cpt_weather, [weather, weather0])
+cpt_ice_cream_eaten = numpy.array([[.9, .2],
+                                   [.1, .8]])
+ice_cream_eaten.set_probability_table(cpt_ice_cream_eaten, [ice_cream_eaten, weather])
+
+from primo.utils import XMLBIF
+xmlbif = XMLBIF(twoTBN, "Test")
+xmlbif.write("test.xmlbif")
 
 dbn.set_B0(B0)
 dbn.set_TwoTBN(twoTBN)
@@ -52,7 +55,7 @@ def get_evidence_function():
     evidence = {}
     if time_slice == 1:
         time_slice = time_slice + 1
-        evidence = {weather:"Rain"}
+        evidence = {weather:"Sun"}
     else:
         time_slice = time_slice + 1
     print "Time slice " + str(time_slice) + " with evidence " + str(evidence)

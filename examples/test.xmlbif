@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <BIF VERSION="0.3">
+        <NETWORK>
+            <NAME>Test</NAME>
+            <VARIABLE TYPE="nature">
+                <NAME>Weather</NAME>
+                <OUTCOME>Sun</OUTCOME>
+                <OUTCOME>Rain</OUTCOME>
+                <PROPERTY>position = (150, 200)</PROPERTY>
+            </VARIABLE>
+            <VARIABLE TYPE="nature">
+                <NAME>Weather0</NAME>
+                <OUTCOME>Sun</OUTCOME>
+                <OUTCOME>Rain</OUTCOME>
+                <PROPERTY>position = (150, 100)</PROPERTY>
+            </VARIABLE>
+            <VARIABLE TYPE="nature">
+                <NAME>Ice_Cream_Eaten</NAME>
+                <OUTCOME>True</OUTCOME>
+                <OUTCOME>False</OUTCOME>
+                <PROPERTY>position = (150, 300)</PROPERTY>
+            </VARIABLE>
+            <DEFINITION>
+                <FOR>Weather</FOR>
+                <GIVEN>Weather0</GIVEN>
+                <TABLE>0.7 0.3 0.5 0.5 </TABLE>
+            </DEFINITION>
+            <DEFINITION>
+                <FOR>Weather0</FOR>
+                <TABLE>0.6 0.4 </TABLE>
+            </DEFINITION>
+            <DEFINITION>
+                <FOR>Ice_Cream_Eaten</FOR>
+                <GIVEN>Weather</GIVEN>
+                <TABLE>0.9 0.1 0.2 0.8 </TABLE>
+            </DEFINITION>
+        </NETWORK>
+    </BIF>
