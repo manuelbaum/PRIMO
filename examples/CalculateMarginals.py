@@ -61,8 +61,8 @@ john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 # This Factor Elimination at first builds the joint probability table (jpt) and
 # then projects on the queried variables
 
-fe = EasiestFactorElimination()
-fe.set_BayesNet(bn)
+fe = EasiestFactorElimination(bn)
+
 print "===== Easiest Factor Elimination ======"
 print "Prior Alarm:   " + str(fe.calculate_PriorMarginal([alarm]))
 print "Prior John_Calls: " + str(fe.calculate_PriorMarginal([john_calls]))
@@ -75,10 +75,10 @@ print "PoE BaumCalls is Calling: " + str(fe.calculate_PoE([(baum_calls, "Calling
 
 print "Posterior of burglary : " + str(fe.calculate_PosteriorMarginal([burglary],[(alarm, "Ringing"),(earthquake, "Calm")]))
 
+#==============================================================================
+
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_greedy_factortree(bn)
-
-#==============================================================================
 
 print "====Factor Tree===="
 

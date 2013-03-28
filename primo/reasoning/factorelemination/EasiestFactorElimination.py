@@ -10,11 +10,9 @@ class EasiestFactorElimination(object):
     
     
     
-    def __init__(self):
-        self.bn= BayesNet()
+    def __init__(self,bayesNet):
+        self.bn= bayesNet
 
-    def set_BayesNet(self,bayesnet):
-        self.bn = bayesnet
         
     def calculate_PriorMarginal(self,variables):        
         nodes = self.bn.get_all_nodes()
@@ -31,10 +29,6 @@ class EasiestFactorElimination(object):
         return finCpd
         
     def calculate_PosteriorMarginal(self,variables,evidence):
-        #TODO
-        # Verbundwahrscheinlichkeit / PoE
-        # Erst wie Prior Marginal nur mit setzen der Evidence
-        # Dann PoE berechnen und damit normalisieren
         nodes = self.bn.get_all_nodes()
         
         ev_list = zip(*evidence)     
