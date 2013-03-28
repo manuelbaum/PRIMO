@@ -111,3 +111,29 @@ print "BurglaryFT: " + str(factorTree.calculate_marginal([burglary]))
 print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
 
 #factorTree.draw()
+
+#Ausgabe:
+#===== Easiest Factor Elimination ======
+#Prior Alarm:   [ 0.00251644  0.99748356]
+#Prior John_Calls: [ 0.01173634  0.98826366]
+#Prior Baum_Calls: [ 0.05213898  0.94786102]
+#Prior Burglary: [ 0.001  0.999]
+#Prior Earthquake: [ 0.002  0.998]
+#PoE Earthquake: 0.998
+#PoE BaumCalls is Calling: 0.0521389757
+#Posterior of burglary : [ 0.48478597  0.51521403]
+#====Factor Tree====
+#Prior Marginal:
+#AlarmFT: [ 0.00251644  0.99748356]
+#John_CallsFT: [ 0.01173634  0.98826366]
+#Baum_CallsFT: [ 0.05213898  0.94786102]
+#BurglaryFT: [ 0.001  0.999]
+#EarthquakeFT: [ 0.002  0.998]
+#PoE: 0.001935122
+#Posterior Marginal (alarm->ringing , earthquake->calm):
+#AlarmFT: [ 1.  0.]
+#John_CallsFT: [ 0.7  0.3]
+#Baum_CallsFT: [ 0.9  0.1]
+#BurglaryFT: [ 0.48478597  0.51521403]
+#EarthquakeFT: [ 0.  1.]
+
