@@ -82,6 +82,7 @@ class ProbabilityTable(Density):
         return set(sum_of_owner_probs.flatten()) == set([1])
 
     def is_normalized_as_jpt(self):
+        '''Returns whether the cpd is summed to one'''
         return numpy.sum(self.table) == 1.0
 
     def normalize_as_jpt(self):

@@ -4,6 +4,11 @@ import primo.reasoning.density.ProbabilityTable as ProbabilityTable
 
 
 class FactorTree(object):
+    '''The factor tree contains for each node in the bayesNet a factor. It
+    is a directed graph with one root node. To speed up the reasoning it uses
+    a method bases approach which stores caclulated intermediate results at
+    edges. Thus, the first query is expensive and all following are cheap.
+    The speed of the first message calculation depends on how the tree was build.'''
     
     
     def __init__(self,graph,rootNode):
@@ -11,6 +16,7 @@ class FactorTree(object):
         self.rootNode = rootNode
         
     def calculate_PoE(self):
+        '''Calculates the probability of evidence with the set evidence'''
         if not self.graph.graph['messagesValid']:
             self.calculate_messages()
             
@@ -22,6 +28,8 @@ class FactorTree(object):
         return cpd
         
     def calculate_marginal(self,variables):
+        ''' If evidence is set, then this methods calculates the posterior marignal.
+        With an empty evidence it is the prior marginal.'''
         if not self.graph.graph['messagesValid']:
             self.calculate_messages()
             
@@ -56,11 +64,13 @@ class FactorTree(object):
         
         
     def draw(self):
+        '''Draws the factor Tree'''
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
         plt.show()
         
     def calculate_messages(self):
+        ''' Calculates the messages and stores the intermediate results.'''
         self.pull_phase(self.rootNode,self.graph)
         self.push_phase(self.rootNode,self.graph,ProbabilityTable.get_neutral_multiplication_PT())
         self.graph.graph['messagesValid'] = True

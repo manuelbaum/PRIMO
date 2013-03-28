@@ -5,8 +5,10 @@ from  primo.reasoning import DiscreteNode
 import numpy
 
 class EasiestFactorElimination(object):
-    '''This is the easiest way for factor elimination. But not
-    very efficient.'''
+    '''This is the easiest way for factor elimination.It's has the worst runtime because:
+    1.* Needed evidences are set.
+    2. All nodes are multiplied.
+    3. The redundant variables are summed out'''
     
     
     
@@ -14,7 +16,9 @@ class EasiestFactorElimination(object):
         self.bn= bayesNet
 
         
-    def calculate_PriorMarginal(self,variables):        
+    def calculate_PriorMarginal(self,variables):  
+        '''Calculates the prior marignal for the given variables. The resulting
+        CPD is returned.'''
         nodes = self.bn.get_all_nodes()
         
         finCpd = nodes.pop().get_cpd()
@@ -29,8 +33,11 @@ class EasiestFactorElimination(object):
         return finCpd
         
     def calculate_PosteriorMarginal(self,variables,evidence):
+        '''Calculates the posterior marginal for given variables and evidence.
+        It returns the resulting cpd.'''
         nodes = self.bn.get_all_nodes()
         
+        #List of evidences
         ev_list = zip(*evidence)     
         # Special Case: First Node
         node1 = nodes.pop()
@@ -45,10 +52,12 @@ class EasiestFactorElimination(object):
         # For all other nodes
         for n in nodes:
             if n in ev_list[0]:
+                #Set evidence and multiply
                 ind = ev_list[0].index(n)
                 nCPD = n.get_cpd().set_evidence(evidence[ind])
                 finCpd = finCpd.multiplication(nCPD)            
             else:
+                #only multiply
                 finCpd = finCpd.multiplication(n.get_cpd())
 
                 
@@ -58,18 +67,14 @@ class EasiestFactorElimination(object):
                 
         finCpd = finCpd.normalize_as_jpt()
         
-        #unityMarg = finCpd
-        
-        #for v in finCpd.get_variables()[:]:
-        #    finCpd = finCpd.marginalization(v)
-            
-        #unityMarg /= finCpd
             
         return finCpd
         
         
         
     def calculate_PoE(self,evidence):
+        ''' Calculates the probabilty of evidence for the given evidence and returns the result.'''
+        
         nodes = self.bn.get_all_nodes()
         
         unzipped_list = zip(*evidence)

@@ -62,6 +62,7 @@ john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 # then projects on the queried variables
 
 fe = EasiestFactorElimination(bn)
+#For very small BayesNets this is possible the fastest calculation
 
 print "===== Easiest Factor Elimination ======"
 print "Prior Alarm:   " + str(fe.calculate_PriorMarginal([alarm]))
@@ -79,6 +80,13 @@ print "Posterior of burglary : " + str(fe.calculate_PosteriorMarginal([burglary]
 
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_greedy_factortree(bn)
+
+#For large nets and when you have a lot of queries you use the factorTree
+#The first query is expensive in calculation but all following queries are very 
+#fast calculated.
+#When you set or clear evidence all stored values need to be recalculated. Thus,
+# after changing evidence the first query after changing evidence is again expensive
+# in calculation
 
 print "====Factor Tree===="
 
