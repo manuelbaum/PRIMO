@@ -7,25 +7,46 @@ from primo.decision import UtilityTable
 from primo.reasoning import DiscreteNode
 
 class MakeDecision(object):
+    """
+    Calculates a Decision on a given Bayesian Decision Network
+    """
     
     def __init__(self, bdn = None):
+        """
+        Constructor
+        
+        Keyword arguments:
+        
+        bdn -- Bayesian Decision Network (default None)
+        """
         super(MakeDecision, self).__init__()
         self.bdn = bdn
         
     def set_bdn(self, bdn):
+        """
+        Sets the Bayesian Decision Network
+        
+        Keyword arguments:
+        
+        bdn -- Bayesian Decision Network
+        """
         self.bdn = bdn
     
     def get_bdn(self):
+        """
+        Getter for the Bayesian Decision Network
+        """
         return self.bdn
     
     def max_sum(self, decisionNode):
-        '''Implementation of the max sum Algorithm to get the best Decision (according to the MEU principle).
+        """Implementation of the max sum Algorithm to get the best Decision (according to the MEU principle).
         maximize over decisions and summing over RandomNodes.
         This function sets the state of provided DecisionNode, so later decisions can't affect that Node
         
-        Argumentlist
+        Keyword arguments:
+        
         decisionNode -- Decision Node on which the decision should be made
-        '''
+        """
         if self.bdn == None:
             raise Exception("Bayesian Decision Network was not set!")
         
@@ -138,13 +159,15 @@ class MakeDecision(object):
         return future_best_decisions[len(future_best_decisions)-1]    
     
     def calculate_utility(self, assignment, currentDecision, list_of_best_decision):
-        '''Sums up the utility values
+        """
+        Sums up the utility values
         
-        Argumentlist
+        Keyword arguments:
+        
         assignment -- the assignment of the variables
         currentDecision -- the current decision that we want to calculate
         list_of_best_decision -- list of the decisions that are lying in the future
-        '''
+        """
         utilityList=[]
         zippedAssignment = zip(*assignment)
         zippedDecisions = zip(*list_of_best_decision)

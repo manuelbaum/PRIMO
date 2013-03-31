@@ -64,6 +64,14 @@ class BayesianDecisionNetwork(BayesNet):
         return self.utility_nodes
     
     def add_edge(self, node_from, node_to):
+        """
+        Adds an edge between two nodes. It is impossible to create en edge between two decision nodes and between two 
+        utility nodes.
+        
+        keyword arguments:
+        node_from -- Node from where the edge shall begin
+        node_to -- Node where the edge shall end
+        """
         if isinstance(node_from, DecisionNode) and isinstance(node_to, DecisionNode):
             raise Exception("Tried to add an edge from a DecisionNode to a DecisionNode")
         if isinstance(node_from, UtilityNode) and isinstance(node_to, UtilityNode):
@@ -75,16 +83,23 @@ class BayesianDecisionNetwork(BayesNet):
             raise Exception("Tried to add an Edge between two Nodes of which at least one was not contained in the Bayesnet")
     
     def reset_Decisions(self):
+        """
+        Resets all decisions in the Bayesian Decision Network
+        """
         for node in self.decision_nodes:
             node.set_state(None)
     
     def get_partialOrdering(self):
+        """
+        Getter for the partial ordere
+        """
         return self.partialOrdering
     
     def set_partialOrdering(self, partialOrder):
-        ''' Sets the partial ordering for this Bayesian Decision Network
+        """
+        Sets the partial ordering for this Bayesian Decision Network
         
         partialOrder -- ordered list of RandomNodes and Decision Nodes
         example: [decisionNode1, [randomNode1,randomNode2], decisionNode2, [randomNode3]]
-        '''
+        """
         self.partialOrdering = partialOrder
