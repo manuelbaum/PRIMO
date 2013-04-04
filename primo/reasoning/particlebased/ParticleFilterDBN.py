@@ -145,7 +145,7 @@ def sample_from_inital_distribution(network, N, evidence):
     weights = []
     for n in xrange(N):
         # Sample from inital distribution
-        (state, w) = weighted_sample(network.get_B0(), evidence)
+        (state, w) = weighted_sample(network.B0, evidence)
         samples[n] = copy.copy(state)
         weights.append(w)
     # wighted sample with replacement
@@ -164,7 +164,7 @@ def sample_one_time_slice(network, samples, evidence, gibbs = True, gibbs_iterat
     Returns a dict of N new samples
     '''
     weights = []
-    twoTBN = network.get_TwoTBN()
+    twoTBN = network.twoTBN
     N = len(samples)
     for i in xrange(N):
         (state, w) = samples[i]

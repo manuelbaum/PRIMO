@@ -43,8 +43,8 @@ from primo.utils import XMLBIF
 xmlbif = XMLBIF(twoTBN, "Test")
 xmlbif.write("test.xmlbif")
 
-dbn.set_B0(B0)
-dbn.set_TwoTBN(twoTBN)
+dbn.B0 = B0
+dbn.twoTBN = twoTBN
 
 N = 1000
 T = 2

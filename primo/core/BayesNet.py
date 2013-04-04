@@ -4,14 +4,12 @@ from primo.core import Node
 
 
 class BayesNet(object):
-    graph = nx.DiGraph()
-    node_lookup = {}
 
     def __init__(self):
         # This is IMPORTANT: without type() all children will have the same
         # graph instance!
-        type(self).graph = nx.DiGraph()
-        type(self).node_lookup = {}
+        self.graph = nx.DiGraph()
+        self.node_lookup = {}
 
     def add_node(self, node):
         if isinstance(node, Node):
