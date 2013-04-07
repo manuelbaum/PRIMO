@@ -4,11 +4,14 @@ import primo.reasoning.density.ProbabilityTable as ProbabilityTable
 
 
 class FactorTree(object):
-    '''The factor tree contains for each node in the bayesNet a factor. It
+    '''The factor tree contains for each node of the BayesNet a factor. It
     is a directed graph with one root node. To speed up the reasoning it uses
-    a method bases approach which stores caclulated intermediate results at
-    edges. Thus, the first query is expensive and all following are cheap.
-    The speed of the first message calculation depends on how the tree was build.'''
+    a message based approach which stores calculated intermediate results at
+    edges. Thus, the first query is expensive and all following are easy calculated.
+    The speed of the first message calculation depends on how the tree was build.
+    Literature: Modeling and Reasoning with Bayesian Networks - Adnan Darwiche
+    Chapter 7    
+    '''
     
     
     def __init__(self,graph,rootNode):
@@ -28,8 +31,8 @@ class FactorTree(object):
         return cpd
         
     def calculate_marginal(self,variables):
-        ''' If evidence is set, then this methods calculates the posterior marignal.
-        With an empty evidence it is the prior marginal.'''
+        ''' If evidence is set, then this methods calculates the posterior marginal.
+        With an empty evidence this is automatically the prior marginal.'''
         if not self.graph.graph['messagesValid']:
             self.calculate_messages()
             
@@ -64,7 +67,7 @@ class FactorTree(object):
         
         
     def draw(self):
-        '''Draws the factor Tree'''
+        '''Draws the FactorTree'''
         import matplotlib.pyplot as plt
         nx.draw_circular(self.graph)
         plt.show()
@@ -97,10 +100,10 @@ class FactorTree(object):
             tmpInput = self.pull_phase(child,graph)
             
             
-            #project each factor on the specific seperator
-            seperator = graph[factor][child]['seperator']
+            #project each factor on the specific separator
+            separator = graph[factor][child]['separator']
             for var in tmpInput.variables[:]:
-                if var not in seperator:
+                if var not in separator:
                     tmpInput = tmpInput.marginalization(var)
                 
             
@@ -119,10 +122,10 @@ class FactorTree(object):
                 if (child != child2):
                     tmpCPD = tmpCPD.multiplication(graph[factor][child2]['msgAgainstWay'])
             
-            seperator = graph[factor][child]['seperator']
-            #project on outgoing edge seperator
-            for var in tmpCPD.variables[:]:
-                if var not in seperator:
+            separator = graph[factor][child]['separator']
+            #project on outgoing edge separator
+            for var in tmpCPD.variables:
+                if var not in separator:
                     tmpCPD = tmpCPD.marginalization(var)
             
             #add setOut to outgoing vars from child

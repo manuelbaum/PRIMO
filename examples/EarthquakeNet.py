@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This Example shows how to create a BayesNet
+This example shows how to create a BayesNet
 
 @author: djohn
 """
@@ -10,7 +10,7 @@ from  primo.core import BayesNet
 from  primo.reasoning import DiscreteNode
 import numpy
 
-#initialize new BayesNet
+#initialize a new BayesNet
 bn = BayesNet()
 
 #create Nodes with Name and the possible values
@@ -60,7 +60,7 @@ john_calls.set_probability(0.3,[(alarm,"Ringing"),(john_calls,"Not Calling")])
 john_calls.set_probability(0.01,[(alarm,"Silent"),(john_calls,"Calling")])
 john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 
-#Draws the BayesNet
+#draws the BayesNet
 #bn.draw()
 
 

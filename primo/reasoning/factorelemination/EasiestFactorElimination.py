@@ -6,9 +6,13 @@ import numpy
 
 class EasiestFactorElimination(object):
     '''This is the easiest way for factor elimination.It's has the worst runtime because:
-    1.* Needed evidences are set.
+    1. Needed evidences are set (optional).
     2. All nodes are multiplied.
-    3. The redundant variables are summed out'''
+    3. The redundant variables are summed out
+    
+    Literature: Modeling and Reasoning with Bayesian Networks - Adnan Darwiche
+    Chapter 6-7    
+    '''
     
     
     
@@ -26,7 +30,7 @@ class EasiestFactorElimination(object):
         for n in nodes:
             finCpd = finCpd.multiplication(n.get_cpd())
             
-        for v in finCpd.get_variables()[:]:
+        for v in finCpd.get_variables():
             if v not in variables:
                 finCpd = finCpd.marginalization(v)
         
@@ -61,7 +65,7 @@ class EasiestFactorElimination(object):
                 finCpd = finCpd.multiplication(n.get_cpd())
 
                 
-        for v in finCpd.get_variables()[:]:
+        for v in finCpd.get_variables():
             if v not in variables:
                 finCpd = finCpd.marginalization(v)
                 
@@ -95,7 +99,7 @@ class EasiestFactorElimination(object):
             else:
                 finCpd = finCpd.multiplication(n.get_cpd())
           
-        for v in finCpd.get_variables()[:]:
+        for v in finCpd.get_variables():
             finCpd = finCpd.marginalization(v)
             
         return finCpd

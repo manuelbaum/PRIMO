@@ -7,15 +7,15 @@ from random import choice
 from operator import itemgetter
 
 class FactorTreeFactory(object):
-    '''The factor tree creates the FactorTree out of a BayesNet.'''
+    '''The FactorTreeFactory creates the FactorTree out of a BayesNet.'''
     
     def create_random_factortree(self,bayesNet):
-        ''' Creates a randomly structered FactorTree. This method is useful for testing
+        ''' Creates a randomly structured FactorTree. This method is useful for testing
         if reasoning works for arbitrary trees.'''
         allNodes = bayesNet.get_all_nodes()
         
         if len(allNodes) == 0:
-            raise Exception("createRandomFactorTree: No nodes in given bayesNet")
+            raise Exception("createRandomFactorTree: No nodes in given BayesNet")
         
         tn = allNodes.pop()
         rootFactor = Factor(tn)
@@ -51,7 +51,7 @@ class FactorTreeFactory(object):
         allNodes = bayesNet.get_all_nodes()
         
         if len(allNodes) == 0:
-            raise Exception("createRandomFactorTree: No nodes in given bayesNet")
+            raise Exception("createRandomFactorTree: No nodes in given BayesNet")
             
         sortNodeList = []
         
@@ -130,7 +130,7 @@ class FactorTreeFactory(object):
                 if (child != child2):
                     tmpSet = tmpSet | graph[factor][child2]['inVars']
             
-            #add setOut to outgoing vars from child
+            #add setOut to outgoing variables from the child
             tmp = graph[factor][child]['outVars']
             graph[factor][child]['outVars'] = tmp | tmpSet
                 
@@ -142,16 +142,16 @@ class FactorTreeFactory(object):
         
         for n,nbrs in graph.adjacency_iter():
             for nbr,eattr in nbrs.items():
-                eattr['seperator'] = eattr['inVars'] & eattr['outVars']
+                eattr['separator'] = eattr['inVars'] & eattr['outVars']
                 
     def calculate_clusters(self,factor,graph,parent_seperator):
         
         localCluster = parent_seperator | set(factor.get_variables())
         
         for n in graph.neighbors(factor):
-            tmpSeperator = graph[factor][n]['seperator']
-            localCluster = localCluster | tmpSeperator
-            self.calculate_clusters(n,graph,tmpSeperator)
+            tmpSeparator = graph[factor][n]['separator']
+            localCluster = localCluster | tmpSeparator
+            self.calculate_clusters(n,graph,tmpSeparator)
             
         factor.set_cluster(localCluster)
 

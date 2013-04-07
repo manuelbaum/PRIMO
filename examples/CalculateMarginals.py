@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 This example show how to calculate Marginals and 
-the probility of evidence.
+the probability of evidence.
 
 @author: djohn
 """
@@ -58,11 +58,11 @@ john_calls.set_probability(0.01,[(alarm,"Silent"),(john_calls,"Calling")])
 john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 
 #==============================================================================
-# This Factor Elimination at first builds the joint probability table (jpt) and
+# The EasiestFactorElimination first builds the joint probability table (jpt) and
 # then projects on the queried variables
 
 fe = EasiestFactorElimination(bn)
-#For very small BayesNets this is possible the fastest calculation
+#For very small BayesNets this is the fastest calculation
 
 print "===== Easiest Factor Elimination ======"
 print "Prior Alarm:   " + str(fe.calculate_PriorMarginal([alarm]))
@@ -81,12 +81,11 @@ print "Posterior of burglary : " + str(fe.calculate_PosteriorMarginal([burglary]
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_greedy_factortree(bn)
 
-#For large nets and when you have a lot of queries you use the factorTree
+#For large nets or much queries the factorTree is the most efficient way.
 #The first query is expensive in calculation but all following queries are very 
 #fast calculated.
 #When you set or clear evidence all stored values need to be recalculated. Thus,
-# after changing evidence the first query after changing evidence is again expensive
-# in calculation
+# after changing evidence the first query is again expensive in calculation.
 
 print "====Factor Tree===="
 
