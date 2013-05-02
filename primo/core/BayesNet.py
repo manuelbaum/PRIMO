@@ -6,8 +6,6 @@ from primo.core import Node
 class BayesNet(object):
 
     def __init__(self):
-        # This is IMPORTANT: without type() all children will have the same
-        # graph instance!
         self.graph = nx.DiGraph()
         self.node_lookup = {}
 

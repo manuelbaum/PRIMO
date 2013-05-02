@@ -9,8 +9,13 @@ class TwoTBN(BayesNet):
     '''
     __initial_nodes = []
 
-    def __init__(self):
+    def __init__(self, bayesnet=None):
         BayesNet.__init__(self)
+        if bayesnet:
+            if not isinstance(bayesnet, BayesNet):
+                raise Exception("Parameter 'bayesnet' is not a instance of class BayesNet.")
+            self.graph = bayesnet.graph
+            self.node_lookup = bayesnet.node_lookup
 
     def create_timeslice(self, state):
         for node_x in self.__initial_nodes:
@@ -26,7 +31,11 @@ class TwoTBN(BayesNet):
     def add_node(self, node, initial=False):
         super(TwoTBN, self).add_node(node)
         if initial:
-            self.__initial_nodes.append(node)
+            self.add_initial_node(node)
+            
+    def set_initial_node(self, node_name):
+        node = self.get_node(node_name)        
+        self.__initial_nodes.append(node)
 
     def has_initial_node_by_name(self, node_name):
         '''

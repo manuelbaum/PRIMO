@@ -260,10 +260,10 @@ class XMLBIF(object):
                 break
             if node == None:
                 continue
-            for given_node in definition_node.getElementsByTagName("GIVEN"):
+            for given_node in reversed(definition_node.getElementsByTagName("GIVEN")):
                 parent_name = XMLBIF.get_node_text(given_node.childNodes)
                 parent_node = network.get_node(parent_name)
-                node.announce_parent(parent_node)
+                network.add_edge(parent_node, node)
             for table_node in definition_node.getElementsByTagName("TABLE"):
                 table = XMLBIF.get_node_table_from_text(table_node.childNodes)
                 node.get_cpd().get_table().T.flat = table
@@ -317,4 +317,6 @@ class XMLBIF(object):
                 rc.append(node.data)
         text = ''.join(rc)
         number_list = re.findall(r"[0-9]*\.*[0-9]+", text)
+        for (i, n) in enumerate(number_list):
+            number_list[i] = float(n)
         return number_list
