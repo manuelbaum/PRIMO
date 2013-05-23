@@ -44,7 +44,7 @@ print pt
 print "----burglary----"
 print pt.marginalization(alarm)
 print "----alarm----"
-print pt.division(burglary.get_cpd())
+#print pt.division(burglary.get_cpd())
 
 bn.draw()
 
