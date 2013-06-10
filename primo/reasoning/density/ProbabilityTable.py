@@ -53,10 +53,12 @@ class ProbabilityTable(Density):
             table to represent a joint probability table constructed from the given samples.
             The Argument samples is a list of pairs (RandomNode, value).'''
 
+        self.table = numpy.zeros(self.table.shape)
         for state in samples:
             index = self.get_cpt_index(state.items())
             self.table[index] = self.table[index] + 1
 
+        print self.table
         return self.normalize_as_jpt()
 
 
