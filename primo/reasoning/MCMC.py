@@ -12,26 +12,7 @@ class MCMC(object):
     def calculate_marginal(self):
         pass
     def calculate_PriorMarginal(self,variables):
-        #Construct a Markov Chain by sampling states from this Network
-
-
-        initial_state={burglary:"Safe",alarm:"Silent"}
-        chain = mcs.generateMarkovChain(bn, 5000, transition_model, initial_state)
-
-        #for c in chain:
-        #    print c
-
-
-        pt = ProbabilityTable()
-        pt.add_variable(burglary)
-        pt.add_variable(alarm)
-        pt.to_jpt_by_states(chain)
-        print "----joint-probability----"
-        print pt
-        print "----burglary----"
-        print pt.marginalization(alarm)
-        print "----alarm----"
-        #print pt.division(burglary.get_cpd())
+        return self.calculate_PosteriorMarginal(variables,dict())
 
 
     def calculate_PosteriorMarginal(self,variables_of_interest,evidence):

@@ -39,3 +39,8 @@ print "PosteriorMarginal:"
 pm=mcmc_ask.calculate_PosteriorMarginal([alarm],evidence)
 print pm
 
+print "PriorMarginal:"
+pm=mcmc_ask.calculate_PriorMarginal([alarm])
+print "Alarm: " + str(pm)
+pm=mcmc_ask.calculate_PriorMarginal([burglary])
+print "Burglary: " + str(pm)
