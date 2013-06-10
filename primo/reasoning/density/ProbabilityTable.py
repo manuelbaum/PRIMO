@@ -34,6 +34,10 @@ class ProbabilityTable(Density):
         ax = self.table.ndim
         self.table=numpy.expand_dims(self.table,ax)
         self.table=numpy.repeat(self.table,len(variable.value_range),axis = ax)
+        
+    def add_variables(self, variables):
+        for v in variables:
+            self.add_variable(v)
 
     def set_probability_table(self, table, nodes):
         if not set(nodes) == set(self.variables):
@@ -58,7 +62,6 @@ class ProbabilityTable(Density):
             index = self.get_cpt_index(state.items())
             self.table[index] = self.table[index] + 1
 
-        print self.table
         return self.normalize_as_jpt()
 
 

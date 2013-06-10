@@ -53,7 +53,7 @@ class MarkovChainSampler(object):
     def __init__(self):
         pass
         
-    def generateMarkovChain(self, network, time_steps, transition_model, initial_state, evidence=[]):
+    def generateMarkovChain(self, network, time_steps, transition_model, initial_state, evidence=[], variables_of_interest=[]):
         state=initial_state
         if evidence:
             for node in evidence.keys():
@@ -63,6 +63,12 @@ class MarkovChainSampler(object):
         else:
             constant_nodes=[]
         for t in xrange(time_steps):
-            yield state
+            if variables_of_interest:
+                yield self._reduce_state_to_variables_of_interest(state, variables_of_interest)
+            else:
+                yield state
             state=transition_model.transition(network, state, constant_nodes)
+            
+    def _reduce_state_to_variables_of_interest(self, state, variables_of_interest):
+        return dict((k,v) for (k,v) in state.iteritems() if k in variables_of_interest)
         
