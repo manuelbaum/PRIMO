@@ -1,10 +1,12 @@
 from  primo.reasoning import MarkovChainSampler
 from primo.reasoning import GibbsTransitionModel
+from primo.reasoning import MetropolisHastingsTransitionModel
 from primo.reasoning.density import ProbabilityTable
 class MCMC(object):
     def __init__(self, bn):
     
-        self.transition_model = GibbsTransitionModel()
+        #self.transition_model = GibbsTransitionModel()
+        self.transition_model = MetropolisHastingsTransitionModel()
         self.bn=bn
         self.mcs = MarkovChainSampler()
         self.times=5000
@@ -19,10 +21,11 @@ class MCMC(object):
         initial_state=self._generateInitialStateWithEvidence(evidence)
         chain = self.mcs.generateMarkovChain(self.bn, self.times, self.transition_model, initial_state, evidence, variables_of_interest)
         
-        
+        for s in chain:
+            print s
         pt = ProbabilityTable()
         pt.add_variables(variables_of_interest)
-        pt.to_jpt_by_states(chain)
+        pt = pt.to_jpt_by_states(chain)
         return pt
         
     
@@ -56,6 +59,6 @@ class MCMC(object):
             if var in evidence.keys():
                 state.append((var,evidence[var]))
             else:
-                state.append((var,var.value_range[0]))
+                state.append((var,var.sample_uniform()))
         return dict(state)
 

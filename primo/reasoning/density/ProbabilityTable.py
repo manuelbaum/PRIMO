@@ -68,6 +68,10 @@ class ProbabilityTable(Density):
     def set_probability(self, value, node_value_pairs):
         index = self.get_cpt_index(node_value_pairs)
         self.table[index]=value
+        
+    def get_probability(self, node_value_pairs):
+        index = self.get_cpt_index(node_value_pairs)
+        return self.table[index]
 
     def get_cpt_index(self, node_value_pairs):
         nodes, values = zip(*node_value_pairs)
@@ -92,7 +96,8 @@ class ProbabilityTable(Density):
 
     def normalize_as_jpt(self):
         '''This method normalizes this ProbabilityTable so it represents a valid joint probability table'''
-        self.table = self.table * 1.0 / numpy.sum(self.table)
+        #self.table = self.table * 1.0 / numpy.sum(self.table)
+        return self.table * 1.0 / numpy.sum(self.table)
 
     def multiplication(self, inputFactor):
         '''This method returns a unified ProbabilityTable which contains the variables of both; the inputFactor

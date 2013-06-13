@@ -1,22 +1,27 @@
 # -*- coding: utf-8 -*-
 
 from primo.reasoning import RandomNode
-from primo.reasoning.density import Gauss
+from primo.reasoning.density import LinearGauss
+import random
 
-
-class GaussNode(RandomNode):
+class LinearGaussNode(RandomNode):
     '''TODO: write doc'''
 
     def __init__(self, name):
-        super(GaussNode, self).__init__(name)
+        super(LinearGaussNode, self).__init__(name)
         
         self.value_range = (-float("Inf"),float("Inf"))
-        self.cpd = Gauss(self)
+        self.cpd = LinearGauss(self)
         
 
-    def set_density_parameters(self, mu, cov):
-        self.cpd.set_mu(mu)
-        self.cpd.set_cov(cov)
+    def set_density_parameters(self, b0, b, var):
+        self.cpd.set_b0(b0)
+        self.cpd.set_b(b)
+        self.cpd.set_var(var)
+        
+    def get_probability(self, value, node_value_pairs):
+        reduced_mu = 
+        return self.cpd.get_probability([(self,value)] + node_value_pairs)
 
     def announce_parent(self, node):
         self.cpd.add_variable(node)
@@ -36,8 +41,11 @@ class GaussNode(RandomNode):
     def get_cpd(self):
         return self.cpd
         
-    def sample(self):
-        return self.cpd.sample()
+    def sample_uniform(self):
+        return random.uniform(self.value_range[0],self.value_range[1])
+        
+    def sample_proposal(self, x):
+        return random.normalvariate(x,1.0)
 
     def is_valid(self):
         raise Exception("Called unimplemented Function: GaussNode.is_valid()")

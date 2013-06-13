@@ -46,7 +46,48 @@ class GibbsTransitionModel(object):
             state[node]=node.get_value_range()[new_state]
             #print state[node]
         return state
+        
+class MetropolisHastingsTransitionModel(object):
+    def __init__(self):
+        pass
+        
+    def _compute_p_of_value_given_mb(self, network, state, node, value):
+        parents=network.get_parents(node)
+        if parents:
+            evidence=[(parent,state[parent]) for parent in parents]
+        else:
+            evidence=[]    
+        p = node.get_probability(value,evidence)
+           
+        children = network.get_children(node)
+        for child in children:
+                
+            #reduce this node's cpd
+            parents=network.get_parents(child)
+            evidence=[(parent,state[parent]) for parent in parents if parent != node]
+            evidence.append((node,value))
+            p = p * child.get_probability(state[child],evidence)
+        return p
+        
+    def transition(self, network, state, constant_nodes):
+        nodes = network.get_nodes([])
+        nodes_to_resample=list(set(nodes)-set(constant_nodes))
+        for node in nodes_to_resample:
+            #propose a new value for this variable:
+            current_value = state[node]
+            proposed_value = node.sample_proposal(current_value)
             
+            p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)
+            p_of_current_given_mb = self._compute_p_of_value_given_mb(network, state, node, current_value)
+            
+            acceptance_probability = min(1.0,  p_of_proposal_given_mb/p_of_current_given_mb * 1.0/1.0)
+            if random.random() <= acceptance_probability:
+                state[node]=proposed_value
+            
+            #new_state=weighted_random(reduced_cpd.get_table())
+            #state[node]=node.get_value_range()[new_state]
+
+        return state    
         
 
 class MarkovChainSampler(object):
