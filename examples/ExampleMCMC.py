@@ -36,11 +36,11 @@ poe=mcmc_ask.calculate_PoE(evidence)
 print poe
 
 print "PosteriorMarginal:"
-pm=mcmc_ask.calculate_PosteriorMarginal([alarm],evidence)
+pm=mcmc_ask.calculate_PosteriorMarginal([alarm],evidence,ProbabilityTable)
 print pm
 
 print "PriorMarginal:"
-pm=mcmc_ask.calculate_PriorMarginal([alarm])
+pm=mcmc_ask.calculate_PriorMarginal([alarm],ProbabilityTable)
 print "Alarm: " + str(pm)
-pm=mcmc_ask.calculate_PriorMarginal([burglary])
+pm=mcmc_ask.calculate_PriorMarginal([burglary],ProbabilityTable)
 print "Burglary: " + str(pm)

@@ -48,5 +48,5 @@ class DiscreteNode(RandomNode):
     def sample_uniform(self):
         return random.choice(self.value_range)
         
-    def sample_proposal(self, current_value):
+    def sample_proposal(self, current_value=None):
         return random.choice(self.value_range)

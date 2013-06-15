@@ -35,9 +35,7 @@ class ProbabilityTable(Density):
         self.table=numpy.expand_dims(self.table,ax)
         self.table=numpy.repeat(self.table,len(variable.value_range),axis = ax)
         
-    def add_variables(self, variables):
-        for v in variables:
-            self.add_variable(v)
+
 
     def set_probability_table(self, table, nodes):
         if not set(nodes) == set(self.variables):
@@ -52,7 +50,7 @@ class ProbabilityTable(Density):
         self.table = table
         self.variables = nodes
 
-    def to_jpt_by_states(self, samples):
+    def parametrize_from_states(self, samples, number_of_samples):
         '''This method uses a list of variable-instantiations to change this nodes internal
             table to represent a joint probability table constructed from the given samples.
             The Argument samples is a list of pairs (RandomNode, value).'''

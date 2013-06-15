@@ -20,8 +20,7 @@ class LinearGaussNode(RandomNode):
         self.cpd.set_var(var)
         
     def get_probability(self, value, node_value_pairs):
-        reduced_mu = 
-        return self.cpd.get_probability([(self,value)] + node_value_pairs)
+        return self.cpd.get_probability(value, node_value_pairs)
 
     def announce_parent(self, node):
         self.cpd.add_variable(node)
@@ -42,9 +41,10 @@ class LinearGaussNode(RandomNode):
         return self.cpd
         
     def sample_uniform(self):
-        return random.uniform(self.value_range[0],self.value_range[1])
+        sampled_value = random.uniform(self.value_range[0],self.value_range[1])
+        return sampled_value
         
-    def sample_proposal(self, x):
+    def sample_proposal(self, x=0.0):
         return random.normalvariate(x,1.0)
 
     def is_valid(self):
