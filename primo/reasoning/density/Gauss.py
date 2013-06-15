@@ -12,8 +12,7 @@ class Gauss(Density):
         self.mu=numpy.array([0.0])
         self.C=numpy.array([[1.0]])
         self.variables=[]
-        print self.mu
-        print self.C
+
         
     def add_variable(self, variable):
         if( not variable.get_value_range() == (-float("Inf"),float("Inf"))):
@@ -47,11 +46,14 @@ class Gauss(Density):
             for j,variable in enumerate(self.variables):
                 X[i,j]=state[variable]
 
-        self.mu=numpy.mean(X)
+        self.mu=numpy.mean(X,axis=0)
         self.C=numpy.cov(X.transpose())
+        return self
         
-        print X
-        print "--mu--"
-        print self.mu
-        print "--C--"
-        print self.C
+    def __str__(self):
+        ret= "Gauss:\n"
+        ret=ret+ "--mu--\n"
+        ret=ret+ str(self.mu)+"\n"
+        ret=ret+ "--C--\n"
+        ret=ret+ str(self.C)+"\n"
+        return ret
