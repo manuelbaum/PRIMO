@@ -75,7 +75,7 @@ class MetropolisHastingsTransitionModel(object):
         for node in nodes_to_resample:
             #propose a new value for this variable:
             current_value = state[node]
-            proposed_value = node.sample_proposal(current_value)
+            proposed_value = node.sample_local(current_value)
             
             p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)
             p_of_current_given_mb = self._compute_p_of_value_given_mb(network, state, node, current_value)
@@ -102,7 +102,7 @@ class MarkovChainSampler(object):
         state=initial_state
         if evidence:
             for node in evidence.keys():
-                if state[node] != evidence[node]:
+                if  not evidence[node].is_compatible(state[node]):
                     raise Exception("The evidence given does not fit to the initial_state specified")
             constant_nodes = evidence.keys()
         else:
@@ -113,6 +113,7 @@ class MarkovChainSampler(object):
             state=transition_model.transition(network, state, constant_nodes)
         #finally sample from the target distribution
         for t in xrange(time_steps):
+            #print state
             if variables_of_interest:
                 yield self._reduce_state_to_variables_of_interest(state, variables_of_interest)
             else:

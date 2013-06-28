@@ -4,6 +4,7 @@ from  primo.core import BayesNet
 from  primo.reasoning import DiscreteNode
 from primo.reasoning.density import ProbabilityTable
 from primo.reasoning import MCMC
+from primo.reasoning import EvidenceEqual as EvEq
 import numpy
 import pdb
 
@@ -28,7 +29,7 @@ alarm.set_probability_table(alarm_cpt, [burglary,alarm])
 
 mcmc_ask=MCMC(bn)
 
-evidence={burglary:"Intruder"}
+evidence={burglary:EvEq("Intruder")}
 
 
 print "---ProbabilityOfEvidence:---" 

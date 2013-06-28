@@ -3,6 +3,9 @@ from primo.reasoning import ContinuousNodeFactory
 from primo.reasoning.density import LinearGaussParameters
 from primo.reasoning.density import Gauss
 from primo.reasoning import MCMC
+from primo.reasoning import EvidenceEqual as EvEq
+from primo.reasoning import EvidenceLower as EvLower
+from primo.reasoning import EvidenceIntervall as EvInterval
 
 import numpy
 
@@ -44,7 +47,7 @@ diameter.set_density_parameters(diameter_parameters)
 
 mcmc_ask=MCMC(bn)
 
-evidence={age:2}
+evidence={age:EvEq(2)}
 
 
 #print "ProbabilityOfEvidence: " 
@@ -59,6 +62,11 @@ print "PriorMarginal:"
 pm=mcmc_ask.calculate_PriorMarginal([height,diameter],Gauss)
 print pm
 
+print "ProbabilityOfEvidence:"
+poe=mcmc_ask.calculate_PoE({age:EvLower(4.0)})
+print "p(age<4.0):"+str(poe)+ " GroundTruth:0.5"
+poe=mcmc_ask.calculate_PoE({age:EvInterval(4.0-2.0**0.5,4.0)})
+print "p(4.0-2.0^0.5<age<4.0):"+str(poe)+ " GroundTruth:1/3"
 #print "PriorMarginal:"
 #pm=mcmc_ask.calculate_PriorMarginal([alarm])
 #print "Alarm: " + str(pm)

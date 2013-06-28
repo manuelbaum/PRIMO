@@ -59,9 +59,9 @@ class MCMC(object):
         number_of_samples=0
         for state in chain:
             compatible = True
-            for node,value in evidence.items():
+            for node,node_evidence in evidence.items():
                 
-                if state[node] != value:
+                if not node_evidence.is_compatible(state[node]):
                     compatible = False
                     break
             
@@ -77,8 +77,12 @@ class MCMC(object):
         state=[]
         for var in self.bn.get_nodes([]):
             if var in evidence.keys():
-                state.append((var,evidence[var]))
+                unambigous=evidence[var].get_unambigous_value()
+                if unambigous == None:
+                    state.append((var,var.sample_global(evidence[var])))
+                else:
+                    state.append((var,unambigous))
             else:
-                state.append((var,var.sample_proposal()))
+                state.append((var,var.sample_global()))
         return dict(state)
 

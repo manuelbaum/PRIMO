@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from primo.reasoning.density import Density
+from primo.reasoning.ContinuousNode import ContinuousNode
 import numpy
 import scipy.stats
+import random
 
 class LinearGaussParameters(object):
     def __init__(self, b0,b,var):
@@ -26,8 +28,9 @@ class LinearGauss(Density):
         self.set_var(parameters.var)
         
     def add_variable(self, variable):
-        if( not variable.get_value_range() == (-float("Inf"),float("Inf"))):
-            raise Exception("Tried to add Variable into Gaussian densitiy, but variable had wrong value-range")
+
+        if not isinstance(variable, ContinuousNode):
+            raise Exception("Tried to add Variable into Gaussian densitiy, but variable is not continuous")
         self.b[variable]=0.0
     
 
@@ -55,8 +58,6 @@ class LinearGauss(Density):
     def set_var(self, var):
         self.var=var
         
-    def sample_proposal(self, x=None):
-        if x==None:
-            x=self.b0
-        return random.normalvariate(x,1.0)
+    def sample_global(self):
+        return random.normalvariate(self.b0,self.var**0.5)
             

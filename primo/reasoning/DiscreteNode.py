@@ -27,8 +27,24 @@ class DiscreteNode(RandomNode):
     def is_valid(self):
         return self.cpd.is_normalized_as_cpt(self)
         
-    def sample_uniform(self):
-        return random.choice(self.value_range)
+    def sample_global(self, evidence=None):
+        if evidence==None:
+            compatibles=self.value_range
+        else:
+            compatibles=[]
+            for v in self.value_range:
+                if evidence.is_compatible(v):
+                    compatibles.append(v)
         
-    def sample_proposal(self, current_value=None):
-        return random.choice(self.value_range)
+        return random.choice(compatibles)
+        
+    def sample_local(self, x, evidence=None):
+        if evidence==None:
+            compatibles=self.value_range
+        else:
+            compatibles=[]
+            for v in self.value_range:
+                if evidence.is_compatible(v):
+                    compatibles.append(v)
+        
+        return random.choice(compatibles)

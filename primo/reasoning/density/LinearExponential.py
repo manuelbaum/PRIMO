@@ -5,8 +5,9 @@ import math
 
 class LinearExponentialParameters(object):
     def __init__(self, b0, b):
-        self.b=b
         self.b0=b0
+        self.b=b
+
         
 
 class LinearExponential(Density):
@@ -29,13 +30,15 @@ class LinearExponential(Density):
         self.b[variable]=0.0
         
     def get_probability(self,value, node_value_pairs):
+        if value<=0:
+            return 0
         lambda_parameter = self.b0
         for node,value in node_value_pairs:
             lambda_parameter = lambda_parameter + self.b[node]*value
         #print scipy.stats.expon(lambda_parameter).pdf(value)
         return lambda_parameter*math.exp(-lambda_parameter*value)
 
-    def sample_proposal(self, x=None):
-        if x==None:
-            x=self.b0
-        return random.expovariate(x)
+
+    def sample_global(self):
+        print self.b0
+        return random.expovariate(self.b0)

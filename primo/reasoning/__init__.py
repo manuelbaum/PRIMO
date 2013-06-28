@@ -3,6 +3,8 @@ from DiscreteNode import DiscreteNode
 from ContinuousNode import ContinuousNode
 from ContinuousNodeFactory import ContinuousNodeFactory
 
+from Evidence import EvidenceEqual, EvidenceIntervall, EvidenceLower, EvidenceHigher
+
 from MarkovChainSampler import MarkovChainSampler
 from MarkovChainSampler import GibbsTransitionModel
 from MarkovChainSampler import MetropolisHastingsTransitionModel

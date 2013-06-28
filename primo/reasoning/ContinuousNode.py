@@ -19,6 +19,29 @@ class ContinuousNode(Node):
     def sample_proposal(self, x=None):
         return self.cpd.sample_proposal(x)
         
+        
+    def sample_local(self, x, evidence=None):
+        '''This is the most simple and stupid implementation of the method. It
+        uses bogo-search to find a sample that fits the evidence. You could
+        reimplement it by constructing the integral over the normalvariate in the
+        intervalls allowed by the evidence and then generate a sample directly.
+        Currently this method has O(inf).'''
+        v=random.normalvariate(x,1.0)
+        if evidence != None:
+            while not evidence.is_compatible(v):
+                v=random.normalvariate(x,1.0)
+        return v
+        
+    def sample_global(self, evidence=None):
+        '''Simple, Stupid and O(inf). Improvement idea see comment on sample_local()'''
+        if evidence==None:
+            return self.cpd.sample_global()
+        else:
+            proposal=self.cpd.sample_global()
+            while not evidence.is_compatible(proposal):
+                proposal=self.cpd.sample_global()
+            return proposal
+        
     def get_probability(self, value, node_value_pairs):
         return self.cpd.get_probability(value, node_value_pairs)
         

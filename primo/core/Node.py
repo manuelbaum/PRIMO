@@ -41,3 +41,9 @@ class Node(object):
     def __str__(self):
         print self.name
         return self.name
+        
+    def sample_gobal(self, evidence=None):
+        raise Exception("Called unimplemented Method")
+        
+    def sample_local(self, x, evidence=None):
+        raise Exception("Called unimplemented Method")
