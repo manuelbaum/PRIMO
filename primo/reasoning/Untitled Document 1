@@ -1,0 +1,13 @@
+from primo.reasoning import ContinuousNode
+from primo.reasoning import LinearGaussNode
+
+class ContinuousNodeFactory(object):
+    def __init__(self):
+        pass
+        
+    def createLinearGaussNode(self, name):
+        return self.createContinuousNode(name,(-float("Inf"),float("Inf")),LinearGauss)
+    
+    def createContinuousNode(self,name,value_range,DensityClass):
+        return ContinuousNode(name,value_range,DensityClass)
+

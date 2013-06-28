@@ -4,6 +4,12 @@ from primo.reasoning.density import Density
 import numpy
 import scipy.stats
 
+class LinearGaussParameters(object):
+    def __init__(self, b0,b,var):
+        self.b0=b0
+        self.b=b
+        self.var=var
+
 class LinearGauss(Density):
     '''TODO: write doc'''
 
@@ -13,6 +19,11 @@ class LinearGauss(Density):
         self.b0=0#numpy.array([0.0])
         self.b={}
         self.var=1.0
+        
+    def set_parameters(self,parameters):
+        self.set_b0(parameters.b0)
+        self.set_b(parameters.b)
+        self.set_var(parameters.var)
         
     def add_variable(self, variable):
         if( not variable.get_value_range() == (-float("Inf"),float("Inf"))):
@@ -44,8 +55,8 @@ class LinearGauss(Density):
     def set_var(self, var):
         self.var=var
         
-    def sample(self):
-        return numpy.random.multivariate_normal(self.b0,self.var)
-        
-    
+    def sample_proposal(self, x=None):
+        if x==None:
+            x=self.b0
+        return random.normalvariate(x,1.0)
             

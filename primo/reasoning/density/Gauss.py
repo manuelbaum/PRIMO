@@ -3,6 +3,11 @@
 from primo.reasoning.density import Density
 import numpy
 
+class GaussParameters(object):
+    def __init__(self, mu, cov):
+        self.mu=mu
+        self.cov=cov
+
 class Gauss(Density):
     '''TODO: write doc'''
 
@@ -15,7 +20,8 @@ class Gauss(Density):
 
         
     def add_variable(self, variable):
-        if( not variable.get_value_range() == (-float("Inf"),float("Inf"))):
+        v_min,v_max=variable.get_value_range()
+        if not  (v_min>= -float("Inf") and v_max <=float("Inf")):
             raise Exception("Tried to add Variable into Gaussian densitiy, but variable had wrong value-range")
         self.variables.append(variable)
         
@@ -25,6 +31,10 @@ class Gauss(Density):
         self.C.resize((m,m))
         
         self.C[m-1,m-1]=1.0
+        
+    def set_parameters(self,parameters):
+        self.set_mu(parameters.mu)
+        self.set_cov(parameters.cov)
         
     def set_mu(self, mu):
         self.mu=mu

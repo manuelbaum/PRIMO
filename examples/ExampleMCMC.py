@@ -31,16 +31,22 @@ mcmc_ask=MCMC(bn)
 evidence={burglary:"Intruder"}
 
 
-print "ProbabilityOfEvidence: " 
+print "---ProbabilityOfEvidence:---" 
 poe=mcmc_ask.calculate_PoE(evidence)
 print poe
 
-print "PosteriorMarginal:"
+print "---PosteriorMarginal:---"
 pm=mcmc_ask.calculate_PosteriorMarginal([alarm],evidence,ProbabilityTable)
 print pm
 
-print "PriorMarginal:"
+print "---PriorMarginal:---"
 pm=mcmc_ask.calculate_PriorMarginal([alarm],ProbabilityTable)
 print "Alarm: " + str(pm)
 pm=mcmc_ask.calculate_PriorMarginal([burglary],ProbabilityTable)
 print "Burglary: " + str(pm)
+
+print "---MAP:---"
+hyp=mcmc_ask.calculate_MAP([alarm],evidence,ProbabilityTable)
+print str(evidence) + ": " + str(hyp)
+hyp=mcmc_ask.calculate_MAP([alarm],{},ProbabilityTable)
+print str({}) + ": "+str(hyp)

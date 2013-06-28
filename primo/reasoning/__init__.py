@@ -1,7 +1,8 @@
 from RandomNode import RandomNode
 from DiscreteNode import DiscreteNode
-from GaussNode import GaussNode
-from LinearGaussNode import LinearGaussNode
+from ContinuousNode import ContinuousNode
+from ContinuousNodeFactory import ContinuousNodeFactory
+
 from MarkovChainSampler import MarkovChainSampler
 from MarkovChainSampler import GibbsTransitionModel
 from MarkovChainSampler import MetropolisHastingsTransitionModel

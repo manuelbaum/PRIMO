@@ -86,13 +86,17 @@ class MetropolisHastingsTransitionModel(object):
             
             #new_state=weighted_random(reduced_cpd.get_table())
             #state[node]=node.get_value_range()[new_state]
-
+        #print state
         return state    
         
 
 class MarkovChainSampler(object):
     def __init__(self):
+        self.convergence_test=None
         pass
+        
+    def set_convergence_test(self, test):
+        self.convergence_test=test
         
     def generateMarkovChain(self, network, time_steps, transition_model, initial_state, evidence=[], variables_of_interest=[]):
         state=initial_state
@@ -103,6 +107,11 @@ class MarkovChainSampler(object):
             constant_nodes = evidence.keys()
         else:
             constant_nodes=[]
+            
+        #let the distribution converge to the target distribution
+        while not self.convergence_test.has_converged(state):
+            state=transition_model.transition(network, state, constant_nodes)
+        #finally sample from the target distribution
         for t in xrange(time_steps):
             if variables_of_interest:
                 yield self._reduce_state_to_variables_of_interest(state, variables_of_interest)

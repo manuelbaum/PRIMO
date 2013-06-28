@@ -16,12 +16,27 @@ class Node(object):
         # for visual illustration
         self.pos = (0, 0)
 
-    @abc.abstractmethod
+ #   @abc.abstractmethod
+ #   def announce_parent(self, node):
+ #       """This method will be called by the graph-management to inform nodes
+ #       which just became children of other nodes, so they can adapt themselves
+ #       (e.g. their cpt)"""
+ #       return
+
+    def set_cpd(self, cpd):
+        self.cpd = cpd
+        
+    def get_cpd(self):
+        return self.cpd
+
     def announce_parent(self, node):
-        """This method will be called by the graph-management to inform nodes
-        which just became children of other nodes, so they can adapt themselves
-        (e.g. their cpt)"""
-        return
+        self.cpd.add_variable(node)
+
+    def get_cpd_reduced(self, evidence):
+        return self.cpd.reduction(evidence)
+
+    def get_value_range(self):
+        return self.value_range
 
     def __str__(self):
         print self.name
