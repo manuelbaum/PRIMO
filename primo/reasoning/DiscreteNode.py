@@ -28,23 +28,23 @@ class DiscreteNode(RandomNode):
         return self.cpd.is_normalized_as_cpt(self)
         
     def sample_global(self, evidence=None):
-        if evidence==None:
+        if evidence==None or not self in evidence.keys():
             compatibles=self.value_range
         else:
             compatibles=[]
             for v in self.value_range:
-                if evidence.is_compatible(v):
+                if evidence[self].is_compatible(v):
                     compatibles.append(v)
         
         return random.choice(compatibles)
         
     def sample_local(self, x, evidence=None):
-        if evidence==None:
+        if evidence==None or not self in evidence.keys():
             compatibles=self.value_range
         else:
             compatibles=[]
             for v in self.value_range:
-                if evidence.is_compatible(v):
+                if evidence[self].is_compatible(v):
                     compatibles.append(v)
         
         return random.choice(compatibles)

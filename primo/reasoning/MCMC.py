@@ -74,15 +74,17 @@ class MCMC(object):
         return probability_of_evidence
         
     def _generateInitialStateWithEvidence(self, evidence):
-        state=[]
-        for var in self.bn.get_nodes([]):
+        return self.forward_sample(evidence)
+        
+    def forward_sample(self, evidence):
+        state={}
+        for var in self.bn.get_nodes_in_topological_sort():
             if var in evidence.keys():
-                unambigous=evidence[var].get_unambigous_value()
-                if unambigous == None:
-                    state.append((var,var.sample_global(evidence[var])))
-                else:
-                    state.append((var,unambigous))
+                value=evidence[var].get_unambigous_value()
+                if value == None:
+                    value=var.sample_global(state)
+                state[var]=value
             else:
-                state.append((var,var.sample_global()))
-        return dict(state)
+                state[var]=var.sample_global(state)
+        return state
 

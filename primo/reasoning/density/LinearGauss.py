@@ -58,6 +58,13 @@ class LinearGauss(Density):
     def set_var(self, var):
         self.var=var
         
-    def sample_global(self):
-        return random.normalvariate(self.b0,self.var**0.5)
+    def _compute_offset_given_parents(self, state):
+        x = self.b0
+        for node in self.b.keys():
+            if node in state.keys():
+                x = x + self.b[node]*state[node]
+        return x
+        
+    def sample_global(self,state):
+        return random.normalvariate(self._compute_offset_given_parents(state),self.var**0.5)
             

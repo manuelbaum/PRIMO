@@ -20,22 +20,22 @@ bn = BayesNet()
 cnf=ContinuousNodeFactory()
 age = cnf.createLinearExponentialNode("Plant_age")
 height = cnf.createLinearGaussNode("Plant_height")
-#diameter = cnf.createLinearBetaNode("Plant_diameter")
+diameter = cnf.createLinearBetaNode("Plant_diameter")
 bn.add_node(age)
 bn.add_node(height)
-#bn.add_node(diameter)
+bn.add_node(diameter)
 bn.add_edge(age,height)
-#bn.add_edge(age,diameter)
+bn.add_edge(age,diameter)
 
 #parameterization
-age_parameters=LinearExponentialParameters(4,{})
+age_parameters=LinearExponentialParameters(1.0,{},2.0)
 age.set_density_parameters(age_parameters)
 
 height_parameters=LinearGaussParameters(0.1,{age:1},0.3)
 height.set_density_parameters(height_parameters)
 
-#diameter_parameters=LinearGaussParameters(0.1,{age:-0.2},0.1)
-#diameter.set_density_parameters(diameter_parameters)
+diameter_parameters=LinearBetaParameters(0.01,{age:0.2},2,5)
+diameter.set_density_parameters(diameter_parameters)
 
 
 mcmc_ask=MCMC(bn)

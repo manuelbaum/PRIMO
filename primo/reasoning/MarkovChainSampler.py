@@ -11,9 +11,10 @@ class GibbsTransitionModel(object):
     def __init__(self):
         pass
         
-    def transition(self, network, state, constant_nodes):
+    def transition(self, network, state, extern_evidence):
         nodes = network.get_nodes([])
-        nodes_to_resample=list(set(nodes)-set(constant_nodes))
+        nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
+        #print nodes_to_resample
         for node in nodes_to_resample:
             parents=network.get_parents(node)
             if parents:
@@ -69,13 +70,13 @@ class MetropolisHastingsTransitionModel(object):
             p = p * child.get_probability(state[child],evidence)
         return p
         
-    def transition(self, network, state, constant_nodes):
+    def transition(self, network, state, extern_evidence):
         nodes = network.get_nodes([])
-        nodes_to_resample=list(set(nodes)-set(constant_nodes))
+        nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
         for node in nodes_to_resample:
             #propose a new value for this variable:
             current_value = state[node]
-            proposed_value = node.sample_local(current_value)
+            proposed_value = node.sample_local(current_value, extern_evidence)
             
             p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)
             p_of_current_given_mb = self._compute_p_of_value_given_mb(network, state, node, current_value)
@@ -98,27 +99,29 @@ class MarkovChainSampler(object):
     def set_convergence_test(self, test):
         self.convergence_test=test
         
-    def generateMarkovChain(self, network, time_steps, transition_model, initial_state, evidence=[], variables_of_interest=[]):
+    def generateMarkovChain(self, network, time_steps, transition_model, initial_state, evidence={}, variables_of_interest=[]):
         state=initial_state
+        
         if evidence:
             for node in evidence.keys():
                 if  not evidence[node].is_compatible(state[node]):
                     raise Exception("The evidence given does not fit to the initial_state specified")
-            constant_nodes = evidence.keys()
-        else:
-            constant_nodes=[]
+#            constant_nodes = evidence.keys()
+#        else:
+#            constant_nodes=[]
             
         #let the distribution converge to the target distribution
         while not self.convergence_test.has_converged(state):
-            state=transition_model.transition(network, state, constant_nodes)
+            #print state
+            state=transition_model.transition(network, state, evidence)
         #finally sample from the target distribution
         for t in xrange(time_steps):
-            #print state
+            
             if variables_of_interest:
                 yield self._reduce_state_to_variables_of_interest(state, variables_of_interest)
             else:
                 yield state
-            state=transition_model.transition(network, state, constant_nodes)
+            state=transition_model.transition(network, state, evidence)
             
     def _reduce_state_to_variables_of_interest(self, state, variables_of_interest):
         return dict((k,v) for (k,v) in state.iteritems() if k in variables_of_interest)
