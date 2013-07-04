@@ -9,6 +9,9 @@ class ContinuousNode(Node):
         self.density_class = DensityClass
         self.cpd = DensityClass(self)
         
+    def __str__(self):
+        return self.name
+        
     def set_density_parameters(self, density_parameters):
         self.cpd.set_parameters(density_parameters)
         

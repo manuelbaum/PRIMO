@@ -71,6 +71,7 @@ class MetropolisHastingsTransitionModel(object):
         return p
         
     def transition(self, network, state, extern_evidence):
+        #print state
         nodes = network.get_nodes([])
         nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
         for node in nodes_to_resample:
@@ -80,7 +81,9 @@ class MetropolisHastingsTransitionModel(object):
             
             p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)
             p_of_current_given_mb = self._compute_p_of_value_given_mb(network, state, node, current_value)
-            
+            #print node.name
+            #print p_of_proposal_given_mb
+            #print p_of_current_given_mb
             acceptance_probability = min(1.0,  p_of_proposal_given_mb/p_of_current_given_mb * 1.0/1.0)
             if random.random() <= acceptance_probability:
                 state[node]=proposed_value

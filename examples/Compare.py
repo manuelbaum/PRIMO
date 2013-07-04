@@ -8,9 +8,11 @@ the probability of evidence.
 
 from  primo.core import BayesNet
 from  primo.reasoning import DiscreteNode
+from primo.reasoning.density import ProbabilityTable
 #from primo.reasoning.factorelemination import EasiestFactorElimination
 from primo.reasoning.factorelemination import FactorTreeFactory
 from primo.reasoning import MCMC
+from primo.reasoning import EvidenceEqual as EvEq
 import numpy
 
 #==============================================================================
@@ -123,23 +125,23 @@ print "====MCMC===="
 
 print "Prior Marginal:"
 
-print "AlarmFT: " + str(mcmc_ask.calculate_PriorMarginal([alarm]))
-print "John_CallsFT: " + str(mcmc_ask.calculate_PriorMarginal([john_calls]))
-print "Baum_CallsFT: " + str(mcmc_ask.calculate_PriorMarginal([baum_calls]))
-print "BurglaryFT: " + str(mcmc_ask.calculate_PriorMarginal([burglary]))
-print "EarthquakeFT: " + str(mcmc_ask.calculate_PriorMarginal([earthquake]))
+print "AlarmFT: " + str(mcmc_ask.calculate_PriorMarginal([alarm],ProbabilityTable))
+print "John_CallsFT: " + str(mcmc_ask.calculate_PriorMarginal([john_calls],ProbabilityTable))
+print "Baum_CallsFT: " + str(mcmc_ask.calculate_PriorMarginal([baum_calls],ProbabilityTable))
+print "BurglaryFT: " + str(mcmc_ask.calculate_PriorMarginal([burglary],ProbabilityTable))
+print "EarthquakeFT: " + str(mcmc_ask.calculate_PriorMarginal([earthquake],ProbabilityTable))
 
-evidences = {alarm: "Ringing",earthquake: "Calm"}
+evidences = {alarm: EvEq("Ringing"),earthquake: EvEq("Calm")}
 
 print "PoE: " + str(mcmc_ask.calculate_PoE(evidences))
 
 print "Posterior Marginal (alarm->ringing , earthquake->calm):"
 
-print "AlarmFT: " + str(mcmc_ask.calculate_PosteriorMarginal([alarm],evidences))
-print "John_CallsFT: " + str(mcmc_ask.calculate_PosteriorMarginal([john_calls],evidences))
-print "Baum_CallsFT: " + str(mcmc_ask.calculate_PosteriorMarginal([baum_calls],evidences))
-print "BurglaryFT: " + str(mcmc_ask.calculate_PosteriorMarginal([burglary],evidences))
-print "EarthquakeFT: " + str(mcmc_ask.calculate_PosteriorMarginal([earthquake],evidences))
+print "AlarmFT: " + str(mcmc_ask.calculate_PosteriorMarginal([alarm],evidences,ProbabilityTable))
+print "John_CallsFT: " + str(mcmc_ask.calculate_PosteriorMarginal([john_calls],evidences,ProbabilityTable))
+print "Baum_CallsFT: " + str(mcmc_ask.calculate_PosteriorMarginal([baum_calls],evidences,ProbabilityTable))
+print "BurglaryFT: " + str(mcmc_ask.calculate_PosteriorMarginal([burglary],evidences,ProbabilityTable))
+print "EarthquakeFT: " + str(mcmc_ask.calculate_PosteriorMarginal([earthquake],evidences,ProbabilityTable))
 
 
 
