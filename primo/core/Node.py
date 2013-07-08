@@ -23,27 +23,8 @@ class Node(object):
  #       (e.g. their cpt)"""
  #       return
 
-    def set_cpd(self, cpd):
-        self.cpd = cpd
-        
-    def get_cpd(self):
-        return self.cpd
-
-    def announce_parent(self, node):
-        self.cpd.add_variable(node)
-
-    def get_cpd_reduced(self, evidence):
-        return self.cpd.reduction(evidence)
-
-    def get_value_range(self):
-        return self.value_range
-
     def __str__(self):
         print self.name
         return self.name
         
-    def sample_gobal(self, evidence=None):
-        raise Exception("Called unimplemented Method")
-        
-    def sample_local(self, x, evidence=None):
-        raise Exception("Called unimplemented Method")
+

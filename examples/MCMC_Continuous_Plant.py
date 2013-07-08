@@ -47,7 +47,7 @@ bn.add_edge(height,children)
 bn.add_edge(ground,children)
 
 #parameterization
-age_parameters=LinearExponentialParameters(0.0,{})
+age_parameters=LinearExponentialParameters(0.1,{})
 age.set_density_parameters(age_parameters)
 
 sun.set_density_parameters(LinearBetaParameters(2,{},2,{}))
@@ -57,13 +57,13 @@ ground.set_density_parameters(LinearGaussParameters(2.0,{},1.5))
 #age,ground,sun
 growth.set_density_parameters(LinearGaussParameters(0.1,{age:5.0,ground:1.0,sun:4.0},2.5))
 
-height_parameters=LinearBetaParameters(0.0,{growth:1},0.5,{growth:0.5})
+height_parameters=LinearBetaParameters(0.1,{growth:1},0.5,{growth:0.5})
 height.set_density_parameters(height_parameters)
 
 diameter_parameters=LinearExponentialParameters(0.01,{growth:0.2})
 diameter.set_density_parameters(diameter_parameters)
 
-children.set_density_parameters(LinearExponentialParameters(0,{ground:1.0,height:1.0}))
+children.set_density_parameters(LinearExponentialParameters(0.1,{ground:1.0,height:1.0}))
 
 
 mcmc_ask=MCMC(bn)

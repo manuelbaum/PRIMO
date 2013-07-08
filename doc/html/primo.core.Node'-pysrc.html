@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>primo.core.Node'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="primo-module.html">Package&nbsp;primo</a> ::
+        <a href="primo.core-module.html">Package&nbsp;core</a> ::
+        Module&nbsp;Node'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="primo.core.Node%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="primo.core.Node%27-module.html">Module primo.core.Node'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">abc</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="Node"></a><div id="Node-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="Node-toggle" onclick="return toggle('Node');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html">Node</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Node-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt class="py-name">__metaclass__</tt> <tt class="py-op">=</tt> <tt class="py-name">abc</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Class abc.ABCMeta=abc.ABCMeta-class.html"><a title="abc.ABCMeta" class="py-name" href="#" onclick="return doclink('link-0', 'ABCMeta', 'link-0');">ABCMeta</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable primo.core.Node'.Node.name=primo.core.Node%27.Node-class.html#name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-1', 'name', 'link-1');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"UninitializedName"</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable primo.core.Node'.Node.position=primo.core.Node%27.Node-class.html#position"><a title="primo.core.Node'.Node.position" class="py-name" href="#" onclick="return doclink('link-2', 'position', 'link-2');">position</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="Node.__init__"></a><div id="Node.__init__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="Node.__init__-toggle" onclick="return toggle('Node.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-comment"># Remove all special characters and replace " " with "_"</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-3" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-3', 'name', 'link-1');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">sub</tt><tt class="py-op">(</tt><tt class="py-string">r"[^a-zA-Z_0-9 ]*"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-name">node_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-4', 'name', 'link-1');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-5', 'name', 'link-1');">name</a></tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">" "</tt><tt class="py-op">,</tt> <tt class="py-string">"_"</tt><tt class="py-op">)</tt>         </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-comment"># for visual illustration</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> <tt class="py-comment">#   @abc.abstractmethod</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> <tt class="py-comment">#   def announce_parent(self, node):</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> <tt class="py-comment">#       """This method will be called by the graph-management to inform nodes</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> <tt class="py-comment">#       which just became children of other nodes, so they can adapt themselves</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> <tt class="py-comment">#       (e.g. their cpt)"""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> <tt class="py-comment">#       return</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="Node.set_cpd"></a><div id="Node.set_cpd-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="Node.set_cpd-toggle" onclick="return toggle('Node.set_cpd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#set_cpd">set_cpd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cpd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.set_cpd-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.set_cpd-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable primo.reasoning.RandomNode'.RandomNode.cpd=primo.reasoning.RandomNode%27.RandomNode-class.html#cpd"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-6', 'cpd', 'link-6');">cpd</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-7', 'cpd', 'link-6');">cpd</a></tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">         </tt>
+<a name="Node.get_cpd"></a><div id="Node.get_cpd-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="Node.get_cpd-toggle" onclick="return toggle('Node.get_cpd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#get_cpd">get_cpd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.get_cpd-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.get_cpd-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-8', 'cpd', 'link-6');">cpd</a></tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="Node.announce_parent"></a><div id="Node.announce_parent-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Node.announce_parent-toggle" onclick="return toggle('Node.announce_parent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#announce_parent">announce_parent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.announce_parent-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.announce_parent-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-9', 'cpd', 'link-6');">cpd</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method primo.decision.UtilityTable'.UtilityTable.add_variable()=primo.decision.UtilityTable%27.UtilityTable-class.html#add_variable,Method primo.reasoning.density.Gauss'.Gauss.add_variable()=primo.reasoning.density.Gauss%27.Gauss-class.html#add_variable,Method primo.reasoning.density.LinearBeta'.LinearBeta.add_variable()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#add_variable,Method primo.reasoning.density.LinearExponential'.LinearExponential.add_variable()=primo.reasoning.density.LinearExponential%27.LinearExponential-class.html#add_variable,Method primo.reasoning.density.LinearGauss'.LinearGauss.add_variable()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#add_variable,Method primo.reasoning.density.ProbabilityTable'.ProbabilityTable.add_variable()=primo.reasoning.density.ProbabilityTable%27.ProbabilityTable-class.html#add_variable"><a title="primo.decision.UtilityTable'.UtilityTable.add_variable
+primo.reasoning.density.Gauss'.Gauss.add_variable
+primo.reasoning.density.LinearBeta'.LinearBeta.add_variable
+primo.reasoning.density.LinearExponential'.LinearExponential.add_variable
+primo.reasoning.density.LinearGauss'.LinearGauss.add_variable
+primo.reasoning.density.ProbabilityTable'.ProbabilityTable.add_variable" class="py-name" href="#" onclick="return doclink('link-10', 'add_variable', 'link-10');">add_variable</a></tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="Node.get_cpd_reduced"></a><div id="Node.get_cpd_reduced-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="Node.get_cpd_reduced-toggle" onclick="return toggle('Node.get_cpd_reduced');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#get_cpd_reduced">get_cpd_reduced</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">evidence</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.get_cpd_reduced-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.get_cpd_reduced-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-11', 'cpd', 'link-6');">cpd</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method primo.reasoning.density.ProbabilityTable'.ProbabilityTable.reduction()=primo.reasoning.density.ProbabilityTable%27.ProbabilityTable-class.html#reduction"><a title="primo.reasoning.density.ProbabilityTable'.ProbabilityTable.reduction" class="py-name" href="#" onclick="return doclink('link-12', 'reduction', 'link-12');">reduction</a></tt><tt class="py-op">(</tt><tt class="py-name">evidence</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="Node.get_value_range"></a><div id="Node.get_value_range-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="Node.get_value_range-toggle" onclick="return toggle('Node.get_value_range');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#get_value_range">get_value_range</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.get_value_range-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.get_value_range-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value_range</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="Node.__str__"></a><div id="Node.__str__-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="Node.__str__-toggle" onclick="return toggle('Node.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.__str__-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-13', 'name', 'link-1');">name</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-14', 'name', 'link-1');">name</a></tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">         </tt>
+<a name="Node.sample_gobal"></a><div id="Node.sample_gobal-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="Node.sample_gobal-toggle" onclick="return toggle('Node.sample_gobal');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#sample_gobal">sample_gobal</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">evidence</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.sample_gobal-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.sample_gobal-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Called unimplemented Method"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">         </tt>
+<a name="Node.sample_local"></a><div id="Node.sample_local-def"><a name="L48"></a><tt class="py-lineno">48</tt> <a class="py-toggle" href="#" id="Node.sample_local-toggle" onclick="return toggle('Node.sample_local');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.Node'.Node-class.html#sample_local">sample_local</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">,</tt> <tt class="py-param">evidence</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.sample_local-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Node.sample_local-expanded"><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Called unimplemented Method"</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  5 12:21:46 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

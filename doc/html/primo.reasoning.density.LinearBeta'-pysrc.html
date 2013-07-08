@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>primo.reasoning.density.LinearBeta'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="primo-module.html">Package&nbsp;primo</a> ::
+        <a href="primo.reasoning-module.html">Package&nbsp;reasoning</a> ::
+        <a href="primo.reasoning.density-module.html">Package&nbsp;density</a> ::
+        Module&nbsp;LinearBeta'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="primo.reasoning.density.LinearBeta%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="primo.reasoning.density.LinearBeta%27-module.html">Module primo.reasoning.density.LinearBeta'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package primo=primo-module.html"><a title="primo" class="py-name" href="#" onclick="return doclink('link-0', 'primo', 'link-0');">primo</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package primo.reasoning=primo.reasoning-module.html"><a title="primo.reasoning" class="py-name" href="#" onclick="return doclink('link-1', 'reasoning', 'link-1');">reasoning</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package primo.reasoning.density=primo.reasoning.density-module.html"><a title="primo.reasoning.density" class="py-name" href="#" onclick="return doclink('link-2', 'density', 'link-2');">density</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class primo.reasoning.density.Density'.Density=primo.reasoning.density.Density%27.Density-class.html"><a title="primo.reasoning.density.Density'.Density" class="py-name" href="#" onclick="return doclink('link-3', 'Density', 'link-3');">Density</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="primo" class="py-name" href="#" onclick="return doclink('link-4', 'primo', 'link-0');">primo</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="primo.reasoning" class="py-name" href="#" onclick="return doclink('link-5', 'reasoning', 'link-1');">reasoning</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Class primo.reasoning.ContinuousNode'.ContinuousNode=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-6', 'ContinuousNode', 'link-6');">ContinuousNode</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">stats</tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Variable primo.reasoning.density.LinearBeta'.beta=primo.reasoning.density.LinearBeta%27-module.html#beta"><a title="primo.reasoning.density.LinearBeta'.beta" class="py-name" href="#" onclick="return doclink('link-7', 'beta', 'link-7');">beta</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">random</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="LinearBetaParameters"></a><div id="LinearBetaParameters-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="LinearBetaParameters-toggle" onclick="return toggle('LinearBetaParameters');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBetaParameters-class.html">LinearBetaParameters</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBetaParameters-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LinearBetaParameters-expanded"><a name="LinearBetaParameters.__init__"></a><div id="LinearBetaParameters.__init__-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="LinearBetaParameters.__init__-toggle" onclick="return toggle('LinearBetaParameters.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBetaParameters-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p0</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-param">q0</tt><tt class="py-op">,</tt> <tt class="py-param">q</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBetaParameters.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBetaParameters.__init__-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">=</tt><tt class="py-name">p</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">=</tt><tt class="py-name">q</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p0</tt><tt class="py-op">=</tt><tt class="py-name">p0</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q0</tt><tt class="py-op">=</tt><tt class="py-name">q0</tt> </tt>
+</div></div><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="LinearBeta"></a><div id="LinearBeta-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="LinearBeta-toggle" onclick="return toggle('LinearBeta');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html">LinearBeta</a><tt class="py-op">(</tt><tt class="py-base-class">Density</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LinearBeta-expanded"><a name="LinearBeta.__init__"></a><div id="LinearBeta.__init__-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="LinearBeta.__init__-toggle" onclick="return toggle('LinearBeta.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta.__init__-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p0</tt><tt class="py-op">=</tt><tt class="py-number">1</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q0</tt><tt class="py-op">=</tt><tt class="py-number">1</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node</tt><tt class="py-op">=</tt><tt class="py-name">node</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">         </tt>
+<a name="LinearBeta.set_parameters"></a><div id="LinearBeta.set_parameters-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="LinearBeta.set_parameters-toggle" onclick="return toggle('LinearBeta.set_parameters');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#set_parameters">set_parameters</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">parameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta.set_parameters-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta.set_parameters-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p0</tt><tt class="py-op">=</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">p0</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q0</tt><tt class="py-op">=</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">q0</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">=</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">p</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">=</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">q</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">         </tt>
+<a name="LinearBeta.add_variable"></a><div id="LinearBeta.add_variable-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="LinearBeta.add_variable-toggle" onclick="return toggle('LinearBeta.add_variable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#add_variable">add_variable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">variable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta.add_variable-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta.add_variable-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-docstring">'''This method needs some serious reworking: Variables should not be permitted</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">        to be parents because of their value range. Instead it should be evaluated</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">        if they can yield parameters for this distribution that are permitted. This </tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">        can in any case happen under bad influence coefficients'''</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt><tt class="py-op">(</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">variable</tt><tt class="py-op">,</tt><tt id="link-8" class="py-name"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-8', 'ContinuousNode', 'link-6');">ContinuousNode</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-9', 'ContinuousNode', 'link-6');">ContinuousNode</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Tried to add Variable as parent, but is not a ContinuousNode"</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-name">variable</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-name">variable</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">         </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">         </tt>
+<a name="LinearBeta.get_probability"></a><div id="LinearBeta.get_probability-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="LinearBeta.get_probability-toggle" onclick="return toggle('LinearBeta.get_probability');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#get_probability">get_probability</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">node_value_pairs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta.get_probability-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta.get_probability-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-comment">#print "Probability to compute for value:"+str(value)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-comment">#Compute the offset for the density and displace the value accordingly</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p0</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q0</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">node</tt><tt class="py-op">,</tt><tt class="py-name">node_value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">node_value_pairs</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-name">node_value</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">q</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-name">node_value</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-10" class="py-name"><a title="primo.reasoning.density.LinearBeta'.beta" class="py-name" href="#" onclick="return doclink('link-10', 'beta', 'link-7');">beta</a></tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">pdf</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">         </tt>
+<a name="LinearBeta._compute_p_given_parents"></a><div id="LinearBeta._compute_p_given_parents-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="LinearBeta._compute_p_given_parents-toggle" onclick="return toggle('LinearBeta._compute_p_given_parents');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#_compute_p_given_parents">_compute_p_given_parents</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta._compute_p_given_parents-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta._compute_p_given_parents-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p0</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">state</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">x</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-name">state</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-number">1.0</tt><tt class="py-op">/</tt><tt class="py-op">(</tt><tt class="py-number">1.0</tt><tt class="py-op">+</tt><tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">exp</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">         </tt>
+<a name="LinearBeta._compute_q_given_parents"></a><div id="LinearBeta._compute_q_given_parents-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="LinearBeta._compute_q_given_parents-toggle" onclick="return toggle('LinearBeta._compute_q_given_parents');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#_compute_q_given_parents">_compute_q_given_parents</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta._compute_q_given_parents-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta._compute_q_given_parents-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q0</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">state</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">                <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">x</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-name">state</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-number">1.0</tt><tt class="py-op">/</tt><tt class="py-op">(</tt><tt class="py-number">1.0</tt><tt class="py-op">+</tt><tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">exp</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="LinearBeta.sample_global"></a><div id="LinearBeta.sample_global-def"><a name="L65"></a><tt class="py-lineno">65</tt> <a class="py-toggle" href="#" id="LinearBeta.sample_global-toggle" onclick="return toggle('LinearBeta.sample_global');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearBeta'.LinearBeta-class.html#sample_global">sample_global</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearBeta.sample_global-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearBeta.sample_global-expanded"><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">p</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method primo.reasoning.density.LinearBeta'.LinearBeta._compute_p_given_parents()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#_compute_p_given_parents"><a title="primo.reasoning.density.LinearBeta'.LinearBeta._compute_p_given_parents" class="py-name" href="#" onclick="return doclink('link-11', '_compute_p_given_parents', 'link-11');">_compute_p_given_parents</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-name">q</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method primo.reasoning.density.LinearBeta'.LinearBeta._compute_q_given_parents()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#_compute_q_given_parents"><a title="primo.reasoning.density.LinearBeta'.LinearBeta._compute_q_given_parents" class="py-name" href="#" onclick="return doclink('link-12', '_compute_q_given_parents', 'link-12');">_compute_q_given_parents</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-name">value</tt><tt class="py-op">=</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">betavariate</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">,</tt><tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-comment">#print "Sampled:"+str(value)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> </tt>
+</div></div><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  5 12:21:46 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>primo.core.BayesNet'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="primo-module.html">Package&nbsp;primo</a> ::
+        <a href="primo.core-module.html">Package&nbsp;core</a> ::
+        Module&nbsp;BayesNet'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="primo.core.BayesNet%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="primo.core.BayesNet%27-module.html">Module primo.core.BayesNet'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">networkx</tt> <tt class="py-keyword">as</tt> <tt class="py-name">nx</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package primo=primo-module.html"><a title="primo" class="py-name" href="#" onclick="return doclink('link-0', 'primo', 'link-0');">primo</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package primo.core=primo.core-module.html"><a title="primo.core" class="py-name" href="#" onclick="return doclink('link-1', 'core', 'link-1');">core</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class primo.core.Node'.Node=primo.core.Node%27.Node-class.html"><a title="primo.core.Node'.Node" class="py-name" href="#" onclick="return doclink('link-2', 'Node', 'link-2');">Node</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet"></a><div id="BayesNet-def"><a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="BayesNet-toggle" onclick="return toggle('BayesNet');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html">BayesNet</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BayesNet-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.__init__"></a><div id="BayesNet.__init__-def"><a name="L8"></a><tt class="py-lineno">  8</tt> <a class="py-toggle" href="#" id="BayesNet.__init__-toggle" onclick="return toggle('BayesNet.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.__init__-expanded"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt> <tt class="py-op">=</tt> <tt class="py-name">nx</tt><tt class="py-op">.</tt><tt class="py-name">DiGraph</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.add_node"></a><div id="BayesNet.add_node-def"><a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="BayesNet.add_node-toggle" onclick="return toggle('BayesNet.add_node');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#add_node">add_node</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.add_node-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.add_node-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name"><a title="primo.core.Node'.Node" class="py-name" href="#" onclick="return doclink('link-3', 'Node', 'link-2');">Node</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable primo.core.Node'.Node.name=primo.core.Node%27.Node-class.html#name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-4', 'name', 'link-4');">name</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Node name already exists in Bayesnet: "</tt><tt class="py-op">+</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-5', 'name', 'link-4');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-6', 'name', 'link-4');">name</a></tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-name">node</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.add_node()=primo.core.BayesNet%27.BayesNet-class.html#add_node,Method primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.add_node()=primo.core.BayesianDecisionNetwork%27.BayesianDecisionNetwork-class.html#add_node,Method primo.core.TwoTBN'.TwoTBN.add_node()=primo.core.TwoTBN%27.TwoTBN-class.html#add_node"><a title="primo.core.BayesNet'.BayesNet.add_node
+primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.add_node
+primo.core.TwoTBN'.TwoTBN.add_node" class="py-name" href="#" onclick="return doclink('link-7', 'add_node', 'link-7');">add_node</a></tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Can only add 'Node' and its subclasses as nodes into the BayesNet"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.add_edge"></a><div id="BayesNet.add_edge-def"><a name="L21"></a><tt class="py-lineno"> 21</tt> <a class="py-toggle" href="#" id="BayesNet.add_edge-toggle" onclick="return toggle('BayesNet.add_edge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#add_edge">add_edge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node_from</tt><tt class="py-op">,</tt> <tt class="py-param">node_to</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.add_edge-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.add_edge-expanded"><a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">node_from</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">node_to</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.add_edge()=primo.core.BayesNet%27.BayesNet-class.html#add_edge,Method primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.add_edge()=primo.core.BayesianDecisionNetwork%27.BayesianDecisionNetwork-class.html#add_edge"><a title="primo.core.BayesNet'.BayesNet.add_edge
+primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.add_edge" class="py-name" href="#" onclick="return doclink('link-8', 'add_edge', 'link-8');">add_edge</a></tt><tt class="py-op">(</tt><tt class="py-name">node_from</tt><tt class="py-op">,</tt> <tt class="py-name">node_to</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">            <tt class="py-name">node_to</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method primo.core.Node'.Node.announce_parent()=primo.core.Node%27.Node-class.html#announce_parent,Method primo.decision.DecisionNode'.DecisionNode.announce_parent()=primo.decision.DecisionNode%27.DecisionNode-class.html#announce_parent,Method primo.decision.UtilityNode'.UtilityNode.announce_parent()=primo.decision.UtilityNode%27.UtilityNode-class.html#announce_parent"><a title="primo.core.Node'.Node.announce_parent
+primo.decision.DecisionNode'.DecisionNode.announce_parent
+primo.decision.UtilityNode'.UtilityNode.announce_parent" class="py-name" href="#" onclick="return doclink('link-9', 'announce_parent', 'link-9');">announce_parent</a></tt><tt class="py-op">(</tt><tt class="py-name">node_from</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Tried to add an Edge between two Nodes of which at least one was not contained in the Bayesnet"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.remove_node"></a><div id="BayesNet.remove_node-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="BayesNet.remove_node-toggle" onclick="return toggle('BayesNet.remove_node');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#remove_node">remove_node</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.remove_node-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.remove_node-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-10', 'name', 'link-4');">name</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Node "</tt> <tt class="py-op">+</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-11', 'name', 'link-4');">name</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"does not exists"</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt> <tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.remove_node()=primo.core.BayesNet%27.BayesNet-class.html#remove_node"><a title="primo.core.BayesNet'.BayesNet.remove_node" class="py-name" href="#" onclick="return doclink('link-12', 'remove_node', 'link-12');">remove_node</a></tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">nx</tt><tt class="py-op">.</tt><tt class="py-name">exception</tt><tt class="py-op">.</tt><tt class="py-name">NetworkXError</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Tried to remove a node which does not exist."</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-13', 'name', 'link-4');">name</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.remove_edge"></a><div id="BayesNet.remove_edge-def"><a name="L38"></a><tt class="py-lineno"> 38</tt> <a class="py-toggle" href="#" id="BayesNet.remove_edge-toggle" onclick="return toggle('BayesNet.remove_edge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#remove_edge">remove_edge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node_from</tt><tt class="py-op">,</tt> <tt class="py-param">node_to</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.remove_edge-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.remove_edge-expanded"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.remove_edge()=primo.core.BayesNet%27.BayesNet-class.html#remove_edge"><a title="primo.core.BayesNet'.BayesNet.remove_edge" class="py-name" href="#" onclick="return doclink('link-14', 'remove_edge', 'link-14');">remove_edge</a></tt><tt class="py-op">(</tt><tt class="py-name">node_from</tt><tt class="py-op">,</tt> <tt class="py-name">node_to</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">nx</tt><tt class="py-op">.</tt><tt class="py-name">exception</tt><tt class="py-op">.</tt><tt class="py-name">NetworkXError</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Tried to remove an edge which does not exist in the BayesNet"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-comment">#raise Exception("Fixme: Adapt CPD of child-node")</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_node"></a><div id="BayesNet.get_node-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="BayesNet.get_node-toggle" onclick="return toggle('BayesNet.get_node');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_node">get_node</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_node-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_node-expanded"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">[</tt><tt class="py-name">node_name</tt><tt class="py-op">]</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">KeyError</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"There is no node with name "</tt><tt class="py-op">+</tt><tt class="py-name">node_name</tt><tt class="py-op">+</tt><tt class="py-string">" in the BayesNet"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_all_nodes"></a><div id="BayesNet.get_all_nodes-def"><a name="L51"></a><tt class="py-lineno"> 51</tt> <a class="py-toggle" href="#" id="BayesNet.get_all_nodes-toggle" onclick="return toggle('BayesNet.get_all_nodes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_all_nodes">get_all_nodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_all_nodes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_all_nodes-expanded"><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_nodes"></a><div id="BayesNet.get_nodes-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="BayesNet.get_nodes-toggle" onclick="return toggle('BayesNet.get_nodes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_nodes">get_nodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node_names</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_nodes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_nodes-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">nodes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">node_names</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-name">nodes</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">node_name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">node_names</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-name">nodes</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.get_node()=primo.core.BayesNet%27.BayesNet-class.html#get_node,Method primo.reasoning.factorelemination.Factor'.Factor.get_node()=primo.reasoning.factorelemination.Factor%27.Factor-class.html#get_node"><a title="primo.core.BayesNet'.BayesNet.get_node
+primo.reasoning.factorelemination.Factor'.Factor.get_node" class="py-name" href="#" onclick="return doclink('link-15', 'get_node', 'link-15');">get_node</a></tt><tt class="py-op">(</tt><tt class="py-name">node_name</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">nodes</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_nodes_in_topological_sort"></a><div id="BayesNet.get_nodes_in_topological_sort-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="BayesNet.get_nodes_in_topological_sort-toggle" onclick="return toggle('BayesNet.get_nodes_in_topological_sort');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_nodes_in_topological_sort">get_nodes_in_topological_sort</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_nodes_in_topological_sort-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_nodes_in_topological_sort-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">nx</tt><tt class="py-op">.</tt><tt class="py-name">topological_sort</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_parents"></a><div id="BayesNet.get_parents-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="BayesNet.get_parents-toggle" onclick="return toggle('BayesNet.get_parents');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_parents">get_parents</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_parents-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_parents-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-16', 'name', 'link-4');">name</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Node "</tt> <tt class="py-op">+</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-17', 'name', 'link-4');">name</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"does not exists"</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">predecessors</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_children"></a><div id="BayesNet.get_children-def"><a name="L73"></a><tt class="py-lineno"> 73</tt> <a class="py-toggle" href="#" id="BayesNet.get_children-toggle" onclick="return toggle('BayesNet.get_children');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_children">get_children</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_children-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_children-expanded"><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-18', 'name', 'link-4');">name</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Node "</tt> <tt class="py-op">+</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-19', 'name', 'link-4');">name</a></tt> <tt class="py-op">+</tt> <tt class="py-string">"does not exists"</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">successors</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.get_markov_blanket"></a><div id="BayesNet.get_markov_blanket-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="BayesNet.get_markov_blanket-toggle" onclick="return toggle('BayesNet.get_markov_blanket');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#get_markov_blanket">get_markov_blanket</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.get_markov_blanket-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.get_markov_blanket-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Called unimplemented function"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.is_dag"></a><div id="BayesNet.is_dag-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="BayesNet.is_dag-toggle" onclick="return toggle('BayesNet.is_dag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#is_dag">is_dag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.is_dag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.is_dag-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Called unimplemented function"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.draw"></a><div id="BayesNet.draw-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="BayesNet.draw-toggle" onclick="return toggle('BayesNet.draw');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#draw">draw</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.draw-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.draw-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">pyplot</tt> <tt class="py-keyword">as</tt> <tt class="py-name">plt</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">nx</tt><tt class="py-op">.</tt><tt class="py-name">draw_circular</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">plt</tt><tt class="py-op">.</tt><tt class="py-name">show</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.draw_graphviz"></a><div id="BayesNet.draw_graphviz-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="BayesNet.draw_graphviz-toggle" onclick="return toggle('BayesNet.draw_graphviz');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#draw_graphviz">draw_graphviz</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.draw_graphviz-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.draw_graphviz-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">pyplot</tt> <tt class="py-keyword">as</tt> <tt class="py-name">plt</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">nx</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.draw_graphviz()=primo.core.BayesNet%27.BayesNet-class.html#draw_graphviz"><a title="primo.core.BayesNet'.BayesNet.draw_graphviz" class="py-name" href="#" onclick="return doclink('link-20', 'draw_graphviz', 'link-20');">draw_graphviz</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">plt</tt><tt class="py-op">.</tt><tt class="py-name">show</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.is_valid"></a><div id="BayesNet.is_valid-def"><a name="L96"></a><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="BayesNet.is_valid-toggle" onclick="return toggle('BayesNet.is_valid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#is_valid">is_valid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.is_valid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.is_valid-expanded"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-docstring">'''Check if graph structure is valid.</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        Returns true if graph is directed and acyclic, false otherwiese'''</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">number_of_selfloops</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">nodes</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.has_loop()=primo.core.BayesNet%27.BayesNet-class.html#has_loop"><a title="primo.core.BayesNet'.BayesNet.has_loop" class="py-name" href="#" onclick="return doclink('link-21', 'has_loop', 'link-21');">has_loop</a></tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.has_loop"></a><div id="BayesNet.has_loop-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="BayesNet.has_loop-toggle" onclick="return toggle('BayesNet.has_loop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#has_loop">has_loop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">node</tt><tt class="py-op">,</tt> <tt class="py-param">origin</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.has_loop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.has_loop-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-docstring">'''Check if any path from node leads back to node.</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        Keyword arguments:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        node -- the start node</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        origin -- for internal recursive loop (default: None)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        Returns true on succes, false otherwise.'''</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">origin</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-name">origin</tt> <tt class="py-op">=</tt> <tt class="py-name">node</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">successor</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt class="py-name">successors</tt><tt class="py-op">(</tt><tt class="py-name">node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">successor</tt> <tt class="py-op">==</tt> <tt class="py-name">origin</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="primo.core.BayesNet'.BayesNet.has_loop" class="py-name" href="#" onclick="return doclink('link-22', 'has_loop', 'link-21');">has_loop</a></tt><tt class="py-op">(</tt><tt class="py-name">successor</tt><tt class="py-op">,</tt> <tt class="py-name">origin</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.clear"></a><div id="BayesNet.clear-def"><a name="L126"></a><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="BayesNet.clear-toggle" onclick="return toggle('BayesNet.clear');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#clear">clear</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.clear-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.clear-expanded"><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-docstring">'''Remove all nodes and edges from the graph.</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        This also removes the name, and all graph, node and edge attributes.'''</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.clear()=primo.core.BayesNet%27.BayesNet-class.html#clear"><a title="primo.core.BayesNet'.BayesNet.clear" class="py-name" href="#" onclick="return doclink('link-23', 'clear', 'link-23');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_lookup</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="primo.core.BayesNet'.BayesNet.clear" class="py-name" href="#" onclick="return doclink('link-24', 'clear', 'link-23');">clear</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.number_of_nodes"></a><div id="BayesNet.number_of_nodes-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="BayesNet.number_of_nodes-toggle" onclick="return toggle('BayesNet.number_of_nodes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#number_of_nodes">number_of_nodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.number_of_nodes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.number_of_nodes-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-docstring">'''Return the number of nodes in the graph.'''</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="BayesNet.__len__"></a><div id="BayesNet.__len__-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="BayesNet.__len__-toggle" onclick="return toggle('BayesNet.__len__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.core.BayesNet'.BayesNet-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BayesNet.__len__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BayesNet.__len__-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-docstring">'''Return the number of nodes in the graph.'''</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  5 12:21:47 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

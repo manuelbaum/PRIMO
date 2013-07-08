@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>primo.reasoning.density.LinearGauss'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="primo-module.html">Package&nbsp;primo</a> ::
+        <a href="primo.reasoning-module.html">Package&nbsp;reasoning</a> ::
+        <a href="primo.reasoning.density-module.html">Package&nbsp;density</a> ::
+        Module&nbsp;LinearGauss'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="primo.reasoning.density.LinearGauss%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="primo.reasoning.density.LinearGauss%27-module.html">Module primo.reasoning.density.LinearGauss'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package primo=primo-module.html"><a title="primo" class="py-name" href="#" onclick="return doclink('link-0', 'primo', 'link-0');">primo</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package primo.reasoning=primo.reasoning-module.html"><a title="primo.reasoning" class="py-name" href="#" onclick="return doclink('link-1', 'reasoning', 'link-1');">reasoning</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package primo.reasoning.density=primo.reasoning.density-module.html"><a title="primo.reasoning.density" class="py-name" href="#" onclick="return doclink('link-2', 'density', 'link-2');">density</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class primo.reasoning.density.Density'.Density=primo.reasoning.density.Density%27.Density-class.html"><a title="primo.reasoning.density.Density'.Density" class="py-name" href="#" onclick="return doclink('link-3', 'Density', 'link-3');">Density</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="primo" class="py-name" href="#" onclick="return doclink('link-4', 'primo', 'link-0');">primo</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="primo.reasoning" class="py-name" href="#" onclick="return doclink('link-5', 'reasoning', 'link-1');">reasoning</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Class primo.reasoning.ContinuousNode'.ContinuousNode=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-6', 'ContinuousNode', 'link-6');">ContinuousNode</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-7', 'ContinuousNode', 'link-6');">ContinuousNode</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">stats</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">random</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="LinearGaussParameters"></a><div id="LinearGaussParameters-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="LinearGaussParameters-toggle" onclick="return toggle('LinearGaussParameters');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGaussParameters-class.html">LinearGaussParameters</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGaussParameters-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LinearGaussParameters-expanded"><a name="LinearGaussParameters.__init__"></a><div id="LinearGaussParameters.__init__-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="LinearGaussParameters.__init__-toggle" onclick="return toggle('LinearGaussParameters.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGaussParameters-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">b0</tt><tt class="py-op">,</tt><tt class="py-param">b</tt><tt class="py-op">,</tt><tt class="py-param">var</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGaussParameters.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGaussParameters.__init__-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b0</tt><tt class="py-op">=</tt><tt class="py-name">b0</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-name">b</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">var</tt><tt class="py-op">=</tt><tt class="py-name">var</tt> </tt>
+</div></div><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="LinearGauss"></a><div id="LinearGauss-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="LinearGauss-toggle" onclick="return toggle('LinearGauss');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html">LinearGauss</a><tt class="py-op">(</tt><tt class="py-base-class">Density</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="LinearGauss-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-docstring">'''TODO: write doc'''</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="LinearGauss.__init__"></a><div id="LinearGauss.__init__-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="LinearGauss.__init__-toggle" onclick="return toggle('LinearGauss.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">variable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.__init__-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name" targets="Class primo.reasoning.density.LinearGauss'.LinearGauss=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html"><a title="primo.reasoning.density.LinearGauss'.LinearGauss" class="py-name" href="#" onclick="return doclink('link-8', 'LinearGauss', 'link-8');">LinearGauss</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.__init__()=primo.core.BayesNet%27.BayesNet-class.html#__init__,Method primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.__init__()=primo.core.BayesianDecisionNetwork%27.BayesianDecisionNetwork-class.html#__init__,Method primo.core.DynamicBayesNet'.DynamicBayesNet.__init__()=primo.core.DynamicBayesNet%27.DynamicBayesNet-class.html#__init__,Method primo.core.Node'.Node.__init__()=primo.core.Node%27.Node-class.html#__init__,Method primo.core.TwoTBN'.TwoTBN.__init__()=primo.core.TwoTBN%27.TwoTBN-class.html#__init__,Method primo.decision.DecisionNode'.DecisionNode.__init__()=primo.decision.DecisionNode%27.DecisionNode-class.html#__init__,Method primo.decision.UtilityNode'.UtilityNode.__init__()=primo.decision.UtilityNode%27.UtilityNode-class.html#__init__,Method primo.decision.UtilityTable'.UtilityTable.__init__()=primo.decision.UtilityTable%27.UtilityTable-class.html#__init__,Method primo.decision.make_decision.MakeDecision'.MakeDecision.__init__()=primo.decision.make_decision.MakeDecision%27.MakeDecision-class.html#__init__,Method primo.reasoning.ContinuousNode'.ContinuousNode.__init__()=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html#__init__,Method primo.reasoning.ContinuousNodeFactory'.ContinuousNodeFactory.__init__()=primo.reasoning.ContinuousNodeFactory%27.ContinuousNodeFactory-class.html#__init__,Method primo.reasoning.DiscreteNode'.DiscreteNode.__init__()=primo.reasoning.DiscreteNode%27.DiscreteNode-class.html#__init__,Method primo.reasoning.Evidence.Evidence.__init__()=primo.reasoning.Evidence.Evidence-class.html#__init__,Method primo.reasoning.Evidence.EvidenceEqual.__init__()=primo.reasoning.Evidence.EvidenceEqual-class.html#__init__,Method primo.reasoning.Evidence.EvidenceHigher.__init__()=primo.reasoning.Evidence.EvidenceHigher-class.html#__init__,Method primo.reasoning.Evidence.EvidenceIntervall.__init__()=primo.reasoning.Evidence.EvidenceIntervall-class.html#__init__,Method primo.reasoning.Evidence.EvidenceLower.__init__()=primo.reasoning.Evidence.EvidenceLower-class.html#__init__,Method primo.reasoning.MCMC'.ConvergenceTestSimpleCounting.__init__()=primo.reasoning.MCMC%27.ConvergenceTestSimpleCounting-class.html#__init__,Method primo.reasoning.MCMC'.MCMC.__init__()=primo.reasoning.MCMC%27.MCMC-class.html#__init__,Method primo.reasoning.MarkovChainSampler'.GibbsTransitionModel.__init__()=primo.reasoning.MarkovChainSampler%27.GibbsTransitionModel-class.html#__init__,Method primo.reasoning.MarkovChainSampler'.MarkovChainSampler.__init__()=primo.reasoning.MarkovChainSampler%27.MarkovChainSampler-class.html#__init__,Method primo.reasoning.MarkovChainSampler'.MetropolisHastingsTransitionModel.__init__()=primo.reasoning.MarkovChainSampler%27.MetropolisHastingsTransitionModel-class.html#__init__,Method primo.reasoning.RandomNode'.RandomNode.__init__()=primo.reasoning.RandomNode%27.RandomNode-class.html#__init__,Method primo.reasoning.density.CanonicalForm.CanonicalForm.__init__()=primo.reasoning.density.CanonicalForm.CanonicalForm-class.html#__init__,Method primo.reasoning.density.Density'.Density.__init__()=primo.reasoning.density.Density%27.Density-class.html#__init__,Method primo.reasoning.density.Gauss'.Gauss.__init__()=primo.reasoning.density.Gauss%27.Gauss-class.html#__init__,Method primo.reasoning.density.Gauss'.GaussParameters.__init__()=primo.reasoning.density.Gauss%27.GaussParameters-class.html#__init__,Method primo.reasoning.density.LinearBeta'.LinearBeta.__init__()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#__init__,Method primo.reasoning.density.LinearBeta'.LinearBetaParameters.__init__()=primo.reasoning.density.LinearBeta%27.LinearBetaParameters-class.html#__init__,Method primo.reasoning.density.LinearExponential'.LinearExponential.__init__()=primo.reasoning.density.LinearExponential%27.LinearExponential-class.html#__init__,Method primo.reasoning.density.LinearExponential'.LinearExponentialParameters.__init__()=primo.reasoning.density.LinearExponential%27.LinearExponentialParameters-class.html#__init__,Method primo.reasoning.density.LinearGauss'.LinearGauss.__init__()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#__init__,Method primo.reasoning.density.LinearGauss'.LinearGaussParameters.__init__()=primo.reasoning.density.LinearGauss%27.LinearGaussParameters-class.html#__init__,Method primo.reasoning.density.ProbabilityTable'.ProbabilityTable.__init__()=primo.reasoning.density.ProbabilityTable%27.ProbabilityTable-class.html#__init__,Method primo.reasoning.factorelemination.EasiestFactorElimination'.EasiestFactorElimination.__init__()=primo.reasoning.factorelemination.EasiestFactorElimination%27.EasiestFactorElimination-class.html#__init__,Method primo.reasoning.factorelemination.Factor'.Factor.__init__()=primo.reasoning.factorelemination.Factor%27.Factor-class.html#__init__,Method primo.reasoning.factorelemination.FactorEdge.FactorEdge.__init__()=primo.reasoning.factorelemination.FactorEdge.FactorEdge-class.html#__init__,Method primo.reasoning.factorelemination.FactorTree'.FactorTree.__init__()=primo.reasoning.factorelemination.FactorTree%27.FactorTree-class.html#__init__,Method primo.utils.XMLBIF'.XMLBIF.__init__()=primo.utils.XMLBIF%27.XMLBIF-class.html#__init__"><a title="primo.core.BayesNet'.BayesNet.__init__
+primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.__init__
+primo.core.DynamicBayesNet'.DynamicBayesNet.__init__
+primo.core.Node'.Node.__init__
+primo.core.TwoTBN'.TwoTBN.__init__
+primo.decision.DecisionNode'.DecisionNode.__init__
+primo.decision.UtilityNode'.UtilityNode.__init__
+primo.decision.UtilityTable'.UtilityTable.__init__
+primo.decision.make_decision.MakeDecision'.MakeDecision.__init__
+primo.reasoning.ContinuousNode'.ContinuousNode.__init__
+primo.reasoning.ContinuousNodeFactory'.ContinuousNodeFactory.__init__
+primo.reasoning.DiscreteNode'.DiscreteNode.__init__
+primo.reasoning.Evidence.Evidence.__init__
+primo.reasoning.Evidence.EvidenceEqual.__init__
+primo.reasoning.Evidence.EvidenceHigher.__init__
+primo.reasoning.Evidence.EvidenceIntervall.__init__
+primo.reasoning.Evidence.EvidenceLower.__init__
+primo.reasoning.MCMC'.ConvergenceTestSimpleCounting.__init__
+primo.reasoning.MCMC'.MCMC.__init__
+primo.reasoning.MarkovChainSampler'.GibbsTransitionModel.__init__
+primo.reasoning.MarkovChainSampler'.MarkovChainSampler.__init__
+primo.reasoning.MarkovChainSampler'.MetropolisHastingsTransitionModel.__init__
+primo.reasoning.RandomNode'.RandomNode.__init__
+primo.reasoning.density.CanonicalForm.CanonicalForm.__init__
+primo.reasoning.density.Density'.Density.__init__
+primo.reasoning.density.Gauss'.Gauss.__init__
+primo.reasoning.density.Gauss'.GaussParameters.__init__
+primo.reasoning.density.LinearBeta'.LinearBeta.__init__
+primo.reasoning.density.LinearBeta'.LinearBetaParameters.__init__
+primo.reasoning.density.LinearExponential'.LinearExponential.__init__
+primo.reasoning.density.LinearExponential'.LinearExponentialParameters.__init__
+primo.reasoning.density.LinearGauss'.LinearGauss.__init__
+primo.reasoning.density.LinearGauss'.LinearGaussParameters.__init__
+primo.reasoning.density.ProbabilityTable'.ProbabilityTable.__init__
+primo.reasoning.factorelemination.EasiestFactorElimination'.EasiestFactorElimination.__init__
+primo.reasoning.factorelemination.Factor'.Factor.__init__
+primo.reasoning.factorelemination.FactorEdge.FactorEdge.__init__
+primo.reasoning.factorelemination.FactorTree'.FactorTree.__init__
+primo.utils.XMLBIF'.XMLBIF.__init__" class="py-name" href="#" onclick="return doclink('link-9', '__init__', 'link-9');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">         </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b0</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-comment">#numpy.array([0.0])</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">var</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.set_parameters"></a><div id="LinearGauss.set_parameters-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="LinearGauss.set_parameters-toggle" onclick="return toggle('LinearGauss.set_parameters');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#set_parameters">set_parameters</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">parameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.set_parameters-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.set_parameters-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method primo.reasoning.density.LinearGauss'.LinearGauss.set_b0()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#set_b0"><a title="primo.reasoning.density.LinearGauss'.LinearGauss.set_b0" class="py-name" href="#" onclick="return doclink('link-10', 'set_b0', 'link-10');">set_b0</a></tt><tt class="py-op">(</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">b0</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method primo.reasoning.density.LinearGauss'.LinearGauss.set_b()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#set_b"><a title="primo.reasoning.density.LinearGauss'.LinearGauss.set_b" class="py-name" href="#" onclick="return doclink('link-11', 'set_b', 'link-11');">set_b</a></tt><tt class="py-op">(</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method primo.reasoning.density.LinearGauss'.LinearGauss.set_var()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#set_var"><a title="primo.reasoning.density.LinearGauss'.LinearGauss.set_var" class="py-name" href="#" onclick="return doclink('link-12', 'set_var', 'link-12');">set_var</a></tt><tt class="py-op">(</tt><tt class="py-name">parameters</tt><tt class="py-op">.</tt><tt class="py-name">var</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.add_variable"></a><div id="LinearGauss.add_variable-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="LinearGauss.add_variable-toggle" onclick="return toggle('LinearGauss.add_variable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#add_variable">add_variable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">variable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.add_variable-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.add_variable-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">variable</tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-13', 'ContinuousNode', 'link-6');">ContinuousNode</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Tried to add Variable into Gaussian densitiy, but variable is not continuous"</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">[</tt><tt class="py-name">variable</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">     </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="LinearGauss.get_probability"></a><div id="LinearGauss.get_probability-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="LinearGauss.get_probability-toggle" onclick="return toggle('LinearGauss.get_probability');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#get_probability">get_probability</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">,</tt> <tt class="py-param">node_value_pairs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.get_probability-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.get_probability-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">         </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">reduced_mu</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b0</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">node</tt><tt class="py-op">,</tt><tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">node_value_pairs</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-name">reduced_mu</tt> <tt class="py-op">=</tt> <tt class="py-name">reduced_mu</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-name">value</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">stats</tt><tt class="py-op">.</tt><tt class="py-name">norm</tt><tt class="py-op">(</tt><tt class="py-name">reduced_mu</tt><tt class="py-op">,</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">var</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">pdf</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">         </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.set_b"></a><div id="LinearGauss.set_b-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="LinearGauss.set_b-toggle" onclick="return toggle('LinearGauss.set_b');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#set_b">set_b</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">variable</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.set_b-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.set_b-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">variable</tt> <tt class="py-keyword">in</tt> <tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"Tried to set dependency-variable b for a variable that has not yet been added to this variable's dependencies"</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">[</tt><tt class="py-name">variable</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-name">b</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.set_b"></a><div id="LinearGauss.set_b-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="LinearGauss.set_b-toggle" onclick="return toggle('LinearGauss.set_b');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#set_b">set_b</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.set_b-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.set_b-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">==</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">"The variables given in the new b do not match the old dependencies of this density"</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-name">b</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.set_b0"></a><div id="LinearGauss.set_b0-def"><a name="L55"></a><tt class="py-lineno">55</tt> <a class="py-toggle" href="#" id="LinearGauss.set_b0-toggle" onclick="return toggle('LinearGauss.set_b0');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#set_b0">set_b0</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">b0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.set_b0-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.set_b0-expanded"><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b0</tt><tt class="py-op">=</tt><tt class="py-name">b0</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.set_var"></a><div id="LinearGauss.set_var-def"><a name="L58"></a><tt class="py-lineno">58</tt> <a class="py-toggle" href="#" id="LinearGauss.set_var-toggle" onclick="return toggle('LinearGauss.set_var');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#set_var">set_var</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">var</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.set_var-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.set_var-expanded"><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">var</tt><tt class="py-op">=</tt><tt class="py-name">var</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss._compute_offset_given_parents"></a><div id="LinearGauss._compute_offset_given_parents-def"><a name="L61"></a><tt class="py-lineno">61</tt> <a class="py-toggle" href="#" id="LinearGauss._compute_offset_given_parents-toggle" onclick="return toggle('LinearGauss._compute_offset_given_parents');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#_compute_offset_given_parents">_compute_offset_given_parents</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss._compute_offset_given_parents-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss._compute_offset_given_parents-expanded"><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b0</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">state</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">                <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">x</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">b</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt><tt class="py-op">*</tt><tt class="py-name">state</tt><tt class="py-op">[</tt><tt class="py-name">node</tt><tt class="py-op">]</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">x</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">         </tt>
+<a name="LinearGauss.sample_global"></a><div id="LinearGauss.sample_global-def"><a name="L68"></a><tt class="py-lineno">68</tt> <a class="py-toggle" href="#" id="LinearGauss.sample_global-toggle" onclick="return toggle('LinearGauss.sample_global');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.density.LinearGauss'.LinearGauss-class.html#sample_global">sample_global</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinearGauss.sample_global-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="LinearGauss.sample_global-expanded"><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">normalvariate</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method primo.reasoning.density.LinearGauss'.LinearGauss._compute_offset_given_parents()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#_compute_offset_given_parents"><a title="primo.reasoning.density.LinearGauss'.LinearGauss._compute_offset_given_parents" class="py-name" href="#" onclick="return doclink('link-14', '_compute_offset_given_parents', 'link-14');">_compute_offset_given_parents</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">var</tt><tt class="py-op">**</tt><tt class="py-number">0.5</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  5 12:21:47 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,6 +1,12 @@
 import random
 import copy
+
 def weighted_random(weights):
+    '''
+    Implements roulette-wheel-sampling.
+    @param weights: A List of float-values.
+    @returns: Index of the selected entity
+    '''
     counter = random.random() * sum(weights)
     for i,w in enumerate(weights):
         counter -= w
@@ -8,13 +14,16 @@ def weighted_random(weights):
             return i
 
 class GibbsTransitionModel(object):
+    '''
+    Implements Gibbs-sampling. Can be used to constuct a Markov Chain.
+    '''
     def __init__(self):
         pass
         
     def transition(self, network, state, extern_evidence):
         nodes = network.get_nodes([])
         nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
-        #print nodes_to_resample
+
         for node in nodes_to_resample:
             parents=network.get_parents(node)
             if parents:
@@ -22,9 +31,6 @@ class GibbsTransitionModel(object):
                 reduced_cpd = node.get_cpd_reduced(evidence)
             else:
                 reduced_cpd = node.get_cpd()
-                
-            #print "--reduced cpt"
-            #print reduced_cpd
                 
             #reduce the children's cpds
             children = network.get_children(node)
@@ -36,19 +42,17 @@ class GibbsTransitionModel(object):
                 evidence.append((child,state[child]))
                 reduced_child_cpd = child.get_cpd_reduced(evidence)
 
-                #print "--reduced child cpt"
-                #print reduced_child_cpd
                 reduced_cpd = reduced_cpd.multiplication(reduced_child_cpd)
                 
             new_state=weighted_random(reduced_cpd.get_table())
-            #print state[node]
-            #print new_state
-            #print node.get_value_range()
             state[node]=node.get_value_range()[new_state]
-            #print state[node]
+
         return state
         
 class MetropolisHastingsTransitionModel(object):
+    '''
+    Implements the Metropolis-Hastings-Algorithm. Can be used to constuct a Markov Chain.
+    '''
     def __init__(self):
         pass
         
@@ -95,6 +99,9 @@ class MetropolisHastingsTransitionModel(object):
         
 
 class MarkovChainSampler(object):
+    '''
+    Can be used to generate a Markov Chain by sampling a Bayesian Network.
+    '''
     def __init__(self):
         self.convergence_test=None
         pass
@@ -115,7 +122,6 @@ class MarkovChainSampler(object):
             
         #let the distribution converge to the target distribution
         while not self.convergence_test.has_converged(state):
-            #print state
             state=transition_model.transition(network, state, evidence)
         #finally sample from the target distribution
         for t in xrange(time_steps):

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>primo.reasoning.ContinuousNode'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="primo-module.html">Package&nbsp;primo</a> ::
+        <a href="primo.reasoning-module.html">Package&nbsp;reasoning</a> ::
+        Module&nbsp;ContinuousNode'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="primo.reasoning.ContinuousNode%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="primo.reasoning.ContinuousNode%27-module.html">Module primo.reasoning.ContinuousNode'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package primo=primo-module.html"><a title="primo" class="py-name" href="#" onclick="return doclink('link-0', 'primo', 'link-0');">primo</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package primo.core=primo.core-module.html"><a title="primo.core" class="py-name" href="#" onclick="return doclink('link-1', 'core', 'link-1');">core</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class primo.core.Node'.Node=primo.core.Node%27.Node-class.html"><a title="primo.core.Node'.Node" class="py-name" href="#" onclick="return doclink('link-2', 'Node', 'link-2');">Node</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">random</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="ContinuousNode"></a><div id="ContinuousNode-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="ContinuousNode-toggle" onclick="return toggle('ContinuousNode');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html">ContinuousNode</a><tt class="py-op">(</tt><tt class="py-base-class">Node</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ContinuousNode-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">    Represents a random-variable with a real-valued domain. Can only be defined</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">    on a subset or on whole R. The probability density can have different forms.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">    Objects of this class can be created by a ContinuousNodeFactory.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="ContinuousNode.__init__"></a><div id="ContinuousNode.__init__-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="ContinuousNode.__init__-toggle" onclick="return toggle('ContinuousNode.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">value_range</tt><tt class="py-op">,</tt> <tt class="py-param">DensityClass</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ContinuousNode.__init__-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name" targets="Class primo.reasoning.ContinuousNode'.ContinuousNode=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html"><a title="primo.reasoning.ContinuousNode'.ContinuousNode" class="py-name" href="#" onclick="return doclink('link-3', 'ContinuousNode', 'link-3');">ContinuousNode</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method primo.core.BayesNet'.BayesNet.__init__()=primo.core.BayesNet%27.BayesNet-class.html#__init__,Method primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.__init__()=primo.core.BayesianDecisionNetwork%27.BayesianDecisionNetwork-class.html#__init__,Method primo.core.DynamicBayesNet'.DynamicBayesNet.__init__()=primo.core.DynamicBayesNet%27.DynamicBayesNet-class.html#__init__,Method primo.core.Node'.Node.__init__()=primo.core.Node%27.Node-class.html#__init__,Method primo.core.TwoTBN'.TwoTBN.__init__()=primo.core.TwoTBN%27.TwoTBN-class.html#__init__,Method primo.decision.DecisionNode'.DecisionNode.__init__()=primo.decision.DecisionNode%27.DecisionNode-class.html#__init__,Method primo.decision.UtilityNode'.UtilityNode.__init__()=primo.decision.UtilityNode%27.UtilityNode-class.html#__init__,Method primo.decision.UtilityTable'.UtilityTable.__init__()=primo.decision.UtilityTable%27.UtilityTable-class.html#__init__,Method primo.decision.make_decision.MakeDecision'.MakeDecision.__init__()=primo.decision.make_decision.MakeDecision%27.MakeDecision-class.html#__init__,Method primo.reasoning.ContinuousNode'.ContinuousNode.__init__()=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html#__init__,Method primo.reasoning.ContinuousNodeFactory'.ContinuousNodeFactory.__init__()=primo.reasoning.ContinuousNodeFactory%27.ContinuousNodeFactory-class.html#__init__,Method primo.reasoning.DiscreteNode'.DiscreteNode.__init__()=primo.reasoning.DiscreteNode%27.DiscreteNode-class.html#__init__,Method primo.reasoning.Evidence.Evidence.__init__()=primo.reasoning.Evidence.Evidence-class.html#__init__,Method primo.reasoning.Evidence.EvidenceEqual.__init__()=primo.reasoning.Evidence.EvidenceEqual-class.html#__init__,Method primo.reasoning.Evidence.EvidenceHigher.__init__()=primo.reasoning.Evidence.EvidenceHigher-class.html#__init__,Method primo.reasoning.Evidence.EvidenceIntervall.__init__()=primo.reasoning.Evidence.EvidenceIntervall-class.html#__init__,Method primo.reasoning.Evidence.EvidenceLower.__init__()=primo.reasoning.Evidence.EvidenceLower-class.html#__init__,Method primo.reasoning.MCMC'.ConvergenceTestSimpleCounting.__init__()=primo.reasoning.MCMC%27.ConvergenceTestSimpleCounting-class.html#__init__,Method primo.reasoning.MCMC'.MCMC.__init__()=primo.reasoning.MCMC%27.MCMC-class.html#__init__,Method primo.reasoning.MarkovChainSampler'.GibbsTransitionModel.__init__()=primo.reasoning.MarkovChainSampler%27.GibbsTransitionModel-class.html#__init__,Method primo.reasoning.MarkovChainSampler'.MarkovChainSampler.__init__()=primo.reasoning.MarkovChainSampler%27.MarkovChainSampler-class.html#__init__,Method primo.reasoning.MarkovChainSampler'.MetropolisHastingsTransitionModel.__init__()=primo.reasoning.MarkovChainSampler%27.MetropolisHastingsTransitionModel-class.html#__init__,Method primo.reasoning.RandomNode'.RandomNode.__init__()=primo.reasoning.RandomNode%27.RandomNode-class.html#__init__,Method primo.reasoning.density.CanonicalForm.CanonicalForm.__init__()=primo.reasoning.density.CanonicalForm.CanonicalForm-class.html#__init__,Method primo.reasoning.density.Density'.Density.__init__()=primo.reasoning.density.Density%27.Density-class.html#__init__,Method primo.reasoning.density.Gauss'.Gauss.__init__()=primo.reasoning.density.Gauss%27.Gauss-class.html#__init__,Method primo.reasoning.density.Gauss'.GaussParameters.__init__()=primo.reasoning.density.Gauss%27.GaussParameters-class.html#__init__,Method primo.reasoning.density.LinearBeta'.LinearBeta.__init__()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#__init__,Method primo.reasoning.density.LinearBeta'.LinearBetaParameters.__init__()=primo.reasoning.density.LinearBeta%27.LinearBetaParameters-class.html#__init__,Method primo.reasoning.density.LinearExponential'.LinearExponential.__init__()=primo.reasoning.density.LinearExponential%27.LinearExponential-class.html#__init__,Method primo.reasoning.density.LinearExponential'.LinearExponentialParameters.__init__()=primo.reasoning.density.LinearExponential%27.LinearExponentialParameters-class.html#__init__,Method primo.reasoning.density.LinearGauss'.LinearGauss.__init__()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#__init__,Method primo.reasoning.density.LinearGauss'.LinearGaussParameters.__init__()=primo.reasoning.density.LinearGauss%27.LinearGaussParameters-class.html#__init__,Method primo.reasoning.density.ProbabilityTable'.ProbabilityTable.__init__()=primo.reasoning.density.ProbabilityTable%27.ProbabilityTable-class.html#__init__,Method primo.reasoning.factorelemination.EasiestFactorElimination'.EasiestFactorElimination.__init__()=primo.reasoning.factorelemination.EasiestFactorElimination%27.EasiestFactorElimination-class.html#__init__,Method primo.reasoning.factorelemination.Factor'.Factor.__init__()=primo.reasoning.factorelemination.Factor%27.Factor-class.html#__init__,Method primo.reasoning.factorelemination.FactorEdge.FactorEdge.__init__()=primo.reasoning.factorelemination.FactorEdge.FactorEdge-class.html#__init__,Method primo.reasoning.factorelemination.FactorTree'.FactorTree.__init__()=primo.reasoning.factorelemination.FactorTree%27.FactorTree-class.html#__init__,Method primo.utils.XMLBIF'.XMLBIF.__init__()=primo.utils.XMLBIF%27.XMLBIF-class.html#__init__"><a title="primo.core.BayesNet'.BayesNet.__init__
+primo.core.BayesianDecisionNetwork'.BayesianDecisionNetwork.__init__
+primo.core.DynamicBayesNet'.DynamicBayesNet.__init__
+primo.core.Node'.Node.__init__
+primo.core.TwoTBN'.TwoTBN.__init__
+primo.decision.DecisionNode'.DecisionNode.__init__
+primo.decision.UtilityNode'.UtilityNode.__init__
+primo.decision.UtilityTable'.UtilityTable.__init__
+primo.decision.make_decision.MakeDecision'.MakeDecision.__init__
+primo.reasoning.ContinuousNode'.ContinuousNode.__init__
+primo.reasoning.ContinuousNodeFactory'.ContinuousNodeFactory.__init__
+primo.reasoning.DiscreteNode'.DiscreteNode.__init__
+primo.reasoning.Evidence.Evidence.__init__
+primo.reasoning.Evidence.EvidenceEqual.__init__
+primo.reasoning.Evidence.EvidenceHigher.__init__
+primo.reasoning.Evidence.EvidenceIntervall.__init__
+primo.reasoning.Evidence.EvidenceLower.__init__
+primo.reasoning.MCMC'.ConvergenceTestSimpleCounting.__init__
+primo.reasoning.MCMC'.MCMC.__init__
+primo.reasoning.MarkovChainSampler'.GibbsTransitionModel.__init__
+primo.reasoning.MarkovChainSampler'.MarkovChainSampler.__init__
+primo.reasoning.MarkovChainSampler'.MetropolisHastingsTransitionModel.__init__
+primo.reasoning.RandomNode'.RandomNode.__init__
+primo.reasoning.density.CanonicalForm.CanonicalForm.__init__
+primo.reasoning.density.Density'.Density.__init__
+primo.reasoning.density.Gauss'.Gauss.__init__
+primo.reasoning.density.Gauss'.GaussParameters.__init__
+primo.reasoning.density.LinearBeta'.LinearBeta.__init__
+primo.reasoning.density.LinearBeta'.LinearBetaParameters.__init__
+primo.reasoning.density.LinearExponential'.LinearExponential.__init__
+primo.reasoning.density.LinearExponential'.LinearExponentialParameters.__init__
+primo.reasoning.density.LinearGauss'.LinearGauss.__init__
+primo.reasoning.density.LinearGauss'.LinearGaussParameters.__init__
+primo.reasoning.density.ProbabilityTable'.ProbabilityTable.__init__
+primo.reasoning.factorelemination.EasiestFactorElimination'.EasiestFactorElimination.__init__
+primo.reasoning.factorelemination.Factor'.Factor.__init__
+primo.reasoning.factorelemination.FactorEdge.FactorEdge.__init__
+primo.reasoning.factorelemination.FactorTree'.FactorTree.__init__
+primo.utils.XMLBIF'.XMLBIF.__init__" class="py-name" href="#" onclick="return doclink('link-4', '__init__', 'link-4');">__init__</a></tt><tt class="py-op">(</tt><tt id="link-5" class="py-name" targets="Variable primo.core.Node'.Node.name=primo.core.Node%27.Node-class.html#name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-5', 'name', 'link-5');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">         </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-comment">#value_range is a 2-tuple that defines this variable's domain.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value_range</tt> <tt class="py-op">=</tt> <tt class="py-name">value_range</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-comment">#the class density_class defines the class of function that is used</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-comment">#for this ContinuousNode's pdf.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">density_class</tt> <tt class="py-op">=</tt> <tt class="py-name">DensityClass</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-comment">#cpd - ConditionalProbabilityDensity is the concrete density function </tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-comment">#of this ContinuousNode, conditioned on this Node's parents.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable primo.reasoning.RandomNode'.RandomNode.cpd=primo.reasoning.RandomNode%27.RandomNode-class.html#cpd"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-6', 'cpd', 'link-6');">cpd</a></tt> <tt class="py-op">=</tt> <tt class="py-name">DensityClass</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">         </tt>
+<a name="ContinuousNode.__str__"></a><div id="ContinuousNode.__str__-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="ContinuousNode.__str__-toggle" onclick="return toggle('ContinuousNode.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ContinuousNode.__str__-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="primo.core.Node'.Node.name" class="py-name" href="#" onclick="return doclink('link-7', 'name', 'link-5');">name</a></tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">         </tt>
+<a name="ContinuousNode.set_density_parameters"></a><div id="ContinuousNode.set_density_parameters-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="ContinuousNode.set_density_parameters-toggle" onclick="return toggle('ContinuousNode.set_density_parameters');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html#set_density_parameters">set_density_parameters</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">density_parameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode.set_density_parameters-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ContinuousNode.set_density_parameters-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-8', 'cpd', 'link-6');">cpd</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method primo.reasoning.density.Gauss'.Gauss.set_parameters()=primo.reasoning.density.Gauss%27.Gauss-class.html#set_parameters,Method primo.reasoning.density.LinearBeta'.LinearBeta.set_parameters()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#set_parameters,Method primo.reasoning.density.LinearExponential'.LinearExponential.set_parameters()=primo.reasoning.density.LinearExponential%27.LinearExponential-class.html#set_parameters,Method primo.reasoning.density.LinearGauss'.LinearGauss.set_parameters()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#set_parameters"><a title="primo.reasoning.density.Gauss'.Gauss.set_parameters
+primo.reasoning.density.LinearBeta'.LinearBeta.set_parameters
+primo.reasoning.density.LinearExponential'.LinearExponential.set_parameters
+primo.reasoning.density.LinearGauss'.LinearGauss.set_parameters" class="py-name" href="#" onclick="return doclink('link-9', 'set_parameters', 'link-9');">set_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">density_parameters</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">         </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment">#    def sample_uniform(self):</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-comment">#        sampled_value = random.uniform(self.value_range[0],self.value_range[1])</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-comment">#        return sampled_value</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-comment">#        </tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-comment">#    def sample_proposal(self, x=None):</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-comment">#        return self.cpd.sample_proposal(x)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">         </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">         </tt>
+<a name="ContinuousNode.sample_local"></a><div id="ContinuousNode.sample_local-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="ContinuousNode.sample_local-toggle" onclick="return toggle('ContinuousNode.sample_local');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html#sample_local">sample_local</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">,</tt> <tt class="py-param">evidence</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode.sample_local-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ContinuousNode.sample_local-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-docstring">        This method can be used to do a random walk in the domain of this node.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring">        @param x: The spot around which the next sample shall be generated.</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring">        @param evidence: Evidence which is to be concerned when new samples are</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">            being generated. I am not entirely sure that this belongs here or is</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring">            correct in theory...</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">        ATTENTION:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">        This is the most simple and stupid implementation of the method. It</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">        uses bogo-search to find a sample that fits the evidence. You could</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring">        reimplement it by constructing the integral over the normalvariate in the</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">        intervalls allowed by the evidence and then generate a sample directly.</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring">        Currently this method has O(inf).'''</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-name">v</tt><tt class="py-op">=</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">normalvariate</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt> <tt class="py-keyword">in</tt> <tt class="py-name">evidence</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt class="py-keyword">while</tt> <tt class="py-keyword">not</tt> <tt class="py-name">evidence</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method primo.reasoning.Evidence.Evidence.is_compatible()=primo.reasoning.Evidence.Evidence-class.html#is_compatible,Method primo.reasoning.Evidence.EvidenceEqual.is_compatible()=primo.reasoning.Evidence.EvidenceEqual-class.html#is_compatible,Method primo.reasoning.Evidence.EvidenceHigher.is_compatible()=primo.reasoning.Evidence.EvidenceHigher-class.html#is_compatible,Method primo.reasoning.Evidence.EvidenceIntervall.is_compatible()=primo.reasoning.Evidence.EvidenceIntervall-class.html#is_compatible,Method primo.reasoning.Evidence.EvidenceLower.is_compatible()=primo.reasoning.Evidence.EvidenceLower-class.html#is_compatible"><a title="primo.reasoning.Evidence.Evidence.is_compatible
+primo.reasoning.Evidence.EvidenceEqual.is_compatible
+primo.reasoning.Evidence.EvidenceHigher.is_compatible
+primo.reasoning.Evidence.EvidenceIntervall.is_compatible
+primo.reasoning.Evidence.EvidenceLower.is_compatible" class="py-name" href="#" onclick="return doclink('link-10', 'is_compatible', 'link-10');">is_compatible</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                <tt class="py-name">v</tt><tt class="py-op">=</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">normalvariate</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">v</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">         </tt>
+<a name="ContinuousNode.sample_global"></a><div id="ContinuousNode.sample_global-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="ContinuousNode.sample_global-toggle" onclick="return toggle('ContinuousNode.sample_global');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html#sample_global">sample_global</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode.sample_global-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ContinuousNode.sample_global-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-docstring">        This method can be used to sample from this local distribution.</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-docstring">        @param state: A Dict from Node-objects to values. You can specify the </tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt class="py-docstring">            values of this nodes parents in this dict and the conditional </tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt class="py-docstring">            probability density will be adjusted accordingly.</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-name">proposal</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-11', 'cpd', 'link-6');">cpd</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method primo.reasoning.ContinuousNode'.ContinuousNode.sample_global()=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html#sample_global,Method primo.reasoning.DiscreteNode'.DiscreteNode.sample_global()=primo.reasoning.DiscreteNode%27.DiscreteNode-class.html#sample_global,Method primo.reasoning.density.LinearBeta'.LinearBeta.sample_global()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#sample_global,Method primo.reasoning.density.LinearExponential'.LinearExponential.sample_global()=primo.reasoning.density.LinearExponential%27.LinearExponential-class.html#sample_global,Method primo.reasoning.density.LinearGauss'.LinearGauss.sample_global()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#sample_global"><a title="primo.reasoning.ContinuousNode'.ContinuousNode.sample_global
+primo.reasoning.DiscreteNode'.DiscreteNode.sample_global
+primo.reasoning.density.LinearBeta'.LinearBeta.sample_global
+primo.reasoning.density.LinearExponential'.LinearExponential.sample_global
+primo.reasoning.density.LinearGauss'.LinearGauss.sample_global" class="py-name" href="#" onclick="return doclink('link-12', 'sample_global', 'link-12');">sample_global</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-comment">#while not evidence.is_compatible(proposal):</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-comment">#    proposal=self.cpd.sample_global(evidence)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">proposal</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">         </tt>
+<a name="ContinuousNode.get_probability"></a><div id="ContinuousNode.get_probability-def"><a name="L70"></a><tt class="py-lineno">70</tt> <a class="py-toggle" href="#" id="ContinuousNode.get_probability-toggle" onclick="return toggle('ContinuousNode.get_probability');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="primo.reasoning.ContinuousNode'.ContinuousNode-class.html#get_probability">get_probability</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">node_value_pairs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContinuousNode.get_probability-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ContinuousNode.get_probability-expanded"><a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="primo.reasoning.RandomNode'.RandomNode.cpd" class="py-name" href="#" onclick="return doclink('link-13', 'cpd', 'link-6');">cpd</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method primo.reasoning.ContinuousNode'.ContinuousNode.get_probability()=primo.reasoning.ContinuousNode%27.ContinuousNode-class.html#get_probability,Method primo.reasoning.DiscreteNode'.DiscreteNode.get_probability()=primo.reasoning.DiscreteNode%27.DiscreteNode-class.html#get_probability,Method primo.reasoning.density.LinearBeta'.LinearBeta.get_probability()=primo.reasoning.density.LinearBeta%27.LinearBeta-class.html#get_probability,Method primo.reasoning.density.LinearExponential'.LinearExponential.get_probability()=primo.reasoning.density.LinearExponential%27.LinearExponential-class.html#get_probability,Method primo.reasoning.density.LinearGauss'.LinearGauss.get_probability()=primo.reasoning.density.LinearGauss%27.LinearGauss-class.html#get_probability,Method primo.reasoning.density.ProbabilityTable'.ProbabilityTable.get_probability()=primo.reasoning.density.ProbabilityTable%27.ProbabilityTable-class.html#get_probability"><a title="primo.reasoning.ContinuousNode'.ContinuousNode.get_probability
+primo.reasoning.DiscreteNode'.DiscreteNode.get_probability
+primo.reasoning.density.LinearBeta'.LinearBeta.get_probability
+primo.reasoning.density.LinearExponential'.LinearExponential.get_probability
+primo.reasoning.density.LinearGauss'.LinearGauss.get_probability
+primo.reasoning.density.ProbabilityTable'.ProbabilityTable.get_probability" class="py-name" href="#" onclick="return doclink('link-14', 'get_probability', 'link-14');">get_probability</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">node_value_pairs</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="primo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jul  5 12:21:46 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
