@@ -2,36 +2,57 @@ from  primo.reasoning import MarkovChainSampler
 from primo.reasoning import GibbsTransitionModel
 from primo.reasoning import MetropolisHastingsTransitionModel
 from primo.reasoning.density import ProbabilityTable
+from primo.reasoning.convergence_test import ConvergenceTestSimpleCounting
 
-class ConvergenceTestSimpleCounting(object):
-    def __init__(self, limit):
-        self.chain_length=0
-        self.limit=limit
-    def has_converged(self, state):
-        self.chain_length= self.chain_length +1
-        return self.chain_length >= self.limit
 
 class MCMC(object):
-    def __init__(self, bn):
-    
-        #self.transition_model = GibbsTransitionModel()
-        self.transition_model = MetropolisHastingsTransitionModel()
+    def __init__(self, bn, times, transition_model=None, convergence_test=None):
+        '''
+        @param bn: The BayesNet that will be used for inference.
+        @param times: How many samples shall be generated for each inference.
+        @param transition_model: The transition model that shall be used to
+            wander around the state space of the BayesNet.
+        @param convergence_test: The ConvergenceTest that shall be used to determine
+            if the markov chain that is being generated internally has converged
+            to its stationary distribution.
+        '''
         self.bn=bn
-        
-        self.times=1000
-        self.number_of_chains=4
+        self.times=times
+    
+        if transition_model == None:
+            transition_model = MetropolisHastingsTransitionModel()
 
-        self.mcs = MarkovChainSampler()
-        self.mcs.set_convergence_test(ConvergenceTestSimpleCounting(100))
+        if convergence_test == None:
+            convergence_test = ConvergenceTestSimpleCounting(100)
 
-    def calculate_marginal(self):
-        pass
+        self.mcs = MarkovChainSampler(transition_model,convergence_test)
+
     def calculate_PriorMarginal(self,variables,AssumedDensity):
+        '''
+        Calculate the marginal over some variables. 
+        @param variables_of_interest: A list containing the variables over which
+            the prior marginal shall be defined.
+        @param AssumedDensity: A class from primo.reasoning.density . This
+            parameter is used to define the class of density for the return value.
+        @returns: An object of the class AssumedDensity.
+        '''   
         return self.calculate_PosteriorMarginal(variables,dict(),AssumedDensity)
 
     def calculate_MAP(self, variables_of_interest, evidence, AssumedDensity):
+        '''
+        Calculate the maximum a posteriori hypothesis given some evidence. 
+        @param variables_of_interest: A list containing the variables for which
+            the map-hypothesis is wanted.
+        @param evidence: A Dict from Node to Evidence.
+        @param AssumedDensity: A class from primo.reasoning.density . This
+            parameter is used to generate a posterior distribution from which it
+            is possible to find the value/set of values that are most probable.
+            You could pass a Gauss in a continuous setting here, for example.
+        @returns: The most probable instatiaion given the evidence in the form:
+            List of pairs (Node, Value).
+        '''        
         initial_state=self._generateInitialStateWithEvidence(evidence)
-        chain = self.mcs.generateMarkovChain(self.bn, self.times, self.transition_model, initial_state, evidence, variables_of_interest)
+        chain = self.mcs.generateMarkovChain(self.bn, self.times, initial_state, evidence, variables_of_interest)
         
         density = AssumedDensity()
         density.add_variables(variables_of_interest)
@@ -40,8 +61,17 @@ class MCMC(object):
 
 
     def calculate_PosteriorMarginal(self,variables_of_interest,evidence,AssumedDensity):
+        '''
+        Calculate some posterior marginal. 
+        @param variables_of_interest: A list containing the variables over which
+            the posterior marginal shall be defined.
+        @param evidence: A Dict from Node to Evidence.
+        @param AssumedDensity: A class from primo.reasoning.density . This
+            parameter is used to define the class of density for the return value.
+        @returns: An object of the class AssumedDensity.
+        '''        
         initial_state=self._generateInitialStateWithEvidence(evidence)
-        chain = self.mcs.generateMarkovChain(self.bn, self.times, self.transition_model, initial_state, evidence, variables_of_interest)
+        chain = self.mcs.generateMarkovChain(self.bn, self.times, initial_state, evidence, variables_of_interest)
         
         density = AssumedDensity()
         density.add_variables(variables_of_interest)
@@ -52,9 +82,13 @@ class MCMC(object):
     
     
     def calculate_PoE(self,evidence):
-    
+        '''
+        Calculate Probability of Evidence.
+        @param evidence: A Dict from Node to Evidence.
+        @returns: Float number representing the wanted probability.
+        '''
         initial_state=self._generateInitialStateWithEvidence(evidence)
-        chain = self.mcs.generateMarkovChain(self.bn, self.times, self.transition_model, initial_state)
+        chain = self.mcs.generateMarkovChain(self.bn, self.times, initial_state)
         compatible_count=0
         number_of_samples=0
         for state in chain:
@@ -77,6 +111,12 @@ class MCMC(object):
         return self.forward_sample(evidence)
         
     def forward_sample(self, evidence):
+        '''
+        Generate a sample from the distribution defined by the given BayesNet by
+        forward sampling.
+        
+        @param evidence: A Dict from Node to Evidence.
+        '''
         state={}
         for var in self.bn.get_nodes_in_topological_sort():
             if var in evidence.keys():

@@ -45,7 +45,7 @@ diameter_parameters=LinearGaussParameters(0.1,{age:-0.2},0.1)
 diameter.set_density_parameters(diameter_parameters)
 
 
-mcmc_ask=MCMC(bn)
+mcmc_ask=MCMC(bn,1000)
 
 evidence={age:EvEq(2)}
 

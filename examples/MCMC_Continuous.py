@@ -38,7 +38,7 @@ diameter_parameters=LinearBetaParameters(0.01,{age:0.2},2,5)
 diameter.set_density_parameters(diameter_parameters)
 
 
-mcmc_ask=MCMC(bn)
+mcmc_ask=MCMC(bn,1000)
 
 evidence={age:EvEqual(2)}
 

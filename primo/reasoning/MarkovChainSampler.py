@@ -15,12 +15,23 @@ def weighted_random(weights):
 
 class GibbsTransitionModel(object):
     '''
-    Implements Gibbs-sampling. Can be used to constuct a Markov Chain.
+    Implements Gibbs-sampling. Can be used to constuct a Markov Chain and is
+    mainly used by MarkovChainSampler.
+    
+    After "Probabilistic Graphical Models, Daphne Koller and Nir Friedman"(p.506)
     '''
     def __init__(self):
         pass
         
     def transition(self, network, state, extern_evidence):
+        '''
+        Does one single state transition.
+        @param network: A BayesNet.
+        @param state: The current state of the BayesNet. Given as a Dict from
+            RandomNode to Value
+        @param extern_evidence: Evidence that is given by the user. This is a
+            Dict from Node to Evidence.
+        '''
         nodes = network.get_nodes([])
         nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
 
@@ -52,6 +63,8 @@ class GibbsTransitionModel(object):
 class MetropolisHastingsTransitionModel(object):
     '''
     Implements the Metropolis-Hastings-Algorithm. Can be used to constuct a Markov Chain.
+    
+    After "Probabilistic Graphical Models, Daphne Koller and Nir Friedman"(p.644)
     '''
     def __init__(self):
         pass
@@ -75,7 +88,14 @@ class MetropolisHastingsTransitionModel(object):
         return p
         
     def transition(self, network, state, extern_evidence):
-        #print state
+        '''
+        Does one single state transition.
+        @param network: A BayesNet.
+        @param state: The current state of the BayesNet. Given as a Dict from
+            RandomNode to Value
+        @param extern_evidence: Evidence that is given by the user. This is a
+            Dict from Node to Evidence.
+        '''
         nodes = network.get_nodes([])
         nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
         for node in nodes_to_resample:
@@ -85,31 +105,52 @@ class MetropolisHastingsTransitionModel(object):
             
             p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)
             p_of_current_given_mb = self._compute_p_of_value_given_mb(network, state, node, current_value)
-            #print node.name
-            #print p_of_proposal_given_mb
-            #print p_of_current_given_mb
+
             acceptance_probability = min(1.0,  p_of_proposal_given_mb/p_of_current_given_mb * 1.0/1.0)
             if random.random() <= acceptance_probability:
                 state[node]=proposed_value
             
-            #new_state=weighted_random(reduced_cpd.get_table())
-            #state[node]=node.get_value_range()[new_state]
-        #print state
         return state    
         
 
 class MarkovChainSampler(object):
     '''
-    Can be used to generate a Markov Chain by sampling a Bayesian Network.
+    Can be used to generate a Markov Chain by sampling a Bayesian Network. This
+    object is mainly used by the MCMC inference class.
     '''
-    def __init__(self):
-        self.convergence_test=None
-        pass
+    def __init__(self, transition_model, convergence_test):
+        '''
+        @param transition_model: This object is used to determine the next state
+            for the chain. Can be GibbsTransitionModel or MetropolisHastingsTransitionModel.
+        @param convergence_test: A Test that is being used to determine if the
+            markov chain has converged to its stationary distribution. For example
+            ConvergenceTestSimpleCounting.
+        '''
+        self.transition_model=transition_model
+        self.convergence_test=convergence_test
         
     def set_convergence_test(self, test):
         self.convergence_test=test
         
-    def generateMarkovChain(self, network, time_steps, transition_model, initial_state, evidence={}, variables_of_interest=[]):
+    def generateMarkovChain(self, network, time_steps, initial_state, evidence={}, variables_of_interest=[]):
+        '''
+        This function generates a markov chain by sampling from a bayesian network.
+        It is possible to use different transition functions.
+        
+        After "Probabilistic Graphical Models, Daphne Koller and Nir Friedman"(p.509)
+        
+        @param network: A BayesNet.
+        @param time_steps: Integer specifying how long the chain shall be.
+        @param initial_state: The state from which transition will start.
+        @param evidence: A Dict from RandomNode to Evidence.
+        @param variables_of_interest: If not all variable instantiations are needed
+            this List of RandomNode objects can be used to select which Nodes
+            are mentioned in the return object.
+        
+        @returns: A Generator-object for a List of States. Each state is a Dict
+            from RandomNode to Value
+        '''
+        self.convergence_test.reset()
         state=initial_state
         
         if evidence:
@@ -122,7 +163,7 @@ class MarkovChainSampler(object):
             
         #let the distribution converge to the target distribution
         while not self.convergence_test.has_converged(state):
-            state=transition_model.transition(network, state, evidence)
+            state=self.transition_model.transition(network, state, evidence)
         #finally sample from the target distribution
         for t in xrange(time_steps):
             
@@ -130,7 +171,7 @@ class MarkovChainSampler(object):
                 yield self._reduce_state_to_variables_of_interest(state, variables_of_interest)
             else:
                 yield state
-            state=transition_model.transition(network, state, evidence)
+            state=self.transition_model.transition(network, state, evidence)
             
     def _reduce_state_to_variables_of_interest(self, state, variables_of_interest):
         return dict((k,v) for (k,v) in state.iteritems() if k in variables_of_interest)

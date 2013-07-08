@@ -27,7 +27,7 @@ alarm.set_probability_table(alarm_cpt, [burglary,alarm])
 
 
 
-mcmc_ask=MCMC(bn)
+mcmc_ask=MCMC(bn,1000)
 
 evidence={burglary:EvEq("Intruder")}
 

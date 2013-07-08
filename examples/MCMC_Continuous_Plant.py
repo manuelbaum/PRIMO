@@ -66,7 +66,7 @@ diameter.set_density_parameters(diameter_parameters)
 children.set_density_parameters(LinearExponentialParameters(0.1,{ground:1.0,height:1.0}))
 
 
-mcmc_ask=MCMC(bn)
+mcmc_ask=MCMC(bn,1000)
 
 evidence={age:EvEqual(2)}
 
