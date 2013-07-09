@@ -61,9 +61,5 @@ class Gauss(Density):
         return self
         
     def __str__(self):
-        ret= "Gauss:\n"
-        ret=ret+ "--mu--\n"
-        ret=ret+ str(self.mu)+"\n"
-        ret=ret+ "--C--\n"
-        ret=ret+ str(self.C)+"\n"
+        ret= "Gauss(\nmu="+str(self.mu)+"\nC="+str(self.C)+")"
         return ret

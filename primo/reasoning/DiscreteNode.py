@@ -14,6 +14,12 @@ class DiscreteNode(RandomNode):
         self.value_range = value_range
         self.cpd = ProbabilityTable()
         self.cpd.add_variable(self)
+        
+    def __str__(self):
+        return self.name
+        
+    def __repr__(self):
+        return "DiscreteNode("+self.name+")"
 
     def set_probability(self, value, node_value_pairs):
         self.cpd.set_probability(value, node_value_pairs)

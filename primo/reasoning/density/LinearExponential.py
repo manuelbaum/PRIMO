@@ -17,6 +17,9 @@ class LinearExponential(Density):
         self.b0=0
         self.node=node
         
+        self.input_scale=1.0
+        self.output_scale=4.0
+        
     def set_parameters(self,parameters):
         self.b=parameters.b
         self.b0=parameters.b0
@@ -33,10 +36,7 @@ class LinearExponential(Density):
     def get_probability(self,value, node_value_pairs):
         
         #Compute the offset for the density and displace the value accordingly
-        x = self.b0
-        for node,value in node_value_pairs:
-            x = x + self.b[node]*value
-        _lambda=1.0/(1.0+math.exp(-x))
+        _lambda = self._compute_lambda_given_parents(dict(node_value_pairs))
         #print "lambda:"+str(_lambda)
         #Evaluate the displaced density at value
         return _lambda*math.exp(-_lambda*value)
@@ -46,9 +46,11 @@ class LinearExponential(Density):
         for node in self.b.keys():
             if node in state.keys():
                 x = x + self.b[node]*state[node]
-        _lambda=1.0/(1.0+math.exp(-x))
+        _lambda=self.output_scale*1.0/(1.0+math.exp(-x*self.input_scale))
         return _lambda
 
     def sample_global(self,state):
         _lambda=self._compute_lambda_given_parents(state)
-        return random.expovariate(_lambda)
+        sample=random.expovariate(_lambda)
+        #print "EXPO-SAMPLE: "+str(sample)+" at lambda: "+str(_lambda)
+        return sample

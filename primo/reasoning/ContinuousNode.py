@@ -24,6 +24,9 @@ class ContinuousNode(RandomNode):
     def __str__(self):
         return self.name
         
+    def __repr__(self):
+        return "str(ContinuousNode)"+self.name+")"
+        
     def set_density_parameters(self, density_parameters):
         self.cpd.set_parameters(density_parameters)
         
@@ -50,10 +53,15 @@ class ContinuousNode(RandomNode):
         reimplement it by constructing the integral over the normalvariate in the
         intervalls allowed by the evidence and then generate a sample directly.
         Currently this method has O(inf).'''
-        v=random.normalvariate(x,1.0)
+        std_walk=0.1
+        v=random.normalvariate(x,std_walk)
         if self in evidence.keys():
-            while not evidence[self].is_compatible(v):
-                v=random.normalvariate(x,1.0)
+            while not (evidence[self].is_compatible(v) and self.value_range[0]<v and v<self.value_range[1]):
+                v=random.normalvariate(x,std_walk)
+        else:
+            while not (self.value_range[0]<v and v<self.value_range[1]):
+                v=random.normalvariate(x,std_walk)
+        #print "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"+self.name+" " +str(v)
         return v
         
     def sample_global(self, state):
