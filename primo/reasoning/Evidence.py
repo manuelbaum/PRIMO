@@ -16,7 +16,7 @@ class Evidence(object):
         '''
         raise Exception("Not defined for this kind of Evidence")
         
-    def get_unambigous_value(self):
+    def get_unique_value(self):
         '''
         Sometimes only one value of some domain is compatible with the evidence.
         This is obviously the case for EvidenceEqual. It is then possible to
@@ -38,7 +38,7 @@ class EvidenceEqual(Evidence):
     def is_compatible(self, value):
         return self.value==value
         
-    def get_unambigous_value(self):
+    def get_unique_value(self):
         return self.value
         
 class EvidenceIntervall(Evidence):

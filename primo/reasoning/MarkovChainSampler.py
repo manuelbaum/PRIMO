@@ -33,7 +33,7 @@ class GibbsTransitionModel(object):
             Dict from Node to Evidence.
         '''
         nodes = network.get_nodes([])
-        nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
+        nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unique_value() == None]
 
         for node in nodes_to_resample:
             parents=network.get_parents(node)
@@ -97,7 +97,7 @@ class MetropolisHastingsTransitionModel(object):
             Dict from Node to Evidence.
         '''
         nodes = network.get_nodes([])
-        nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unambigous_value() == None]
+        nodes_to_resample=[n for n in nodes if not n in extern_evidence.keys() or extern_evidence[n].get_unique_value() == None]
         for node in nodes_to_resample:
             #propose a new value for this variable:
             current_value = state[node]
