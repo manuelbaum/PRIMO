@@ -101,12 +101,12 @@ class MetropolisHastingsTransitionModel(object):
         for node in nodes_to_resample:
             #propose a new value for this variable:
             current_value = state[node]
-            proposed_value = node.sample_local(current_value, extern_evidence)
+            proposed_value, cdf_ratio = node.sample_local(current_value, extern_evidence)
             
             p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)
             p_of_current_given_mb = self._compute_p_of_value_given_mb(network, state, node, current_value)
-
-            acceptance_probability = min(1.0,  p_of_proposal_given_mb/p_of_current_given_mb * 1.0/1.0)
+            #print "acceptance_probability = min(1.0,  "+str(p_of_proposal_given_mb)+" / "+str(p_of_current_given_mb) + " * "+str(cdf_ratio)
+            acceptance_probability = min(1.0,  p_of_proposal_given_mb/p_of_current_given_mb * cdf_ratio * 1.0/1.0)
             if random.random() <= acceptance_probability:
                 state[node]=proposed_value
             

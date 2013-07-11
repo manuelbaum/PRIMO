@@ -73,9 +73,31 @@ class LinearBeta(Density):
         return self.output_scale*1.0/(1.0+math.exp(-x*self.input_scale))
 
 
-    def sample_global(self, state):
+    def sample_global(self, state, lower_limit, upper_limit):
         p=self._compute_p_given_parents(state)
         q=self._compute_q_given_parents(state)
-        value=random.betavariate(p,q)
+        #value=random.betavariate(p,q)
         #print "Sampled:"+str(value)
-        return value
+        #return value
+        
+        
+        
+        
+        
+        
+        #_lambda=self._compute_lambda_given_parents(state)
+        distribution=beta(p,q)
+        
+        lower_cdf=distribution.cdf(lower_limit)
+        upper_cdf=distribution.cdf(upper_limit)
+        
+        sample_in_integral=random.uniform(lower_cdf, upper_cdf)
+        
+        sample=distribution.ppf(sample_in_integral)
+        return sample
+        
+        
+        
+        
+        
+        

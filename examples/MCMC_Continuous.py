@@ -43,10 +43,12 @@ diameter_parameters=LinearBetaParameters(-10.0,{age:4.0},10.0,{age:-4.0})
 diameter.set_density_parameters(diameter_parameters)
 
 
-mcmc_ask=MCMC(bn,100000,convergence_test=ConvergenceTestSimpleCounting(50000))
+mcmc_ask=MCMC(bn,10000,convergence_test=ConvergenceTestSimpleCounting(5000))
 
 
 print "------PriorMarginal:------"
+
+
 pm=mcmc_ask.calculate_PriorMarginal([age],Gauss)
 print pm
 print "Ground truth: mu=0.5 C=[0.25]"
@@ -56,19 +58,20 @@ print pm
 print ""
 
 
-evidence={age:EvEqual(2)}
-
-
-#print "ProbabilityOfEvidence: " 
-#poe=mcmc_ask.calculate_PoE(evidence)
-#print poe
-
 print "------PosteriorMarginal:------"
-pm=mcmc_ask.calculate_PosteriorMarginal([age,height],evidence,Gauss)
+pm=mcmc_ask.calculate_PosteriorMarginal([age,height],{age:EvEqual(2)},Gauss)
 #pm=mcmc_ask.calculate_PosteriorMarginal([height],evidence,Gauss)
 print "P(age,height|age=2):"
 print pm
 print "Ground truth: age=2, height=mu:1.9,C=0.3"
+print ""
+
+pm=mcmc_ask.calculate_PosteriorMarginal([age,height],{age:EvLower(0.1)},Gauss)
+#pm=mcmc_ask.calculate_PosteriorMarginal([height],evidence,Gauss)
+print "P(age,height|age<0.1):"
+print pm
+print "Ground truth: age=0:0.1, height=mu:-0.1:0.0,C=0.3"
+print ""
 
 print "------PropabilityOfEvidence------"
 poe=mcmc_ask.calculate_PoE({age:EvLower(0.347)})

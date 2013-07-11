@@ -65,6 +65,17 @@ class LinearGauss(Density):
                 x = x + self.b[node]*state[node]
         return x
         
-    def sample_global(self,state):
-        return random.normalvariate(self._compute_offset_given_parents(state),self.var**0.5)
+    def sample_global(self,state,lower_limit,upper_limit):
+        
+        distribution=scipy.stats.norm(self._compute_offset_given_parents(state), self.var**0.5)
+        
+        lower_cdf=distribution.cdf(lower_limit)
+        upper_cdf=distribution.cdf(upper_limit)
+        
+        sample_in_integral=random.uniform(lower_cdf, upper_cdf)
+        
+        sample=distribution.ppf(sample_in_integral)
+    
+    
+        return sample
             

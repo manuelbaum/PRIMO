@@ -119,12 +119,13 @@ class MCMC(object):
         '''
         state={}
         for var in self.bn.get_nodes_in_topological_sort():
-            if var in evidence.keys():
-                value=evidence[var].get_unique_value()
-                if value == None:
-                    value=var.sample_global(state)
-                state[var]=value
-            else:
-                state[var]=var.sample_global(state)
+#            if var in evidence.keys():
+#                value=evidence[var].get_unique_value()
+#                if value == None:
+#                    value=var.sample_global(state,evidence)
+#                state[var]=value
+#            else:
+#                state[var]=var.sample_global(state)
+            state[var]=var.sample_global(state, evidence)
         return state
 

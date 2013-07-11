@@ -41,7 +41,7 @@ class EvidenceEqual(Evidence):
     def get_unique_value(self):
         return self.value
         
-class EvidenceIntervall(Evidence):
+class EvidenceInterval(Evidence):
     '''
     This class can be used to specify evidence that a variable has taken on
     some value in a defined interval.
@@ -54,27 +54,26 @@ class EvidenceIntervall(Evidence):
     def is_compatible(self, value):
         return self.min_val <= value and value<=self.max_val
         
+    def get_interval(self):
+        return self.min_val,self.max_val
+        
 
-class EvidenceLower(Evidence):
+class EvidenceLower(EvidenceInterval):
     '''
     This class can be used to specify evidence that a variable has taken on
     some value lower than some threshold.
     e.g. a<3
     '''
     def __init__(self,limit):
-        self.limit=limit
+        super(EvidenceLower, self).__init__(float("-inf"),limit)
+
         
-    def is_compatible(self, value):
-        return value<self.limit
-        
-class EvidenceHigher(Evidence):
+class EvidenceHigher(EvidenceInterval):
     '''
     This class can be used to specify evidence that a variable has taken on
     some value higher than some threshold.
     e.g. a>3
     '''
     def __init__(self,limit):
-        self.limit=limit
-        
-    def is_compatible(self, value):
-        return value>self.limit
+        super(EvidenceLower, self).__init__(limit,float("inf"))
+

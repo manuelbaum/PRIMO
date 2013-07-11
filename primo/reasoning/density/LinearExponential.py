@@ -37,7 +37,6 @@ class LinearExponential(Density):
         
         #Compute the offset for the density and displace the value accordingly
         _lambda = self._compute_lambda_given_parents(dict(node_value_pairs))
-        #print "lambda:"+str(_lambda)
         #Evaluate the displaced density at value
         return _lambda*math.exp(-_lambda*value)
 
@@ -49,8 +48,17 @@ class LinearExponential(Density):
         _lambda=self.output_scale*1.0/(1.0+math.exp(-x*self.input_scale))
         return _lambda
 
-    def sample_global(self,state):
+    def sample_global(self,state, lower_limit, upper_limit):
         _lambda=self._compute_lambda_given_parents(state)
-        sample=random.expovariate(_lambda)
+        distribution=scipy.stats.expon(loc=0,scale=1.0/_lambda)
+        
+        lower_cdf=distribution.cdf(lower_limit)
+        upper_cdf=distribution.cdf(upper_limit)
+        
+        sample_in_integral=random.uniform(lower_cdf, upper_cdf)
+        
+        sample=distribution.ppf(sample_in_integral)
+        
+        #sample=random.expovariate(_lambda)
         #print "EXPO-SAMPLE: "+str(sample)+" at lambda: "+str(_lambda)
         return sample
