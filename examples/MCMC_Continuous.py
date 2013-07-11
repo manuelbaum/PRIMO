@@ -43,7 +43,7 @@ diameter_parameters=LinearBetaParameters(-10.0,{age:4.0},10.0,{age:-4.0})
 diameter.set_density_parameters(diameter_parameters)
 
 
-mcmc_ask=MCMC(bn,10000,convergence_test=ConvergenceTestSimpleCounting(5000))
+mcmc_ask=MCMC(bn,1000,convergence_test=ConvergenceTestSimpleCounting(500))
 
 
 print "------PriorMarginal:------"
@@ -52,7 +52,6 @@ print "------PriorMarginal:------"
 pm=mcmc_ask.calculate_PriorMarginal([age],Gauss)
 print pm
 print "Ground truth: mu=0.5 C=[0.25]"
-#pm=mcmc_ask.calculate_PriorMarginal([height,diameter],Gauss)
 pm=mcmc_ask.calculate_PriorMarginal([height],Gauss)
 print pm
 print ""
@@ -60,14 +59,12 @@ print ""
 
 print "------PosteriorMarginal:------"
 pm=mcmc_ask.calculate_PosteriorMarginal([age,height],{age:EvEqual(2)},Gauss)
-#pm=mcmc_ask.calculate_PosteriorMarginal([height],evidence,Gauss)
 print "P(age,height|age=2):"
 print pm
 print "Ground truth: age=2, height=mu:1.9,C=0.3"
 print ""
 
 pm=mcmc_ask.calculate_PosteriorMarginal([age,height],{age:EvLower(0.1)},Gauss)
-#pm=mcmc_ask.calculate_PosteriorMarginal([height],evidence,Gauss)
 print "P(age,height|age<0.1):"
 print pm
 print "Ground truth: age=0:0.1, height=mu:-0.1:0.0,C=0.3"
@@ -78,6 +75,11 @@ poe=mcmc_ask.calculate_PoE({age:EvLower(0.347)})
 print "Probabilty that age is lower than it's median:"
 print "p(age<0.347)="+str(poe)
 print "Ground truth=0.5"
+print ""
+
+print "------MAP------"
+map_hypothesis=mcmc_ask.calculate_MAP([height,diameter],{},Gauss)
+print map_hypothesis
 
 
 

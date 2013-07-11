@@ -7,7 +7,7 @@ from primo.reasoning.density import Gauss
 from primo.reasoning import MCMC
 
 from primo.reasoning import EvidenceEqual as EvEqual
-from primo.reasoning import EvidenceIntervall as EvInterval
+from primo.reasoning import EvidenceInterval as EvInterval
 
 import numpy
 
@@ -47,21 +47,17 @@ bn.add_edge(height,children)
 bn.add_edge(ground,children)
 
 #parameterization
-age_parameters=LinearExponentialParameters(0.1,{})
-age.set_density_parameters(age_parameters)
+age.set_density_parameters(LinearExponentialParameters(0.1,{}))
 
 sun.set_density_parameters(LinearBetaParameters(2,{},2,{}))
 
 ground.set_density_parameters(LinearGaussParameters(2.0,{},1.5))
 
-#age,ground,sun
 growth.set_density_parameters(LinearGaussParameters(0.1,{age:5.0,ground:1.0,sun:4.0},2.5))
 
-height_parameters=LinearBetaParameters(0.1,{growth:1},0.5,{growth:0.5})
-height.set_density_parameters(height_parameters)
+height.set_density_parameters(LinearBetaParameters(0.1,{growth:1},0.5,{growth:0.5}))
 
-diameter_parameters=LinearExponentialParameters(0.01,{growth:0.2})
-diameter.set_density_parameters(diameter_parameters)
+diameter.set_density_parameters(LinearExponentialParameters(0.01,{growth:0.2}))
 
 children.set_density_parameters(LinearExponentialParameters(0.1,{ground:1.0,height:1.0}))
 
@@ -70,10 +66,6 @@ mcmc_ask=MCMC(bn,1000)
 
 evidence={age:EvEqual(2)}
 
-
-#print "ProbabilityOfEvidence: " 
-#poe=mcmc_ask.calculate_PoE(evidence)
-#print poe
 
 print "PosteriorMarginal:"
 pm=mcmc_ask.calculate_PosteriorMarginal([age,height],evidence,Gauss)

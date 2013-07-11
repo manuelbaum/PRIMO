@@ -60,6 +60,9 @@ class Gauss(Density):
         self.C=numpy.cov(X.transpose())
         return self
         
+    def get_most_probable_instantiation(self):
+        return self.mu
+        
     def __str__(self):
         ret= "Gauss(\nmu="+str(self.mu)+"\nC="+str(self.C)+")"
         return ret

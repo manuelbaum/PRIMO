@@ -40,22 +40,10 @@ class LinearBeta(Density):
         
         
     def get_probability(self,value, node_value_pairs):
-        #print "Probability to compute for value:"+str(value)
-        #Compute the offset for the density and displace the value accordingly
-        #p = self.p0
-        #q = self.q0
-
-        #for node,node_value in node_value_pairs:
-        #    p = p + self.p[node]*node_value
-        #    q = q + self.q[node]*node_value
-        #p=1.0/(1.0+math.exp(-p))
-        #q=1.0/(1.0+math.exp(-q))
         p=self._compute_p_given_parents(dict(node_value_pairs))
         q=self._compute_q_given_parents(dict(node_value_pairs))
-        #print node_value_pairs
-        #print "beta "+str(p)+" "+str(q)
         probability = beta(p, q).pdf(value)
-        #print "/beta"
+
         return probability
         
     def _compute_p_given_parents(self, state):
@@ -76,16 +64,7 @@ class LinearBeta(Density):
     def sample_global(self, state, lower_limit, upper_limit):
         p=self._compute_p_given_parents(state)
         q=self._compute_q_given_parents(state)
-        #value=random.betavariate(p,q)
-        #print "Sampled:"+str(value)
-        #return value
-        
-        
-        
-        
-        
-        
-        #_lambda=self._compute_lambda_given_parents(state)
+
         distribution=beta(p,q)
         
         lower_cdf=distribution.cdf(lower_limit)
