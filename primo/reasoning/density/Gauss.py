@@ -1,68 +1,100 @@
 # -*- coding: utf-8 -*-
 
 from primo.reasoning.density import Density
+from primo.reasoning.ContinuousNode import ContinuousNode
 import numpy
+import scipy.stats
+import random
 
 class GaussParameters(object):
-    def __init__(self, mu, cov):
-        self.mu=mu
-        self.cov=cov
+    '''
+    This represents the parameters for the Gauss-density class.
+    '''
+    def __init__(self, b0,b,var):
+        #offset for the mean of this variable, a priori
+        self.b0=b0
+        #a vector that holds one weight for each variable that this density depends on
+        self.b=b
+        #the variance
+        self.var=var
 
 class Gauss(Density):
-    '''TODO: write doc'''
+    '''
+    This class represents a one-dimensional normal distribution with a mean that
+    depends linear on the parents but with invariant variance.'''
 
-    def __init__(self):
+    def __init__(self,variable):
         super(Gauss, self).__init__()
         
-        self.mu=numpy.array([0.0])
-        self.C=numpy.array([[1.0]])
-        self.variables=[]
-
-        
-    def add_variable(self, variable):
-        v_min,v_max=variable.get_value_range()
-        if not  (v_min>= -float("Inf") and v_max <=float("Inf")):
-            raise Exception("Tried to add Variable into Gaussian densitiy, but variable had wrong value-range")
-        self.variables.append(variable)
-        
-        
-        m=len(self.variables)
-        self.mu.resize([m,1])
-        self.C.resize((m,m))
-        
-        self.C[m-1,m-1]=1.0
+        self.b0=0#numpy.array([0.0])
+        self.b={}
+        self.var=1.0
         
     def set_parameters(self,parameters):
-        self.set_mu(parameters.mu)
-        self.set_cov(parameters.cov)
+        self.set_b0(parameters.b0)
+        self.set_b(parameters.b)
+        self.set_var(parameters.var)
         
-    def set_mu(self, mu):
-        self.mu=mu
-        
-    def set_cov(self, C):
-        self.C=C
-        
-    def sample(self):
-        return numpy.random.multivariate_normal(self.mu,self.C)
-            
-            
-    def parametrize_from_states(self, samples, number_of_samples):
-        '''This method uses a list of variable-instantiations to change this node's parametrization
-         to represent a Gaussian constructed from the given samples.
-            The Argument samples is a list of pairs (RandomNode, value).'''
-            
-        X=numpy.empty((number_of_samples, len(self.variables)))
-        for i,state in enumerate(samples):
-            for j,variable in enumerate(self.variables):
-                X[i,j]=state[variable]
+    def add_variable(self, variable):
 
-        self.mu=numpy.mean(X,axis=0)
-        self.C=numpy.cov(X.transpose())
-        return self
+        if not isinstance(variable, ContinuousNode):
+            raise Exception("Tried to add Variable into Gaussian densitiy, but variable is not continuous")
+        self.b[variable]=0.0
+    
+
+    def get_probability(self, x, node_value_pairs):
         
-    def get_most_probable_instantiation(self):
-        return self.mu
+        reduced_mu = self.b0
+        for node,value in node_value_pairs:
+            reduced_mu = reduced_mu + self.b[node]*value
+        return scipy.stats.norm(reduced_mu, numpy.sqrt(self.var)).pdf(x)
         
-    def __str__(self):
-        ret= "Gauss(\nmu="+str(self.mu)+"\nC="+str(self.C)+")"
-        return ret
+        
+    def set_b(self, variable, b):
+        if not variable in b.keys():
+            raise Exception("Tried to set dependency-variable b for a variable that has not yet been added to this variable's dependencies")
+        self.b[variable]=b
+        
+    def set_b(self, b):
+        if not set(self.b.keys())==set(b.keys()):
+            raise Exception("The variables given in the new b do not match the old dependencies of this density")
+        self.b=b
+        
+    def set_b0(self, b0):
+        self.b0=b0
+        
+    def set_var(self, var):
+        self.var=var
+        
+    def _compute_offset_given_parents(self, state):
+        x = self.b0
+        for node in self.b.keys():
+            if node in state.keys():
+                x = x + self.b[node]*state[node]
+        return x
+        
+    def sample_global(self,state,lower_limit,upper_limit):
+        '''This method can be used to sample from this distribution. It is necessary that 
+        a value for each parent is specified and it is possible to constrain the
+        value that is being sampled to some intervall.
+        @param state: A dict (node->value) that specifies a value for each variable
+            that this density depends on.
+        @param lower_limit: The lower limit of the interval that is allowed to be
+            sampled as value.
+        @param upper_limit: The upper limit of the interval that is allowed to be
+            sampled as value.
+        @returns: The sampled value. A real number.
+        '''
+        
+        distribution=scipy.stats.norm(self._compute_offset_given_parents(state), self.var**0.5)
+        
+        lower_cdf=distribution.cdf(lower_limit)
+        upper_cdf=distribution.cdf(upper_limit)
+        
+        sample_in_integral=random.uniform(lower_cdf, upper_cdf)
+        
+        sample=distribution.ppf(sample_in_integral)
+    
+    
+        return sample
+            

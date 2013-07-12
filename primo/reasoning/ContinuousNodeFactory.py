@@ -1,36 +1,36 @@
 from primo.reasoning import ContinuousNode
-from primo.reasoning.density import LinearGauss
-from primo.reasoning.density import LinearExponential
-from primo.reasoning.density import LinearBeta
+from primo.reasoning.density import Gauss
+from primo.reasoning.density import Exponential
+from primo.reasoning.density import Beta
 
 class ContinuousNodeFactory(object):
     '''This class offers methods for generating ContinuousNodes'''
     def __init__(self):
         pass
         
-    def createLinearGaussNode(self, name):
+    def createGaussNode(self, name):
         '''
         Create a LinearGaussNode with linear dependencies on parents.
         
         @param name: The name of the node.
         '''        
-        return self.createContinuousNode(name,(-float("Inf"),float("Inf")),LinearGauss)
+        return self.createContinuousNode(name,(-float("Inf"),float("Inf")),Gauss)
         
-    def createLinearExponentialNode(self, name):
+    def createExponentialNode(self, name):
         '''
         Create a LinearExponentialNode with linear dependencies on parents.
         
         @param name: The name of the node.
         '''  
-        return self.createContinuousNode(name,(0,float("Inf")),LinearExponential)
+        return self.createContinuousNode(name,(0,float("Inf")),Exponential)
         
-    def createLinearBetaNode(self, name):
+    def createBetaNode(self, name):
         '''
         Create a LinearBetaNode with linear dependencies on parents.
         
         @param name: The name of the node.
         '''  
-        return self.createContinuousNode(name,(0,1),LinearBeta)
+        return self.createContinuousNode(name,(0,1),Beta)
     
     def createContinuousNode(self,name,value_range,DensityClass):
         '''

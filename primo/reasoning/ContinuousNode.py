@@ -31,14 +31,6 @@ class ContinuousNode(RandomNode):
     def set_density_parameters(self, density_parameters):
         self.cpd.set_parameters(density_parameters)
         
-#    def sample_uniform(self):
-#        sampled_value = random.uniform(self.value_range[0],self.value_range[1])
-#        return sampled_value
-#        
-#    def sample_proposal(self, x=None):
-#        return self.cpd.sample_proposal(x)
-        
-        
     def sample_local(self, x, evidence):
         '''
         This method can be used to do a random walk in the domain of this node.
@@ -70,10 +62,6 @@ class ContinuousNode(RandomNode):
         if lower_limit>upper_limit:
             raise Exception("Intersection of random variable's value_range and"
                 "allowed Interval for Evidence is empty - no sampling possible")
-        
-        #v=random.normalvariate(x,std_walk)
-        #while not (lower_limit<=v and v<=upper_limit):
-        #    v=random.normalvariate(x,std_walk)
         
         #generate the actual sample
         distribution=scipy.stats.norm(x, std_walk)

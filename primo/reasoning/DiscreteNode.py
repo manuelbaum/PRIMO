@@ -33,7 +33,7 @@ class DiscreteNode(RandomNode):
     def is_valid(self):
         return self.cpd.is_normalized_as_cpt(self)
         
-    def sample_global(self, evidence=None):
+    def sample_global(self, state, evidence):
         if evidence==None or not self in evidence.keys():
             compatibles=self.value_range
         else:
@@ -42,7 +42,7 @@ class DiscreteNode(RandomNode):
                 if evidence[self].is_compatible(v):
                     compatibles.append(v)
         
-        return random.choice(compatibles)
+        return self.cpd.sample_global(state,self,compatibles)
         
     def sample_local(self, x, evidence=None):
         if evidence==None or not self in evidence.keys():
@@ -53,4 +53,4 @@ class DiscreteNode(RandomNode):
                 if evidence[self].is_compatible(v):
                     compatibles.append(v)
         
-        return random.choice(compatibles)
+        return random.choice(compatibles),1.0

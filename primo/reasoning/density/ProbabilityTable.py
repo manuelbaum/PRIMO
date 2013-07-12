@@ -1,7 +1,20 @@
 # -*- coding: utf-8 -*-
 import numpy
 import copy
+import random
 from primo.reasoning.density import Density
+
+def weighted_random(weights):
+    '''
+    Implements roulette-wheel-sampling.
+    @param weights: A List of float-values.
+    @returns: Index of the selected entity
+    '''
+    counter = random.random() * sum(weights)
+    for i,w in enumerate(weights):
+        counter -= w
+        if counter <=0:
+            return i
 
 class ProbabilityTable(Density):
     '''TODO: write doc'''
@@ -63,6 +76,11 @@ class ProbabilityTable(Density):
         return self.normalize_as_jpt()
         
     def get_most_probable_instantiation(self):
+        '''
+        This method returns a list of (node,value)-pairs for which this density
+        is at its maximum. Probably more useful if this represents a jpt than when
+        it represents a cpt.
+        '''
         simple_index=numpy.argmax(self.table)
         tuple_index=numpy.unravel_index(simple_index, self.table.shape)
         return self.get_node_value_pairs(tuple_index)
@@ -74,8 +92,34 @@ class ProbabilityTable(Density):
     def get_probability(self, node_value_pairs):
         index = self.get_cpt_index(node_value_pairs)
         return self.table[index]
+        
+    def sample_global(self, global_state, variable, allowed_values):
+        '''
+        This method can be used to sample from the density according to a global
+        state containing values for all other variables that this node belongs to.
+        @param global_state: A Dict (node -> value) that must hold a value for
+            all variables that this density depends on. Except for the variable 
+            that it is directly associated with.
+        @param variable: The variable that this density is directly associated
+            with.
+        @param allowed_values: A list of values that are allowed to be sampled.
+            This is necessary because external evidence may restrict the value
+            range.
+        @returns: The sampled value.
+        '''
+        node_value_pairs=[(node,global_state[node]) for node in self.variables if node != variable]
+        probabilities=[self.get_probability(node_value_pairs+[(variable,value)]) for value in allowed_values]
+        idx=weighted_random(probabilities)
+        return allowed_values[idx]
 
     def get_cpt_index(self, node_value_pairs):
+        '''
+        Can be used to determine the index in this densitys cpt that accords to
+        a completely specified node-value combination for all nodes that this
+        density depends on
+        @param node_value_pairs: A list of (Node,Value) pairs
+        @returns: A tuple representing the index
+        '''
         nodes, values = zip(*node_value_pairs)
         index = []
         for node in self.variables:
@@ -85,6 +129,16 @@ class ProbabilityTable(Density):
         return tuple(index)
         
     def get_node_value_pairs(self, index):
+        '''
+        Can be used to determine the node-value combination that belongs to some
+        index for the contitional probabilty table. That state needs to be fully
+        specified/all variables this density depends on need to be specified.
+        
+        This method should probably only be used internally.
+        
+        @param index: A tuple 
+        @returns: a list of (node,value) pairs
+        '''
         nv_pairs=[]
         for index_of_value,var in zip(index,self.variables):
             nv_pairs.append((var,var.value_range[index_of_value]))
@@ -92,6 +146,13 @@ class ProbabilityTable(Density):
 
 
     def is_normalized_as_cpt(self,owner):
+        '''
+        This method can be used to determine if this density is a valid cpt for
+        some variable. This important as this class can equally represent jpts.
+        @param owner: The variable for which normalization-constraints should be
+            valid.
+        @returns: boolean
+        '''
 
         dim_of_owner = self.variables.index(owner)
         sum_of_owner_probs = numpy.sum(self.table, dim_of_owner)
@@ -99,6 +160,11 @@ class ProbabilityTable(Density):
         return set(sum_of_owner_probs.flatten()) == set([1])
 
     def is_normalized_as_jpt(self):
+        '''
+        This method can be used to determine if this density is a valid jpt for
+        some variable. This important as this class can equally represent cpts.
+        @returns: boolean
+        '''
         '''Returns whether the cpd is summed to one'''
         return numpy.sum(self.table) == 1.0
 

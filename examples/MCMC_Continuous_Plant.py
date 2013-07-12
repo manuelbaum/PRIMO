@@ -1,9 +1,9 @@
 from primo.core import BayesNet
 from primo.reasoning import ContinuousNodeFactory
-from primo.reasoning.density import LinearExponentialParameters
-from primo.reasoning.density import LinearBetaParameters
-from primo.reasoning.density import LinearGaussParameters
-from primo.reasoning.density import Gauss
+from primo.reasoning.density import ExponentialParameters
+from primo.reasoning.density import BetaParameters
+from primo.reasoning.density import GaussParameters
+from primo.reasoning.density import NDGauss
 from primo.reasoning import MCMC
 
 from primo.reasoning import EvidenceEqual as EvEqual
@@ -20,13 +20,13 @@ bn = BayesNet()
 cnf=ContinuousNodeFactory()
 
 #create the nodes
-age = cnf.createLinearExponentialNode("Age")
-sun = cnf.createLinearBetaNode("Sun")
-ground= cnf.createLinearGaussNode("Ground")
-growth= cnf.createLinearGaussNode("Growth")
-height = cnf.createLinearBetaNode("Height")
-diameter = cnf.createLinearExponentialNode("Diameter")
-children = cnf.createLinearExponentialNode("Children")
+age = cnf.createExponentialNode("Age")
+sun = cnf.createBetaNode("Sun")
+ground= cnf.createGaussNode("Ground")
+growth= cnf.createGaussNode("Growth")
+height = cnf.createBetaNode("Height")
+diameter = cnf.createExponentialNode("Diameter")
+children = cnf.createExponentialNode("Children")
 
 #add the nodes to the network
 bn.add_node(age)
@@ -47,19 +47,19 @@ bn.add_edge(height,children)
 bn.add_edge(ground,children)
 
 #parameterization
-age.set_density_parameters(LinearExponentialParameters(0.1,{}))
+age.set_density_parameters(ExponentialParameters(0.1,{}))
 
-sun.set_density_parameters(LinearBetaParameters(2,{},2,{}))
+sun.set_density_parameters(BetaParameters(2,{},2,{}))
 
-ground.set_density_parameters(LinearGaussParameters(2.0,{},1.5))
+ground.set_density_parameters(GaussParameters(2.0,{},1.5))
 
-growth.set_density_parameters(LinearGaussParameters(0.1,{age:5.0,ground:1.0,sun:4.0},2.5))
+growth.set_density_parameters(GaussParameters(0.1,{age:5.0,ground:1.0,sun:4.0},2.5))
 
-height.set_density_parameters(LinearBetaParameters(0.1,{growth:1},0.5,{growth:0.5}))
+height.set_density_parameters(BetaParameters(0.1,{growth:1},0.5,{growth:0.5}))
 
-diameter.set_density_parameters(LinearExponentialParameters(0.01,{growth:0.2}))
+diameter.set_density_parameters(ExponentialParameters(0.01,{growth:0.2}))
 
-children.set_density_parameters(LinearExponentialParameters(0.1,{ground:1.0,height:1.0}))
+children.set_density_parameters(ExponentialParameters(0.1,{ground:1.0,height:1.0}))
 
 
 mcmc_ask=MCMC(bn,1000)
@@ -68,13 +68,13 @@ evidence={age:EvEqual(2)}
 
 
 print "PosteriorMarginal:"
-pm=mcmc_ask.calculate_PosteriorMarginal([age,height],evidence,Gauss)
+pm=mcmc_ask.calculate_PosteriorMarginal([age,height],evidence,NDGauss)
 #pm=mcmc_ask.calculate_PosteriorMarginal([height],evidence,Gauss)
 print pm
 
 print "PriorMarginal:"
-pm=mcmc_ask.calculate_PriorMarginal([age],Gauss)
+pm=mcmc_ask.calculate_PriorMarginal([age],NDGauss)
 print pm
 #pm=mcmc_ask.calculate_PriorMarginal([height,diameter],Gauss)
-pm=mcmc_ask.calculate_PriorMarginal([height],Gauss)
+pm=mcmc_ask.calculate_PriorMarginal([height],NDGauss)
 print pm

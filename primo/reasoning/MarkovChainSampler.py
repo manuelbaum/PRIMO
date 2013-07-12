@@ -16,9 +16,18 @@ def weighted_random(weights):
 class GibbsTransitionModel(object):
     '''
     Implements Gibbs-sampling. Can be used to constuct a Markov Chain and is
-    mainly used by MarkovChainSampler.
+    mainly used by MarkovChainSampler. This transition model can only be used
+    if the product of each variable and the variables in it's  markov blanket 
+    can be computed in closed form. This is currently only the case for discrete
+    variables / ProbabilityTables, but could possibly extended to the continuous
+    setting by assuming gaussian forms for the products or using only classes of
+    pdfs for which closed forms are computable.
     
-    After "Probabilistic Graphical Models, Daphne Koller and Nir Friedman"(p.506)
+    If the pdf-classes used can not offer this kind of computation you should
+    use the MetropolisHastingsTransitionModel, as it only requires to compute
+    a single probability, which can way easier be obtained.
+    
+    Implemented after "Probabilistic Graphical Models, Daphne Koller and Nir Friedman"(p.506)
     '''
     def __init__(self):
         pass
@@ -101,6 +110,7 @@ class MetropolisHastingsTransitionModel(object):
         for node in nodes_to_resample:
             #propose a new value for this variable:
             current_value = state[node]
+            #print node.sample_local(current_value, extern_evidence)
             proposed_value, cdf_ratio = node.sample_local(current_value, extern_evidence)
             
             p_of_proposal_given_mb = self._compute_p_of_value_given_mb(network, state, node, proposed_value)

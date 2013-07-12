@@ -5,8 +5,18 @@ from  primo.reasoning import DiscreteNode
 from primo.reasoning.density import ProbabilityTable
 from primo.reasoning import MCMC
 from primo.reasoning import EvidenceEqual as EvEq
+from primo.reasoning import GibbsTransitionModel
 import numpy
 import pdb
+
+#About this example:
+#This example shows how approximate inference can be used query a purely discrete
+#bayesian network. At first that network is being constructed and afterwards it
+#is passed to an MCMC object that is used to answer several kinds of questions:
+#-Prior marginal
+#-Posterior marginal
+#-Probability of evidence
+#-Maximum a-posteriori hypothesis
 
 #Construct some simple BayesianNetwork
 bn = BayesNet()
@@ -28,7 +38,7 @@ alarm.set_probability_table(alarm_cpt, [burglary,alarm])
 
 
 #Get some inference object
-mcmc_ask=MCMC(bn,5000)
+mcmc_ask=MCMC(bn,5000,transition_model=GibbsTransitionModel())
 
 #Do some Inferences
 evidence={burglary:EvEq("Intruder")}
