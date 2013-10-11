@@ -1,0 +1,89 @@
+\documentclass[c, compress, ngerman,  presentation, final, xcolor=svgnames]{beamer}
+
+% standard packages
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{eurosym, babel}
+\usepackage{amsmath}
+
+% \usepackage{listings}
+% \usepackage{multimedia, fancybox}
+% \usepackage{calc, amssymb, amsmath, amsfonts}
+% \usepackage{pstricks, pst-bar}
+% \usepackage{graphicx}
+% \usepackage{color}
+% \usepackage{caption3} % load caption package kernel first
+
+
+% ---------- for example pages ----------------
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\tikzstyle{block}=[draw opacity=0.7,line width=1.4cm]
+% ---------------------------------------------
+
+
+% ---------- various options ----------------
+\usepackage[small]{caption}
+\DeclareCaptionOption{parskip}[]{} % disable "parskip" caption option
+\setbeamercovered{transparent} % enable semi transparent bullet points
+% ---------------------------------------------
+
+
+% ---------- color and theme settings ----------------
+\usetheme{Darmstadt}
+\usecolortheme[named=SteelBlue]{structure}
+
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+
+%\setbeamertemplate{items}[ball] % round numberings and bullets
+%\setbeamertemplate{blocks}[rounded][shadow=true] %rounded boxes with shadows
+\setbeamertemplate{navigation symbols}{} %hide navigation symbols
+% ---------------------------------------------
+
+
+% ---------- Footnote ----------------
+\setbeamertemplate{footline} {
+\begin{beamercolorbox}[wd=0.5\textwidth,ht=3ex,dp=1.5ex,leftskip=.5em,rightskip=.5em]{author in head/foot}%
+\usebeamerfont{author in head/foot}%
+\hfill \insertshortauthor%
+\end{beamercolorbox}%
+\vspace*{-4.5ex}\hspace*{0.5\textwidth}%
+\begin{beamercolorbox}[wd=0.5\textwidth,ht=3ex,dp=1.5ex,left,leftskip=.5em]
+{title in head/foot}%
+\usebeamerfont{title in head/foot}%
+\insertshorttitle \hfill \hfill \hfill \hfill \insertframenumber%
+\end{beamercolorbox} }
+% ---------------------------------------------
+
+
+% ---------- Author, Title, etc. ----------------
+\title[] {PRIMO}
+\subtitle[]{PRobabilistic Inference MOdules}
+\author[]{Manuel Baum, Denis John, \\ Lukas Kettenbach, Maximilian Koch}
+\institute[]{Bielefeld University}
+\date{\today}
+% ---------------------------------------------
+
+
+% ---------- document start ----------------
+\begin{document}
+
+\maketitle
+
+%\begin{frame}{Table of Contents}{}
+%	\tableofcontents%[pausesections]
+%\end{frame}
+
+%\AtBeginSection{\begin{frame}<beamer>{Gliederung} \tableofcontents[currentsection, currentsubsection] \end{frame}}
+
+%\input{010_example}
+\input{input/intro}
+\input{input/lukas}
+\input{input/denis}
+\input{input/manu}
+\input{input/max}
+
+
+\end{document}

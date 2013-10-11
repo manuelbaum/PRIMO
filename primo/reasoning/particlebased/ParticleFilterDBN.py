@@ -5,6 +5,38 @@ import random
 import copy
 import time
 
+class Particle(object):
+    ''' 
+    This is the basic particle class used by the DBN particle filter.
+    Inherit this class for more functionality.
+    '''
+    def __init__(self):
+        self.state = None
+        
+    def set_state(self, state):
+        ''' 
+        Set the state of this particle and call the update() function.
+        
+        Keyword arguments:
+        state -- new state of this particle
+        '''
+        self.state = state   
+        self.update()
+        
+    def get_state(self):
+        ''' 
+        Get the state of this particle.
+        
+        Returns the state of this particle.
+        '''
+        return self.state
+        
+    def update(self):
+        ''' 
+        Implement this method to update the particle as required.
+        '''
+        pass
+
 def weighted_random(weights):
     counter = random.random() * sum(weights)
     for i, w in enumerate(weights):
@@ -12,24 +44,54 @@ def weighted_random(weights):
         if counter <= 0:
             return i
 
-def wighted_sample_with_replacement(samples = {}, weights = [], N = 0):
+def wighted_sample_with_replacement(samples = [], weights = [], N = 0):
+    '''
+    The population is resampled to generate a new population of N samples. 
+    Each new sample is selected from the current population; the probability 
+    that a particular sample is selected is proportional to its weight.
+    
+    See "Artificial Intelligence: A Modern Approach (Third edition)" by 
+    Stuart Russell and Peter Norvig (p. 596 ff.)
+
+    Keyword arguments:
+    samples -- a vector/list of samples of size N
+    weights -- a vector/list of weights of size N
+    N -- number of samples to be maintained
+
+    Returns a vector/list with new samples.
+    '''
     ws_sum = sum(weights)
-    new_samples = {}
+    new_samples = []
     for n in xrange(N):
         r = random.random() * ws_sum
         for i, w in enumerate(weights):
             r -= w
             if r <= 0:
-                new_samples[n] = (samples[i], w);
+                new_samples.append(copy.copy(samples[i]));
                 break
     return new_samples
 
 def weighted_sample(network, evidence = {}):
+    '''
+    Each nonevidence variable is sampled according to the conditional
+    distribution given the values already sampled for the variable's parents,
+    while a weight isaccumulated based on the likelihood for each evidence 
+    variable.
+    
+    See "Artificial Intelligence: A Modern Approach (Third edition)" by 
+    Stuart Russell and Peter Norvig (p. 534)
+
+    Keyword arguments:
+    network -- a Bayesian network
+    evidence -- a dict of observed values
+
+    Returns a new sample as tuple of state and weight (state, w).
+    '''
     w = 1.0
     state = {}
     if not isinstance(network, BayesNet):
         raise Exception("The given network is not an instance of BayesNet.")
-
+        
     nodes = network.get_nodes_in_topological_sort()
     for node in nodes:
         #reduce this node's cpd
@@ -39,49 +101,24 @@ def weighted_sample(network, evidence = {}):
             reduced_cpd = node.get_cpd_reduced(evidence_tmp)
         else:
             reduced_cpd = node.get_cpd()
-        # sample state
-        new_state = weighted_random(reduced_cpd.get_table())
-        state[node] = node.get_value_range()[new_state]
-        
+                
         # (re-)calulate weight
         if node in evidence:
             w *= reduced_cpd.get_table()[node.get_value_range().index(evidence[node])]
-    return (state, w)
-
-def gibs_sample(network, state, events = {}):
-    w = 1.0
-    if not isinstance(network, BayesNet):
-        raise Exception("The given network is not an instance of BayesNet.")
-    nodes = network.get_nodes_in_topological_sort()
-    for node in nodes:
-        # reduce this node's cpd
-        parents = network.get_parents(node)
-        if parents:
-            evidence = [(parent, state[parent]) for parent in parents]
-            reduced_cpd = node.get_cpd_reduced(evidence)
+            state[node] = node.get_value_range().index(evidence[node])
         else:
-            reduced_cpd = node.get_cpd()
-        
-        #reduce the children's cpds
-        children = network.get_children(node)
-        for child in children:
-            parents = network.get_parents(child)
-            evidence = [(parent, state[parent]) for parent in parents if parent != node]
-            evidence.append((child, state[child]))
-            reduced_child_cpd = child.get_cpd_reduced(evidence)
-            reduced_cpd = reduced_cpd.multiplication(reduced_child_cpd)
-        # sample state
-        new_state = weighted_random(reduced_cpd.get_table())
-        state[node] = node.get_value_range()[new_state]       
-        
-        # (re-)calulate weight
-        if node in events:
-            w *= reduced_cpd.get_table()[node.get_value_range().index(evidence[node])]
+            # sample state
+            new_state = weighted_random(reduced_cpd.get_table())
+            state[node] = node.get_value_range()[new_state]
+
     return (state, w)
 
-def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
+def particle_filtering_DBN(network, N, T, get_evidence_function, particle_class = Particle, interval = 0):
     '''
     Create N samples for the given network with T time slices.
+    
+    See "Artificial Intelligence: A Modern Approach (Third edition)" by 
+    Stuart Russell and Peter Norvig (p. 596 ff.)
 
     Keyword arguments:
     network -- a DynamicBayesNet
@@ -91,7 +128,7 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
     structure: {node1:evidence1, node2:evidence2, ...}
     interval -- time to sleep between two sample loops (only if T = -1)
 
-    Returns a dict of N samples
+    Returns a list of N samples
     '''
     if not isinstance(network, DynamicBayesNet):
         raise Exception("The given network is not an instance of DynamicBayesNet.")
@@ -100,8 +137,8 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
         raise Exception("The given network is not valid.")
 
     # Sample from inital distribution
-    samples = sample_from_inital_distribution(network, get_evidence_function(), N)
-
+    samples = sample_from_inital_distribution(network, get_evidence_function(), N, particle_class)
+    
     # Sample time slices
     initial_samples = True
     if T == -1:
@@ -114,7 +151,7 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
                 samples = sample_one_time_slice(network, samples, get_evidence_function())
             time.sleep(interval)
     else:
-        for t in xrange(0, T):            
+        for t in xrange(0, T):
             yield samples
             if initial_samples:
                 samples = sample_one_time_slice(network, samples, get_evidence_function(), True)
@@ -122,9 +159,8 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, interval = 0):
             else:
                 samples = sample_one_time_slice(network, samples, get_evidence_function())
 
-#    return samples
 
-def sample_from_inital_distribution(network, evidence, N):
+def sample_from_inital_distribution(network, evidence, N, particle_class = Particle):
     '''
     Create samples from initial distribution.
 
@@ -133,14 +169,15 @@ def sample_from_inital_distribution(network, evidence, N):
     evidence -- dict with the following structure: {node1:evidence1, node2:evidence2, ...}
     N -- number of samples
 
-    Returns a dict of N samples
+    Returns a list of N samples
     '''
-    samples = {}
+    samples = []
     weights = []
     for n in xrange(N):
         # Sample from inital distribution
         (state, w) = weighted_sample(network.B0, evidence)
-        samples[n] = copy.copy(state)
+        samples.append(particle_class())
+        samples[n].set_state(copy.copy(state))
         weights.append(w)
     
     weights = normalize_weights(weights)    
@@ -149,7 +186,7 @@ def sample_from_inital_distribution(network, evidence, N):
     return wighted_sample_with_replacement(samples, weights, N)
 
 
-def sample_one_time_slice(network, samples, evidence, initial_samples = False, gibbs = False, gibbs_iterations = 5):
+def sample_one_time_slice(network, samples, evidence, initial_samples = False):
     '''
     Create samples for next time slice
 
@@ -158,20 +195,18 @@ def sample_one_time_slice(network, samples, evidence, initial_samples = False, g
     samples -- a dict of samples (sampled from initial distribution at the beginning or a previous time slice)
     evidence -- dict with the following structure: {node1:evidence1, node2:evidence2, ...}
     initial_samples -- is true if the given samples where sampled from the initial distribution
-    Returns a dict of N new samples
+    
+    Returns a list of N new samples
     '''
     weights = []
     twoTBN = network.twoTBN
     N = len(samples)
-    for i in xrange(N):
-        (state, w) = samples[i]
+    for n in xrange(N):
+        state = samples[n].get_state()
         ts = twoTBN.create_timeslice(state, initial_samples)
         (state, w) = weighted_sample(ts, evidence)
-        if gibbs:
-            for g in xrange(gibbs_iterations):
-                (state, w) = gibs_sample(ts, state, evidence)
 
-        samples[i] = copy.copy(state)
+        samples[n].set_state(copy.copy(state))
         weights.append(w)
     
     weights = normalize_weights(weights)

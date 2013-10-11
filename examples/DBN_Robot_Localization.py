@@ -7,6 +7,8 @@ from primo.reasoning import DiscreteNode
 import primo.reasoning.particlebased.ParticleFilterDBN as pf
 import numpy
 from primo.utils import XMLBIF
+import random
+
 
 # Construct a DynmaicBayesianNetwork
 dbn = DynamicBayesNet()
@@ -32,24 +34,68 @@ N = 1000
 T = 10
 
 pos = 0
+lastPos = 0
 evidence = {}
 def get_evidence_function():
     global pos
-    global evidence    
-    if pos == 10:
-        pos = 0
-    if pos == 1 or pos == 3 or pos == 7:
-        evidence = {door:"True"}
-    else:
-        evidence = {door:"False"}
-    pos = pos + 1
+    global evidence
+    simulate_evidence()
+    simulate_next_pos()
     return evidence
     
-result = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function)
+def simulate_next_pos():
+    global pos
+    global lastPos
+    lastPos = pos
+    random_pos = random.random()
+    if random_pos >= 0.1:
+        pos = pos + 1
+    elif random_pos >= 0.05:
+        pos = pos
+    else:
+        pos =  pos - 1
+    if pos == 10:
+        pos = 0
+    if pos == -1:
+        pos = 9
+        
+def simulate_evidence():
+    global pos
+    global evidence
+    global door
+    err = False
+    if random.random() > 0.99:
+        err = True
+    if pos == 1 or pos == 3 or pos == 7:
+        if err:
+            evidence = {door:"False"}
+        else:
+            evidence = {door:"True"}
+    else:
+        if err:
+            evidence = {door:"True"}
+        else:
+            evidence = {door:"False"}
+            
+        
+class RobotParticle(pf.Particle):
+    def __init__(self):
+        super(pf.Particle, self).__init__()
+        # set random initial position
+        self.pos = random.randrange(10)
+        
+    def update(self):
+        x_ = x
+        if x not in self.state:
+            x_ = x0_init
+        #print(self.state[x_])
+        pass    
+    
+result = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function, RobotParticle, 0)
 for samples in result:
     w_hit = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    for i in samples:
-        (state, w) = samples[i]
+    for sample in samples:
+        state = sample.get_state()
         x_ = x
         if x not in state:
             x_ = x0_init
@@ -73,5 +119,7 @@ for samples in result:
             w_hit[8] += 1
         if state[x_] == "p9":
             w_hit[9] += 1
-    print "Real position: " + str(pos) + " (Door: " + str(evidence[door]) + ")"
-    print "Partical distribution: " + str(w_hit)
+    prob = [w / N for w in w_hit]
+    print "Real position: " + str(lastPos) + " (Door: " + str(evidence[door]) + ")"
+    #print str(w_hit)
+    print str(prob)
