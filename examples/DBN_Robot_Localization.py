@@ -76,22 +76,9 @@ def simulate_evidence():
             evidence = {door:"True"}
         else:
             evidence = {door:"False"}
-            
-        
-class RobotParticle(pf.Particle):
-    def __init__(self):
-        super(pf.Particle, self).__init__()
-        # set random initial position
-        self.pos = random.randrange(10)
-        
-    def update(self):
-        x_ = x
-        if x not in self.state:
-            x_ = x0_init
-        #print(self.state[x_])
-        pass    
+ 
     
-result = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function, RobotParticle, 0)
+result = pf.particle_filtering_DBN(dbn, N, T, get_evidence_function)
 for samples in result:
     w_hit = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     for sample in samples:

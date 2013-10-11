@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.4.6)  11 OCT 2013 16:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.4.6)  11 OCT 2013 18:47
 entering extended mode
  %&-line parsing enabled.
 **primo.tex
@@ -1247,7 +1247,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 12.
  [4
 
-] <figures/dbn.jpeg, id=176, 434.5836pt x 196.3335pt>
+] <figures/dbn.jpeg, id=214, 434.5836pt x 196.3335pt>
 File: figures/dbn.jpeg Graphic file (type jpg)
 
 <use figures/dbn.jpeg> [5
@@ -1256,18 +1256,46 @@ File: figures/dbn.jpeg Graphic file (type jpg)
 
 ] [7
 
-] [8
+]
+<figures/lwalgsimple.jpeg, id=282, 333.8874pt x 193.6836pt>
+File: figures/lwalgsimple.jpeg Graphic file (type jpg)
 
-]) (./input/denis.tex <figures/algo10.png, id=246, 1188.44pt x 632.3625pt>
-File: figures/algo10.png Graphic file (type png)
- <use figures/algo10.png>
+<use figures/lwalgsimple.jpeg> [8
+
+ <./figures/lwalgsimple.jpeg>]
+<figures/lwalg.jpeg, id=305, 329.5512pt x 215.8464pt>
+File: figures/lwalg.jpeg Graphic file (type jpg)
+ <use figures/lwalg.jpeg>
 [9
 
- <./figures/algo10.png>] [10
+ <./figures/lwalg.jpeg>]
+<figures/pfalg.jpeg, id=328, 291.0072pt x 221.628pt>
+File: figures/pfalg.jpeg Graphic file (type jpg)
+ <use figures/pfalg.jpeg>
+[10
 
-] [11
+ <./figures/pfalg.jpeg>]
+<figures/pfalg_code.jpeg, id=351, 291.0072pt x 221.628pt>
+File: figures/pfalg_code.jpeg Graphic file (type jpg)
 
-]) (./input/manu.tex) (./input/max.tex)
+<use figures/pfalg_code.jpeg> [11
+
+ <./figures/pfalg_code.jpeg>] [12
+
+] [13
+
+])
+(./input/denis.tex <figures/algo10.png, id=419, 1188.44pt x 632.3625pt>
+File: figures/algo10.png Graphic file (type png)
+
+<use figures/algo10.png> [14
+
+ <./figures/algo10.png>] [15
+
+] [16
+
+])
+(./input/manu.tex) (./input/max.tex)
 \tf@nav=\write6
 \openout6 = `primo.nav'.
 
@@ -1277,29 +1305,28 @@ File: figures/algo10.png Graphic file (type png)
 \tf@snm=\write8
 \openout8 = `primo.snm'.
 
-
-(./primo.aux) ) 
+ (./primo.aux) ) 
 Here is how much of TeX's memory you used:
- 19481 strings out of 495021
- 369103 string characters out of 1181036
- 446025 words of memory out of 3000000
- 22088 multiletter control sequences out of 15000+50000
- 62241 words of font info for 85 fonts, out of 3000000 for 9000
+ 19532 strings out of 495021
+ 369861 string characters out of 1181036
+ 449025 words of memory out of 3000000
+ 22121 multiletter control sequences out of 15000+50000
+ 67409 words of font info for 87 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  49i,20n,57p,394b,754s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-</usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-
-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/typ
-e1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/u
-hvro8a.pfb>
-Output written on primo.pdf (11 pages, 437285 bytes).
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf
+-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/
+uhvro8a.pfb>
+Output written on primo.pdf (16 pages, 1059268 bytes).
 PDF statistics:
- 342 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 191 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 534 PDF objects out of 1000 (max. 8388607)
+ 46 named destinations out of 1000 (max. 500000)
+ 227 words of extra memory for PDF output out of 10000 (max. 10000000)
 

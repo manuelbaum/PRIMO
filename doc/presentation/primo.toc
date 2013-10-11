@@ -5,9 +5,11 @@
 \beamer@subsectionintoc {2}{1}{Definition}{4}{0}{2}
 \beamer@subsectionintoc {2}{2}{Example}{5}{0}{2}
 \beamer@subsectionintoc {2}{3}{Inference}{6}{0}{2}
-\beamer@sectionintoc {3}{Factor Trees}{9}{0}{3}
-\beamer@subsectionintoc {3}{1}{Task Description}{9}{0}{3}
-\beamer@subsectionintoc {3}{2}{Factor Elimination}{10}{0}{3}
-\beamer@subsectionintoc {3}{3}{Elimination Trees}{10}{0}{3}
-\beamer@subsectionintoc {3}{4}{Building Strategies}{10}{0}{3}
-\beamer@subsectionintoc {3}{5}{Literature}{10}{0}{3}
+\beamer@subsectionintoc {2}{4}{Structure}{11}{0}{2}
+\beamer@subsectionintoc {2}{5}{Literature}{13}{0}{2}
+\beamer@sectionintoc {3}{Factor Trees}{14}{0}{3}
+\beamer@subsectionintoc {3}{1}{Task Description}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Factor Elimination}{15}{0}{3}
+\beamer@subsectionintoc {3}{3}{Elimination Trees}{15}{0}{3}
+\beamer@subsectionintoc {3}{4}{Building Strategies}{15}{0}{3}
+\beamer@subsectionintoc {3}{5}{Literature}{15}{0}{3}

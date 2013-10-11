@@ -24,22 +24,34 @@
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\slideentry {2}{3}{3}{8/8}{Inference}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {3}{Factor Trees}{9}{Factor Trees}{0}}
-\headcommand {\beamer@sectionpages {4}{8}}
-\headcommand {\beamer@subsectionpages {6}{8}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{9}{Task Description}}\headcommand {\beamer@subsectionpages {9}{8}}
-\headcommand {\slideentry {3}{1}{1}{9/9}{Task Description}{0}}
+\headcommand {\slideentry {2}{3}{4}{9/9}{Inference}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{10}{Factor Elimination}}\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{10}{Elimination Trees}}\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{10}{Building Strategies}}\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{10}{Literature}}\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\slideentry {3}{5}{1}{10/10}{Literature}{0}}
+\headcommand {\slideentry {2}{3}{5}{10/10}{Inference}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {3}{5}{2}{11/11}{Literature}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{11}{Structure}}\headcommand {\beamer@subsectionpages {6}{10}}
+\headcommand {\slideentry {2}{4}{1}{11/11}{Structure}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\beamer@sectionpages {12}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\def \inserttotalframenumber {11}}
+\headcommand {\slideentry {2}{4}{2}{12/12}{Structure}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@subsectionentry {0}{2}{5}{13}{Literature}}\headcommand {\beamer@subsectionpages {11}{12}}
+\headcommand {\slideentry {2}{5}{1}{13/13}{Literature}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\sectionentry {3}{Factor Trees}{14}{Factor Trees}{0}}
+\headcommand {\beamer@sectionpages {4}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{14}{Task Description}}\headcommand {\beamer@subsectionpages {14}{13}}
+\headcommand {\slideentry {3}{1}{1}{14/14}{Task Description}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{15}{Factor Elimination}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{15}{Elimination Trees}}\headcommand {\beamer@subsectionpages {15}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{15}{Building Strategies}}\headcommand {\beamer@subsectionpages {15}{14}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{15}{Literature}}\headcommand {\beamer@subsectionpages {15}{14}}
+\headcommand {\slideentry {3}{5}{1}{15/15}{Literature}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {3}{5}{2}{16/16}{Literature}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@partpages {1}{16}}
+\headcommand {\beamer@subsectionpages {17}{16}}
+\headcommand {\beamer@sectionpages {17}{16}}
+\headcommand {\beamer@documentpages {16}}
+\headcommand {\def \inserttotalframenumber {16}}

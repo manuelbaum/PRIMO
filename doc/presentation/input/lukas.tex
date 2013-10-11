@@ -14,7 +14,7 @@
 \subsection{Example}
 \begin{frame}
 %\frametitle{Example}
-\includegraphics[width=.9\textwidth]{figures/dbn}
+\includegraphics[width=1\textwidth]{figures/dbn}
 \end{frame}
 
 \subsection{Inference}
@@ -49,4 +49,54 @@
 
 \begin{frame}
 \frametitle{Algorithm}
+\includegraphics[width=1\textwidth]{figures/lwalgsimple}
+\end{frame}
+
+\begin{frame}
+\frametitle{Algorithm}
+\includegraphics[width=1\textwidth]{figures/lwalg}
+\end{frame}
+
+\begin{frame}
+\frametitle{Algorithm}
+\includegraphics[width=.8\textwidth]{figures/pfalg}
+\end{frame}
+
+\subsection{Structure}
+\begin{frame}
+\frametitle{Algorithm}
+\includegraphics[width=.8\textwidth]{figures/pfalg_code}
+\end{frame}
+
+\begin{frame}
+\frametitle{Files}
+\Large\textbf{PRIMO/primo/}
+\begin{itemize}
+	\item core/
+	\begin{itemize}
+		\item DynamicBayesNet.py
+		\item TowTBN.py (create\_timeslice())
+	\end{itemize}
+	\item reasoning/particlebased/
+	\begin{itemize}
+		\item ParticleFilterDBN.py (sample\_from\_inital\_distribution(), wighted\_sample\_with\_replacement(), ...)
+	\end{itemize}
+	\item tests/
+	\begin{itemize}
+		\item DynamicBayesNet\_test.py
+		\item XMLBIF\_test.py
+	\end{itemize}
+	\item utils/
+	\begin{itemize}
+		\item XMLBIF.py
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Literature}
+\begin{frame}
+\begin{itemize}
+\item \textsc{Stuart Russell and Peter Norvig} \\ Artificial Intelligence: A Modern Approach
+\item \textsc{Daphne Koller and Nir Friedman} \\ Probabilistic Graphical Models: Principles and Techniques
+\end{itemize}
 \end{frame}
