@@ -80,6 +80,7 @@ print "Posterior of burglary : " + str(fe.calculate_PosteriorMarginal([burglary]
 
 factorTreeFactory = FactorTreeFactory()
 factorTree = factorTreeFactory.create_greedy_factortree(bn)
+factorTree.draw()
 
 #For large nets or much queries the factorTree is the most efficient way.
 #The first query is expensive in calculation but all following queries are very 

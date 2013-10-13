@@ -13,10 +13,13 @@
 \beamer@subsectionintoc {3}{3}{Elimination Trees}{15}{0}{3}
 \beamer@subsectionintoc {3}{4}{Building Strategies}{15}{0}{3}
 \beamer@subsectionintoc {3}{5}{Literature}{15}{0}{3}
-\beamer@sectionintoc {4}{manu}{17}{0}{4}
-\beamer@sectionintoc {5}{Bayesian Decision Network}{17}{0}{5}
-\beamer@subsectionintoc {5}{1}{Definition}{17}{0}{5}
-\beamer@subsectionintoc {5}{2}{Example}{19}{0}{5}
-\beamer@subsectionintoc {5}{3}{Solving a BDN}{20}{0}{5}
-\beamer@subsectionintoc {5}{4}{Structure}{22}{0}{5}
-\beamer@subsectionintoc {5}{5}{Literature}{23}{0}{5}
+\beamer@sectionintoc {4}{Approximate Inference}{17}{0}{4}
+\beamer@subsectionintoc {4}{1}{Motivation}{17}{0}{4}
+\beamer@subsectionintoc {4}{2}{Structure}{18}{0}{4}
+\beamer@subsectionintoc {4}{3}{Literature}{22}{0}{4}
+\beamer@sectionintoc {5}{Bayesian Decision Network}{22}{0}{5}
+\beamer@subsectionintoc {5}{1}{Definition}{22}{0}{5}
+\beamer@subsectionintoc {5}{2}{Example}{25}{0}{5}
+\beamer@subsectionintoc {5}{3}{Solving a BDN}{26}{0}{5}
+\beamer@subsectionintoc {5}{4}{Structure}{28}{0}{5}
+\beamer@subsectionintoc {5}{5}{Literature}{29}{0}{5}

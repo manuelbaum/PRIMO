@@ -46,34 +46,13 @@
 
 \end{frame}
   \begin{frame}
-    \Large\textbf{MCMC-class}
-    This encapsules MarkovChainSampler
-    \begin{block}{Possible requests:}
-     \begin{itemize}
-      \item def calculate\_PriorMarginal(self, variables, AssumedDensity):
-      \item def calculate\_MAP(self, variables, evidence, AssumedDensity):
-      \item def calculate\_PosteriorMarginal(self, variables, evidence, AssumedDensity):
-      \item  def calculate\_PoE(self, evidence):
-\end{itemize}
-
-    \end{block}
-
+    \Large\textbf{MCMC}
+    Danach in MCMC klasse ergebnisse berechnen
 \end{frame}
   \begin{frame}
     \Large\textbf{Real-valued variables}
-      \begin{block}{Which densities are supported?}
-	\begin{itemize}
-	 \item Gaussian
-	  \item  Beta
-	  \item  Exponential
-	\end{itemize}
-
-      \end{block}
-
-	
+      Which kinds of nodes are there?
+	Gaussian, Beta, Exponential
 \end{frame}
 \subsection{Literature}
-\Large\textbf{Literature}
-
-
-\textsc{Daphne Koller and Nir Friedman} \\ Probabilistic Graphical Models: Principles and Techniques
+asdf
