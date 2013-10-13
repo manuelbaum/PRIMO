@@ -50,8 +50,33 @@
 \headcommand {\beamer@framepages {15}{15}}
 \headcommand {\slideentry {3}{5}{2}{16/16}{Literature}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\beamer@partpages {1}{16}}
-\headcommand {\beamer@subsectionpages {17}{16}}
+\headcommand {\sectionentry {4}{manu}{17}{manu}{0}}
+\headcommand {\beamer@sectionpages {14}{16}}
+\headcommand {\beamer@subsectionpages {15}{16}}
+\headcommand {\sectionentry {5}{Bayesian Decision Network}{17}{Bayesian Decision Network}{0}}
 \headcommand {\beamer@sectionpages {17}{16}}
-\headcommand {\beamer@documentpages {16}}
-\headcommand {\def \inserttotalframenumber {16}}
+\headcommand {\beamer@subsectionpages {17}{16}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{17}{Definition}}\headcommand {\beamer@subsectionpages {17}{16}}
+\headcommand {\slideentry {5}{1}{1}{17/17}{Definition}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {5}{1}{2}{18/18}{Definition}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{19}{Example}}\headcommand {\beamer@subsectionpages {17}{18}}
+\headcommand {\slideentry {5}{2}{1}{19/19}{Example}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{20}{Solving a BDN}}\headcommand {\beamer@subsectionpages {19}{19}}
+\headcommand {\slideentry {5}{3}{1}{20/20}{Solving a BDN}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\slideentry {5}{3}{2}{21/21}{Solving a BDN}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@subsectionentry {0}{5}{4}{22}{Structure}}\headcommand {\beamer@subsectionpages {20}{21}}
+\headcommand {\slideentry {5}{4}{1}{22/22}{Structure}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@subsectionentry {0}{5}{5}{23}{Literature}}\headcommand {\beamer@subsectionpages {22}{22}}
+\headcommand {\slideentry {5}{5}{1}{23/23}{Literature}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\beamer@partpages {1}{23}}
+\headcommand {\beamer@subsectionpages {23}{23}}
+\headcommand {\beamer@sectionpages {17}{23}}
+\headcommand {\beamer@documentpages {23}}
+\headcommand {\def \inserttotalframenumber {23}}
