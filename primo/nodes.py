@@ -33,14 +33,12 @@ class RandomNode(Node):
     At a later point in time there may be structural nodes too.
     '''
 
-    #The Continditional Propability Distribution of this random variable
-    cpd = None
 
     def __init__(self, name):
         super(RandomNode, self).__init__(name)
-
+        self.cpd = None
         #value_range defines the domain of this random variable
-        self.value_range=None
+        self.value_range = None
 
     def set_cpd(self, cpd):
         self.cpd = cpd
@@ -96,13 +94,9 @@ class DiscreteNode(RandomNode):
 
     def __init__(self, name, value_range):
         super(DiscreteNode, self).__init__(name)
-
         self.value_range = value_range
         self.cpd = primo.densities.ProbabilityTable()
         self.cpd.add_variable(self)
-
-    def __str__(self):
-        return self.name
 
     def __repr__(self):
         return "DiscreteNode("+self.name+")"
@@ -138,7 +132,6 @@ class DiscreteNode(RandomNode):
             for v in self.value_range:
                 if evidence[self].is_compatible(v):
                     compatibles.append(v)
-
         return random.choice(compatibles), 1.0
 
 
@@ -150,7 +143,6 @@ class ContinuousNode(RandomNode):
     '''
     def __init__(self, name, value_range, DensityClass):
         super(ContinuousNode, self).__init__(name)
-
         #value_range is a 2-tuple that defines this variable's domain.
         self.value_range = value_range
         #the class density_class defines the class of function that is used
@@ -160,11 +152,8 @@ class ContinuousNode(RandomNode):
         #of this ContinuousNode, conditioned on this Node's parents.
         self.cpd = DensityClass(self)
 
-    def __str__(self):
-        return self.name
-
     def __repr__(self):
-        return "str(ContinuousNode)"+self.name+")"
+        return "ContinuousNode(" + self.name + ")"
 
     def set_density_parameters(self, density_parameters):
         self.cpd.set_parameters(density_parameters)
@@ -436,3 +425,4 @@ class UtilityNode(Node):
 
     def __str__(self):
         return self.name + "\n" + str(self.ut)
+        

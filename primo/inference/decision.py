@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import itertools
-import operator
 
 import numpy as np
 

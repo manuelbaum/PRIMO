@@ -5,13 +5,14 @@ import primo.nodes
 class BayesianNetwork(object):
 
     def __init__(self):
+        super(BayesianNetwork, self).__init__()
         self.graph = nx.DiGraph()
         self.node_lookup = {}
 
     def add_node(self, node):
         if isinstance(node, primo.nodes.Node):
             if node.name in self.node_lookup.keys():
-                raise Exception("Node name already exists in Bayesnet: "+node.name)
+                raise Exception("Node name already exists in BayesNetwork: " + node.name)
             self.node_lookup[node.name]=node
             self.graph.add_node(node)
         else:
@@ -68,13 +69,11 @@ class BayesianNetwork(object):
         else:
             return self.graph.predecessors(node)
 
-
     def get_children(self, node):
         if node.name not in self.node_lookup.keys():
             raise Exception("Node " + node.name + "does not exists")
         else:
             return self.graph.successors(node)
-
 
     def get_markov_blanket(self, node):
         raise Exception("Called unimplemented function")
@@ -95,14 +94,11 @@ class BayesianNetwork(object):
     def is_valid(self):
         '''Check if graph structure is valid.
         Returns true if graph is directed and acyclic, false otherwiese'''
-
         if self.graph.number_of_selfloops() > 0:
             return False
-
         for node in self.graph.nodes():
             if self.has_loop(node):
                 return False
-
         return True
 
     def has_loop(self, node, origin=None):
@@ -115,7 +111,6 @@ class BayesianNetwork(object):
         Returns true on succes, false otherwise.'''
         if not origin:
             origin = node
-
         for successor in self.graph.successors(node):
             if successor == origin:
                 return True
@@ -150,14 +145,11 @@ class BayesianDecisionNetwork(BayesianNetwork):
         '''Check if graph structure is valid.
         Returns true if graph is directed, acyclic and if there is a path that connects every decision node(consistency check),
         false otherwise'''
-
         if self.graph.number_of_selfloops() > 0:
             return False
-
         for node in self.graph.nodes():
             if self.has_loop(node):
                 return False
-
         decisionNodeList = []
         for node in self.get_all_nodes():
             if isinstance(node, DecisionNode):
@@ -292,8 +284,7 @@ class DynamicBayesianNetwork(BayesianNetwork):
             if not self._twoTBN.has_initial_node_by_name(node.name):
                 print("Node with name " + str(node.name) +
                 " not found in TwoTBN!")
-                return False;
-
+                return False
         return super(DynamicBayesianNetwork, self).is_valid()
 
 
