@@ -4,7 +4,7 @@ import re
 
 import scipy.stats
 
-import primo.reasoning.densities
+import primo.densities
 
 
 class Node(object):
@@ -98,7 +98,7 @@ class DiscreteNode(RandomNode):
         super(DiscreteNode, self).__init__(name)
 
         self.value_range = value_range
-        self.cpd = primo.reasoning.densities.ProbabilityTable()
+        self.cpd = primo.densities.ProbabilityTable()
         self.cpd.add_variable(self)
         
     def __str__(self):
@@ -279,7 +279,7 @@ class ContinuousNodeFactory(object):
             name,
             (-float("Inf"),
             float("Inf")),
-            primo.reasoning.densities.Gauss)
+            primo.densities.Gauss)
         
     def createExponentialNode(self, name):
         '''
@@ -290,7 +290,7 @@ class ContinuousNodeFactory(object):
         return self.createContinuousNode(
             name,
             (0,float("Inf")),
-            primo.reasoning.densities.Exponential)
+            primo.densities.Exponential)
         
     def createBetaNode(self, name):
         '''
@@ -301,7 +301,7 @@ class ContinuousNodeFactory(object):
         return self.createContinuousNode(
             name,
             (0, 1),
-            primo.reasoning.densities.Beta)
+            primo.densities.Beta)
     
     def createContinuousNode(self,name,value_range,density_class):
         '''
