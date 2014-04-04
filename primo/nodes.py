@@ -5,10 +5,7 @@ import re
 import scipy
 
 from primo.decision.UtilityTable import UtilityTable
-from primo.reasoning.density import Beta
-from primo.reasoning.density import Exponential
-from primo.reasoning.density import Gauss
-from primo.reasoning.density import ProbabilityTable
+import primo.reasoning.density
 
 
 class Node(object):
@@ -102,7 +99,7 @@ class DiscreteNode(RandomNode):
         super(DiscreteNode, self).__init__(name)
 
         self.value_range = value_range
-        self.cpd = ProbabilityTable()
+        self.cpd = primo.reasoning.density.ProbabilityTable()
         self.cpd.add_variable(self)
         
     def __str__(self):
@@ -279,7 +276,11 @@ class ContinuousNodeFactory(object):
         
         @param name: The name of the node.
         '''        
-        return self.createContinuousNode(name,(-float("Inf"),float("Inf")),Gauss)
+        return self.createContinuousNode(
+            name,
+            (-float("Inf"),
+            float("Inf")),
+            primo.reasoning.density.Gauss)
         
     def createExponentialNode(self, name):
         '''
@@ -287,7 +288,10 @@ class ContinuousNodeFactory(object):
         
         @param name: The name of the node.
         '''  
-        return self.createContinuousNode(name,(0,float("Inf")),Exponential)
+        return self.createContinuousNode(
+            name,
+            (0,float("Inf")),
+            primo.reasoning.density.Exponential)
         
     def createBetaNode(self, name):
         '''
@@ -295,9 +299,12 @@ class ContinuousNodeFactory(object):
         
         @param name: The name of the node.
         '''  
-        return self.createContinuousNode(name,(0,1),Beta)
+        return self.createContinuousNode(
+            name,
+            (0, 1),
+            primo.reasoning.density.Beta)
     
-    def createContinuousNode(self,name,value_range,DensityClass):
+    def createContinuousNode(self,name,value_range,density_class):
         '''
         Create a ContinuousNode. This method should only be invoked from
         outside this class if no specialized method is available.
@@ -308,7 +315,10 @@ class ContinuousNodeFactory(object):
         @param DensityClass: A class from primo.reasoning.density that shall be
             the node's pdf
         '''  
-        return ContinuousNode(name,value_range,DensityClass)
+        return ContinuousNode(
+            name,
+            value_range,
+            density_class)
 
 
 class DecisionNode(Node):
