@@ -7,8 +7,7 @@ import random
 import numpy
 from scipy.stats
 
-from primo.nodes import ContinuousNode
-
+from primo.nodes
 
 class Density(object):
     '''TODO: write doc'''
@@ -46,6 +45,7 @@ class ExponentialParameters(object):
         #a dict (node,coefficient) that holds the weights that define the depency on each node
         self.b=b
 
+
 class GaussParameters(object):
     '''
     This represents the parameters for the Gauss-density class.
@@ -58,6 +58,7 @@ class GaussParameters(object):
         #the variance
         self.var=var
         
+
 class NDGaussParameters(object):
     def __init__(self, mu, cov):
         self.mu=mu
@@ -591,7 +592,7 @@ class Gauss(Density):
         
     def add_variable(self, variable):
 
-        if not isinstance(variable, ContinuousNode):
+        if not isinstance(variable, primo.nodes.ContinuousNode):
             raise Exception("Tried to add Variable into Gaussian densitiy, but variable is not continuous")
         self.b[variable]=0.0
     

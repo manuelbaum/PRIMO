@@ -2,10 +2,9 @@ import abc
 import random
 import re
 
-import scipy
+import scipy.stats
 
-from primo.decision.UtilityTable import UtilityTable
-import primo.reasoning.density
+import primo.reasoning.densities
 
 
 class Node(object):
@@ -99,7 +98,7 @@ class DiscreteNode(RandomNode):
         super(DiscreteNode, self).__init__(name)
 
         self.value_range = value_range
-        self.cpd = primo.reasoning.density.ProbabilityTable()
+        self.cpd = primo.reasoning.densities.ProbabilityTable()
         self.cpd.add_variable(self)
         
     def __str__(self):
@@ -280,7 +279,7 @@ class ContinuousNodeFactory(object):
             name,
             (-float("Inf"),
             float("Inf")),
-            primo.reasoning.density.Gauss)
+            primo.reasoning.densities.Gauss)
         
     def createExponentialNode(self, name):
         '''
@@ -291,7 +290,7 @@ class ContinuousNodeFactory(object):
         return self.createContinuousNode(
             name,
             (0,float("Inf")),
-            primo.reasoning.density.Exponential)
+            primo.reasoning.densities.Exponential)
         
     def createBetaNode(self, name):
         '''
@@ -302,7 +301,7 @@ class ContinuousNodeFactory(object):
         return self.createContinuousNode(
             name,
             (0, 1),
-            primo.reasoning.density.Beta)
+            primo.reasoning.densities.Beta)
     
     def createContinuousNode(self,name,value_range,density_class):
         '''

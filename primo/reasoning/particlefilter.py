@@ -4,8 +4,7 @@ import copy
 import random
 import time
 
-from primo.networks import BayesNet
-from primo.networks import DynamicBayesNet
+import primo.networks
 
 class Particle(object):
     ''' 
@@ -91,7 +90,7 @@ def weighted_sample(network, evidence = {}):
     '''
     w = 1.0
     state = {}
-    if not isinstance(network, BayesNet):
+    if not isinstance(network, primo.network.BayesianNetwork):
         raise Exception("The given network is not an instance of BayesNet.")
         
     nodes = network.get_nodes_in_topological_sort()
@@ -132,7 +131,7 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, particle_class 
 
     Returns a list of N samples
     '''
-    if not isinstance(network, DynamicBayesNet):
+    if not isinstance(network, primo.networks.DynamicBayesianNetwork):
         raise Exception("The given network is not an instance of DynamicBayesNet.")
 
     if not network.is_valid():

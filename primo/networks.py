@@ -2,7 +2,7 @@ import networkx as nx
 
 import primo.nodes
 
-class BayesNet(object):
+class BayesianNetwork(object):
 
     def __init__(self):
         self.graph = nx.DiGraph()
@@ -15,7 +15,7 @@ class BayesNet(object):
             self.node_lookup[node.name]=node
             self.graph.add_node(node)
         else:
-            raise Exception("Can only add 'Node' and its subclasses as nodes into the BayesNet")
+            raise Exception("Can only add 'Node' and its subclasses as nodes into the BayesianNetwork")
 
     def add_edge(self, node_from, node_to):
         if node_from in self.graph.nodes() and node_to in self.graph.nodes():
@@ -38,14 +38,14 @@ class BayesNet(object):
         try:
             self.graph.remove_edge(node_from, node_to)
         except nx.exception.NetworkXError:
-            raise Exception("Tried to remove an edge which does not exist in the BayesNet")
+            raise Exception("Tried to remove an edge which does not exist in the BayesianNetwork")
         #raise Exception("Fixme: Adapt CPD of child-node")
 
     def get_node(self, node_name):
         try:
             return self.node_lookup[node_name]
         except KeyError:
-            raise Exception("There is no node with name "+node_name+" in the BayesNet")
+            raise Exception("There is no node with name "+node_name+" in the BayesianNetwork")
 
     def get_all_nodes(self):
         return self.graph.nodes()
@@ -137,7 +137,7 @@ class BayesNet(object):
         return len(self.graph)
 
 
-class BayesianDecisionNetwork(BayesNet):
+class BayesianDecisionNetwork(BayesianNetwork):
     
     def __init__(self): 
         super(BayesianDecisionNetwork, self).__init__()
@@ -180,7 +180,7 @@ class BayesianDecisionNetwork(BayesNet):
             self.node_lookup[node.name]=node
             self.graph.add_node(node)
         else:
-            raise Exception("Can only add 'Node' and its subclasses as nodes into the BayesNet")
+            raise Exception("Can only add 'Node' and its subclasses as nodes into the BayesianNetwork")
 
     def get_all_nodes(self):
         '''Returns all RandomNodes'''
@@ -234,7 +234,7 @@ class BayesianDecisionNetwork(BayesNet):
         self.partialOrdering = partialOrder
 
 
-class DynamicBayesNet(BayesNet):
+class DynamicBayesianNetwork(BayesianNetwork):
     ''' This is the implementation of a dynamic Bayesian network (also called
     temporal Bayesian network).
 
@@ -248,8 +248,8 @@ class DynamicBayesNet(BayesNet):
     '''
 
     def __init__(self):
-        super(DynamicBayesNet, self).__init__()
-        self._B0 = BayesNet()
+        super(DynamicBayesianNetwork, self).__init__()
+        self._B0 = BayesianNetwork()
         self._twoTBN = TwoTBN()
 
     @property
@@ -260,12 +260,12 @@ class DynamicBayesNet(BayesNet):
     @B0.setter
     def B0(self, value):
         ''' Set the Bayesian network representing the initial distribution.'''
-        if isinstance(value, BayesNet):
+        if isinstance(value, BayesianNetwork):
             if not value.is_valid():
-                raise Exception("BayesNet is not valid.")
+                raise Exception("BayesianNetwork is not valid.")
             self._B0 = value
         else:
-            raise Exception("Can only set 'BayesNet' and its subclasses as " +
+            raise Exception("Can only set 'BayesianNetwork' and its subclasses as " +
             "B0 of a DBN.")
 
     @property
@@ -278,7 +278,7 @@ class DynamicBayesNet(BayesNet):
         ''' Set the 2-time-slice Bayesian network.'''
         if isinstance(value, TwoTBN):
             if not value.is_valid():
-                raise Exception("BayesNet is not valid.")
+                raise Exception("BayesianNetwork is not valid.")
             self._twoTBN = value
         else:
             raise Exception("Can only set 'TwoTBN' and its subclasses as " +
@@ -294,18 +294,18 @@ class DynamicBayesNet(BayesNet):
                 " not found in TwoTBN!")
                 return False;
 
-        return super(DynamicBayesNet, self).is_valid()
+        return super(DynamicBayesianNetwork, self).is_valid()
 
 
-class TwoTBN(BayesNet):
+class TwoTBN(BayesianNetwork):
     ''' This is the implementation of a 2-time-slice Bayesian network (2-TBN).
     '''
 
     def __init__(self, bayesnet=None):
-        BayesNet.__init__(self)
+        BayesianNetwork.__init__(self)
         if bayesnet:
-            if not isinstance(bayesnet, BayesNet):
-                raise Exception("Parameter 'bayesnet' is not a instance of class BayesNet.")
+            if not isinstance(bayesnet, BayesianNetwork):
+                raise Exception("Parameter 'bayesnet' is not a instance of class BayesianNetwork.")
             self.graph = bayesnet.graph
             self.node_lookup = bayesnet.node_lookup
         self.__initial_nodes = []
