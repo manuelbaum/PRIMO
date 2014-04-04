@@ -97,8 +97,8 @@ class XMLBIF(object):
             tag_for.appendChild(txt_for)
             tag_def.appendChild(tag_for)
 
-            # It's not guaranteed that the own node is at dimension zero in 
-            # the probability table.But for the function the order of the 
+            # It's not guaranteed that the own node is at dimension zero in
+            # the probability table.But for the function the order of the
             # variables is important
             for parent in reversed(current_node.get_cpd().get_variables()):
                 tag_par = minidom.Element("GIVEN")

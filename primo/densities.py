@@ -14,7 +14,7 @@ class Density(object):
 
     def __init__(self):
         super(Density, self).__init__()
-        
+
     def add_variables(self, variables):
         for v in variables:
             self.add_variable(v)
@@ -57,7 +57,7 @@ class GaussParameters(object):
         self.b=b
         #the variance
         self.var=var
-        
+
 
 class NDGaussParameters(object):
     def __init__(self, mu, cov):
@@ -71,7 +71,7 @@ class Beta(Density):
     This class represents an beta probabilty density. Unfortunately this
     is currently a little bulky to use as the parameters for the dependency are
     not very transparent. This is how the dependency works:
-    
+
     The parameters p,q for the exponential distribution are computed analogous
     as the activation of a perceptron with sigmoid-activation function:
     output_scale * sigmoid(input_scale* (b0 + b'state)) where b'state means the dot product between b (a vector
@@ -79,24 +79,24 @@ class Beta(Density):
     density depends on). Here: sigmoid=1/(1+exp(-x))
     The parameters output_scale and input_scale can be used to strech or compress
     the sigmoid.
-    
+
     The reason for this is that the parameters are required to be >0. And with
     linear dependencies on the parents this could in no way be guaranteed.
-    
+
     Why the sigmoid function:
     I had to guarantee that the parameters are > 0. As i did not want to
     impose any restrictions on the value range of the parents it was necessary
     to map the support of the parents values to a valid support for the parameters. In
     other (and maybe more correct words): The dependency function to compute
     p and q needed to be of the form R^n->]0,inf].
-    
+
     The first function that came to my mind was:
     weighted sum of the parents values put into an exponential function. This
     caused problems due to the fast growth of the exponential.
     For that reason i switched to the sigmoid function that guarantees 0<p,q<1.
     And because p,q<1 is not very practical output_scale has been introduced
-    to scale from ]0,1[ to ]0,output_scale[. 
-    
+    to scale from ]0,1[ to ]0,output_scale[.
+
     input_scale can be used to strech the sigmoid in input_direction.
     '''
     def __init__(self, node):
@@ -105,37 +105,37 @@ class Beta(Density):
         self.p={}
         self.q={}
         self.node=node
-        
+
         self.input_scale=0.1
         self.output_scale=5.0
-        
+
     def set_parameters(self,parameters):
         self.p0=parameters.p0
         self.q0=parameters.q0
         self.p=parameters.p
         self.q=parameters.q
-        
+
     def add_variable(self, variable):
         if( not isinstance(variable,ContinuousNode.ContinuousNode)):
             raise Exception("Tried to add Variable as parent, but is not a ContinuousNode")
         self.p[variable]=0.0
         self.q[variable]=0.0
-        
-        
+
+
     def get_probability(self,value, node_value_pairs):
         p=self._compute_p_given_parents(dict(node_value_pairs))
         q=self._compute_q_given_parents(dict(node_value_pairs))
         probability = scipy.stats.beta(p, q).pdf(value)
 
         return probability
-        
+
     def _compute_p_given_parents(self, state):
         x = self.p0
         for node in self.p.keys():
             if node in state.keys():
                 x = x + self.p[node]*state[node]
         return self.output_scale*1.0/(1.0+math.exp(-x*self.input_scale))
-        
+
     def _compute_q_given_parents(self, state):
         x = self.q0
         for node in self.q.keys():
@@ -145,7 +145,7 @@ class Beta(Density):
 
 
     def sample_global(self, state, lower_limit, upper_limit):
-        '''This method can be used to sample from this distribution. It is necessary that 
+        '''This method can be used to sample from this distribution. It is necessary that
         a value for each parent is specified and it is possible to constrain the
         value that is being sampled to some intervall.
         @param state: A dict (node->value) that specifies a value for each variable
@@ -160,21 +160,21 @@ class Beta(Density):
         q=self._compute_q_given_parents(state)
 
         distribution=scipy.stats.beta(p,q)
-        
+
         lower_cdf=distribution.cdf(lower_limit)
         upper_cdf=distribution.cdf(upper_limit)
-        
+
         sample_in_integral=random.uniform(lower_cdf, upper_cdf)
-        
+
         sample=distribution.ppf(sample_in_integral)
-        return sample      
+        return sample
 
 class Exponential(Density):
     '''
     This class represents an exponential probabilty density. Unfortunately this
     is currently a little bulky to use as the parameters for the dependency are
     not very transparent. This is how the dependency works:
-    
+
     The parameter lambda for the exponential distribution is computed analogous
     as the activation of a perceptron with sigmoid-activation function:
     output_scale * sigmoid(input_scale* (b0 + b'state)) where b'state means the dot product between b (a vector
@@ -182,24 +182,24 @@ class Exponential(Density):
     density depends on). Here: sigmoid=1/(1+exp(-x))
     The parameters output_scale and input_scale can be used to strech or compress
     the sigmoid.
-    
+
     The reason for this is that the parameter lambda is required to be >0. And with
     linear dependencies on the parents this could in no way be guaranteed.
-    
+
     Why the sigmoid function:
     I had to guarantee that the parameter lambda is > 0. As i did not want to
     impose any restrictions on the value range of the parents it was necessary
     to map the support of the parents values to a valid support for lambda. In
     other (and maybe more correct words): The dependency function to compute
     lambda needed to be of the form R^n->]0,inf].
-    
+
     The first function that came to my mind was:
     weighted sum of the parents values put into an exponential function. This
     caused problems due to the fast growth of the exponential.
     For that reason i switched to the sigmoid function that guarantees 0<lambda<1.
     And because lambda<1 is not very practical output_scale has been introduced
-    to scale from ]0,1[ to ]0,output_scale[. 
-    
+    to scale from ]0,1[ to ]0,output_scale[.
+
     input_scale can be used to strech the sigmoid in input_direction.
     '''
     def __init__(self, node):
@@ -213,22 +213,22 @@ class Exponential(Density):
         self.input_scale=1.0
         #scaling coefficient to stretch or compress the sigmoid in output-direction
         self.output_scale=4.0
-        
+
     def set_parameters(self,parameters):
         self.b=parameters.b
         self.b0=parameters.b0
-        
+
     def add_variable(self, variable):
         '''This method needs some serious reworking: Variables should not be denied
         to be parents because of their value range. Instead it should be evaluated
-        if they can yield parameters for this distribution that are permitted. This 
+        if they can yield parameters for this distribution that are permitted. This
         can in any case happen under bad influence coefficients'''
         if( not isinstance(variable,ContinuousNode.ContinuousNode)):
             raise Exception("Tried to add Variable as parent, but is not a ContinuousNode")
         self.b[variable]=0.0
-        
+
     def get_probability(self,value, node_value_pairs):
-        
+
         #Compute the offset for the density and displace the value accordingly
         _lambda = self._compute_lambda_given_parents(dict(node_value_pairs))
         #Evaluate the displaced density at value
@@ -243,7 +243,7 @@ class Exponential(Density):
         return _lambda
 
     def sample_global(self,state, lower_limit, upper_limit):
-        '''This method can be used to sample from this distribution. It is necessary that 
+        '''This method can be used to sample from this distribution. It is necessary that
         a value for each parent is specified and it is possible to constrain the
         value that is being sampled to some intervall.
         @param state: A dict (node->value) that specifies a value for each variable
@@ -256,14 +256,14 @@ class Exponential(Density):
         '''
         _lambda=self._compute_lambda_given_parents(state)
         distribution=scipy.stats.expon(loc=0,scale=1.0/_lambda)
-        
+
         lower_cdf=distribution.cdf(lower_limit)
         upper_cdf=distribution.cdf(upper_limit)
-        
+
         sample_in_integral=random.uniform(lower_cdf, upper_cdf)
-        
+
         sample=distribution.ppf(sample_in_integral)
-        
+
         #sample=random.expovariate(_lambda)
         #print "EXPO-SAMPLE: "+str(sample)+" at lambda: "+str(_lambda)
         return sample
@@ -277,7 +277,7 @@ class ProbabilityTable(Density):
     def get_neutral_multiplication_PT():
         pt = ProbabilityTable()
         pt.set_probability_table(numpy.array(1.0),[])
-        
+
         return pt
 
 
@@ -301,7 +301,7 @@ class ProbabilityTable(Density):
         ax = self.table.ndim
         self.table=numpy.expand_dims(self.table,ax)
         self.table=numpy.repeat(self.table,len(variable.value_range),axis = ax)
-        
+
 
 
     def set_probability_table(self, table, nodes):
@@ -328,7 +328,7 @@ class ProbabilityTable(Density):
             self.table[index] = self.table[index] + 1
 
         return self.normalize_as_jpt()
-        
+
     def get_most_probable_instantiation(self):
         '''
         This method returns a list of (node,value)-pairs for which this density
@@ -342,17 +342,17 @@ class ProbabilityTable(Density):
     def set_probability(self, value, node_value_pairs):
         index = self.get_cpt_index(node_value_pairs)
         self.table[index]=value
-        
+
     def get_probability(self, node_value_pairs):
         index = self.get_cpt_index(node_value_pairs)
         return self.table[index]
-        
+
     def sample_global(self, global_state, variable, allowed_values):
         '''
         This method can be used to sample from the density according to a global
         state containing values for all other variables that this node belongs to.
         @param global_state: A Dict (node -> value) that must hold a value for
-            all variables that this density depends on. Except for the variable 
+            all variables that this density depends on. Except for the variable
             that it is directly associated with.
         @param variable: The variable that this density is directly associated
             with.
@@ -381,16 +381,16 @@ class ProbabilityTable(Density):
             value = values[index_in_values_list]
             index.append(node.value_range.index(value))
         return tuple(index)
-        
+
     def get_node_value_pairs(self, index):
         '''
         Can be used to determine the node-value combination that belongs to some
         index for the contitional probabilty table. That state needs to be fully
         specified/all variables this density depends on need to be specified.
-        
+
         This method should probably only be used internally.
-        
-        @param index: A tuple 
+
+        @param index: A tuple
         @returns: a list of (node,value) pairs
         '''
         nv_pairs=[]
@@ -431,7 +431,7 @@ class ProbabilityTable(Density):
         retInstance.table = retInstance.table * 1.0 / numpy.sum(retInstance.table)
         retInstance.variables = copy.copy(self.variables)
         return retInstance
-        
+
         #this is the old code:
         #return self.table * 1.0 / numpy.sum(self.table)
 
@@ -544,14 +544,14 @@ class ProbabilityTable(Density):
         ev.table[pos_value] = tmpCpd[pos_value]
 
         return ev
-        
+
     def copy(self):
         '''Returns a copied version of this probabilityTable'''
-        
+
         ev = ProbabilityTable()
         ev.variables = copy.copy(self.variables)
         ev.table = copy.copy(self.table)
-        
+
         return ev
 
 
@@ -580,56 +580,56 @@ class Gauss(Density):
 
     def __init__(self,variable):
         super(Gauss, self).__init__()
-        
+
         self.b0=0#numpy.array([0.0])
         self.b={}
         self.var=1.0
-        
+
     def set_parameters(self,parameters):
         self.set_b0(parameters.b0)
         self.set_b(parameters.b)
         self.set_var(parameters.var)
-        
+
     def add_variable(self, variable):
 
         if not isinstance(variable, primo.nodes.ContinuousNode):
             raise Exception("Tried to add Variable into Gaussian densitiy, but variable is not continuous")
         self.b[variable]=0.0
-    
+
 
     def get_probability(self, x, node_value_pairs):
-        
+
         reduced_mu = self.b0
         for node,value in node_value_pairs:
             reduced_mu = reduced_mu + self.b[node]*value
         return scipy.stats.norm(reduced_mu, numpy.sqrt(self.var)).pdf(x)
-        
-        
+
+
     def set_b(self, variable, b):
         if not variable in b.keys():
             raise Exception("Tried to set dependency-variable b for a variable that has not yet been added to this variable's dependencies")
         self.b[variable]=b
-        
+
     def set_b(self, b):
         if not set(self.b.keys())==set(b.keys()):
             raise Exception("The variables given in the new b do not match the old dependencies of this density")
         self.b=b
-        
+
     def set_b0(self, b0):
         self.b0=b0
-        
+
     def set_var(self, var):
         self.var=var
-        
+
     def _compute_offset_given_parents(self, state):
         x = self.b0
         for node in self.b.keys():
             if node in state.keys():
                 x = x + self.b[node]*state[node]
         return x
-        
+
     def sample_global(self,state,lower_limit,upper_limit):
-        '''This method can be used to sample from this distribution. It is necessary that 
+        '''This method can be used to sample from this distribution. It is necessary that
         a value for each parent is specified and it is possible to constrain the
         value that is being sampled to some intervall.
         @param state: A dict (node->value) that specifies a value for each variable
@@ -640,17 +640,17 @@ class Gauss(Density):
             sampled as value.
         @returns: The sampled value. A real number.
         '''
-        
+
         distribution=scipy.stats.norm(self._compute_offset_given_parents(state), self.var**0.5)
-        
+
         lower_cdf=distribution.cdf(lower_limit)
         upper_cdf=distribution.cdf(upper_limit)
-        
+
         sample_in_integral=random.uniform(lower_cdf, upper_cdf)
-        
+
         sample=distribution.ppf(sample_in_integral)
-    
-    
+
+
         return sample
 
 
@@ -669,44 +669,44 @@ class NDGauss(Density):
 
     def __init__(self):
         super(NDGauss, self).__init__()
-        
+
         self.mu=numpy.array([0.0])
         self.C=numpy.array([[1.0]])
         self.variables=[]
 
-        
+
     def add_variable(self, variable):
         v_min,v_max=variable.get_value_range()
         if not  (v_min>= -float("Inf") and v_max <=float("Inf")):
             raise Exception("Tried to add Variable into Gaussian densitiy, but variable had wrong value-range")
         self.variables.append(variable)
-        
-        
+
+
         m=len(self.variables)
         self.mu.resize([m,1])
         self.C.resize((m,m))
-        
+
         self.C[m-1,m-1]=1.0
-        
+
     def set_parameters(self,parameters):
         self.set_mu(parameters.mu)
         self.set_cov(parameters.cov)
-        
+
     def set_mu(self, mu):
         self.mu=mu
-        
+
     def set_cov(self, C):
         self.C=C
-        
+
     def sample(self):
         return numpy.random.multivariate_normal(self.mu,self.C)
-            
-            
+
+
     def parametrize_from_states(self, samples, number_of_samples):
         '''This method uses a list of variable-instantiations to change this node's parametrization
          to represent a Gaussian constructed from the given samples.
             The Argument samples is a list of pairs (RandomNode, value).'''
-            
+
         X=numpy.empty((number_of_samples, len(self.variables)))
         for i,state in enumerate(samples):
             for j,variable in enumerate(self.variables):
@@ -715,10 +715,10 @@ class NDGauss(Density):
         self.mu=numpy.mean(X,axis=0)
         self.C=numpy.cov(X.transpose())
         return self
-        
+
     def get_most_probable_instantiation(self):
         return self.mu
-        
+
     def __str__(self):
         ret= "Gauss(\nmu="+str(self.mu)+"\nC="+str(self.C)+")"
         return ret

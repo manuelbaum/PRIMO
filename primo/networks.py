@@ -138,17 +138,17 @@ class BayesianNetwork(object):
 
 
 class BayesianDecisionNetwork(BayesianNetwork):
-    
-    def __init__(self): 
+
+    def __init__(self):
         super(BayesianDecisionNetwork, self).__init__()
         self.partialOrdering = []
         self.random_nodes = []
         self.decision_nodes = []
         self.utility_nodes = []
-        
+
     def is_valid(self):
         '''Check if graph structure is valid.
-        Returns true if graph is directed, acyclic and if there is a path that connects every decision node(consistency check), 
+        Returns true if graph is directed, acyclic and if there is a path that connects every decision node(consistency check),
         false otherwise'''
 
         if self.graph.number_of_selfloops() > 0:
@@ -157,14 +157,14 @@ class BayesianDecisionNetwork(BayesianNetwork):
         for node in self.graph.nodes():
             if self.has_loop(node):
                 return False
-        
+
         decisionNodeList = []
         for node in self.get_all_nodes():
             if isinstance(node, DecisionNode):
                 decisionNodeList.append(node)
-        
+
         return all([nx.has_path(self.graph, x, y) == True for x in decisionNodeList for y in decisionNodeList])
-    
+
     def add_node(self, node):
         if isinstance(node, Node):
             if node.name in self.node_lookup.keys():
@@ -184,19 +184,19 @@ class BayesianDecisionNetwork(BayesianNetwork):
 
     def get_all_nodes(self):
         '''Returns all RandomNodes'''
-        return self.random_nodes        
-    
+        return self.random_nodes
+
     def get_all_decision_nodes(self):
         return self.decision_nodes
-        
+
     def get_all_utility_nodes(self):
         return self.utility_nodes
-    
+
     def add_edge(self, node_from, node_to):
         """
-        Adds an edge between two nodes. It is impossible to create en edge between two decision nodes and between two 
+        Adds an edge between two nodes. It is impossible to create en edge between two decision nodes and between two
         utility nodes.
-        
+
         keyword arguments:
         node_from -- Node from where the edge shall begin
         node_to -- Node where the edge shall end
@@ -210,24 +210,24 @@ class BayesianDecisionNetwork(BayesianNetwork):
             node_to.announce_parent(node_from)
         else:
             raise Exception("Tried to add an Edge between two Nodes of which at least one was not contained in the Bayesnet")
-    
+
     def reset_Decisions(self):
         """
         Resets all decisions in the Bayesian Decision Network
         """
         for node in self.decision_nodes:
             node.set_state(None)
-    
+
     def get_partialOrdering(self):
         """
         Getter for the partial ordere
         """
         return self.partialOrdering
-    
+
     def set_partialOrdering(self, partialOrder):
         """
         Sets the partial ordering for this Bayesian Decision Network
-        
+
         partialOrder -- ordered list of RandomNodes and Decision Nodes
         example: [decisionNode1, [randomNode1,randomNode2], decisionNode2, [randomNode3]]
         """
@@ -314,12 +314,12 @@ class TwoTBN(BayesianNetwork):
         '''
         Set all initial nodes to the value of their corresponding nodes
         in state (previous time slice).
-        
+
         Keyword arguments:
         state -- Current state of the network (previous time slice).
         initial -- Set initial to true if this will be the first time slice
         and state only contains nodes of the initial distribution.
-        
+
         Returns this instance with all initial nodes set to their
         new value.
         '''
@@ -340,7 +340,7 @@ class TwoTBN(BayesianNetwork):
     def add_node(self, node, initial=False, node_t=None):
         '''
         Add a node to the TwoTBN.
-        
+
         Keyword arguments:
         node -- Node to be added.
         initial -- If true node is marked as initial node.
@@ -349,11 +349,11 @@ class TwoTBN(BayesianNetwork):
         super(TwoTBN, self).add_node(node)
         if initial:
             self.set_initial_node(node, node_t)
-            
+
     def set_initial_node(self, node_name, node_name_t):
         '''
         Mark a node as initial node.
-        
+
         Keyword arguments:
         node_name -- Name of the initial node.
         node_name_t -- Name of the corresponding node in the time slice.
@@ -365,7 +365,7 @@ class TwoTBN(BayesianNetwork):
     def has_initial_node_by_name(self, node_name):
         '''
         Check if this instance has an inital node with name node_name.
-        
+
         Returns true on success, false otherwise.
         '''
         for (node, node_t) in self.__initial_nodes:

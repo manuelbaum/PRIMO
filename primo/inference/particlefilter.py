@@ -7,33 +7,33 @@ import time
 import primo.networks
 
 class Particle(object):
-    ''' 
+    '''
     This is the basic particle class used by the DBN particle filter.
     Inherit this class for more functionality.
     '''
     def __init__(self):
         self.state = None
-        
+
     def set_state(self, state):
-        ''' 
+        '''
         Set the state of this particle and call the update() function.
-        
+
         Keyword arguments:
         state -- new state of this particle
         '''
-        self.state = state   
+        self.state = state
         self.update()
-        
+
     def get_state(self):
-        ''' 
+        '''
         Get the state of this particle.
-        
+
         Returns the state of this particle.
         '''
         return self.state
-        
+
     def update(self):
-        ''' 
+        '''
         Implement this method to update the particle as required.
         '''
         pass
@@ -47,11 +47,11 @@ def weighted_random(weights):
 
 def wighted_sample_with_replacement(samples = [], weights = [], N = 0):
     '''
-    The population is resampled to generate a new population of N samples. 
-    Each new sample is selected from the current population; the probability 
+    The population is resampled to generate a new population of N samples.
+    Each new sample is selected from the current population; the probability
     that a particular sample is selected is proportional to its weight.
-    
-    See "Artificial Intelligence: A Modern Approach (Third edition)" by 
+
+    See "Artificial Intelligence: A Modern Approach (Third edition)" by
     Stuart Russell and Peter Norvig (p. 596 ff.)
 
     Keyword arguments:
@@ -76,10 +76,10 @@ def weighted_sample(network, evidence = {}):
     '''
     Each nonevidence variable is sampled according to the conditional
     distribution given the values already sampled for the variable's parents,
-    while a weight isaccumulated based on the likelihood for each evidence 
+    while a weight isaccumulated based on the likelihood for each evidence
     variable.
-    
-    See "Artificial Intelligence: A Modern Approach (Third edition)" by 
+
+    See "Artificial Intelligence: A Modern Approach (Third edition)" by
     Stuart Russell and Peter Norvig (p. 534)
 
     Keyword arguments:
@@ -92,7 +92,7 @@ def weighted_sample(network, evidence = {}):
     state = {}
     if not isinstance(network, primo.network.BayesianNetwork):
         raise Exception("The given network is not an instance of BayesNet.")
-        
+
     nodes = network.get_nodes_in_topological_sort()
     for node in nodes:
         #reduce this node's cpd
@@ -102,7 +102,7 @@ def weighted_sample(network, evidence = {}):
             reduced_cpd = node.get_cpd_reduced(evidence_tmp)
         else:
             reduced_cpd = node.get_cpd()
-                
+
         # (re-)calulate weight
         if node in evidence:
             w *= reduced_cpd.get_table()[node.get_value_range().index(evidence[node])]
@@ -117,8 +117,8 @@ def weighted_sample(network, evidence = {}):
 def particle_filtering_DBN(network, N, T, get_evidence_function, particle_class = Particle, interval = 0):
     '''
     Create N samples for the given network with T time slices.
-    
-    See "Artificial Intelligence: A Modern Approach (Third edition)" by 
+
+    See "Artificial Intelligence: A Modern Approach (Third edition)" by
     Stuart Russell and Peter Norvig (p. 596 ff.)
 
     Keyword arguments:
@@ -139,7 +139,7 @@ def particle_filtering_DBN(network, N, T, get_evidence_function, particle_class 
 
     # Sample from inital distribution
     samples = sample_from_inital_distribution(network, get_evidence_function(), N, particle_class)
-    
+
     # Sample time slices
     initial_samples = True
     if T == -1:
@@ -180,9 +180,9 @@ def sample_from_inital_distribution(network, evidence, N, particle_class = Parti
         samples.append(particle_class())
         samples[n].set_state(copy.copy(state))
         weights.append(w)
-    
-    weights = normalize_weights(weights)    
-    
+
+    weights = normalize_weights(weights)
+
     # wighted sample with replacement
     return wighted_sample_with_replacement(samples, weights, N)
 
@@ -196,7 +196,7 @@ def sample_one_time_slice(network, samples, evidence, initial_samples = False):
     samples -- a dict of samples (sampled from initial distribution at the beginning or a previous time slice)
     evidence -- dict with the following structure: {node1:evidence1, node2:evidence2, ...}
     initial_samples -- is true if the given samples where sampled from the initial distribution
-    
+
     Returns a list of N new samples
     '''
     weights = []
@@ -209,12 +209,12 @@ def sample_one_time_slice(network, samples, evidence, initial_samples = False):
 
         samples[n].set_state(copy.copy(state))
         weights.append(w)
-    
+
     weights = normalize_weights(weights)
 
     # wighted sample with replacement
     return wighted_sample_with_replacement(samples, weights, N)
-    
+
 def normalize_weights(weights=[]):
     '''
     Normalize the given weights.
