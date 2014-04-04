@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from primo.core import BayesNet
-from primo.core import DynamicBayesNet
-import random
+
 import copy
+import random
 import time
+
+from primo.networks import BayesNet
+from primo.networks import DynamicBayesNet
 
 class Particle(object):
     ''' 
