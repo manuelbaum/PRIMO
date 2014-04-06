@@ -1,8 +1,8 @@
 import unittest
 import numpy
 
-from primo.reasoning.density import ProbabilityTable
-from primo.reasoning import DiscreteNode
+from primo.densities import ProbabilityTable
+from primo.nodes import DiscreteNode
 
 
 class MultiplicationTest(unittest.TestCase):

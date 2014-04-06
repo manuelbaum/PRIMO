@@ -1,8 +1,8 @@
-from primo.core import BayesianDecisionNetwork
-from primo.decision import DecisionNode
-from primo.decision import UtilityNode
-from primo.reasoning import DiscreteNode
-from primo.decision.make_decision import MakeDecision
+from primo.networks import BayesianDecisionNetwork
+from primo.nodes import DecisionNode
+from primo.nodes import UtilityNode
+from primo.nodes import DiscreteNode
+from primo.inference.decision import MakeDecision
 
 import numpy
 

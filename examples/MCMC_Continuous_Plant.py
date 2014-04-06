@@ -1,13 +1,13 @@
-from primo.core import BayesNet
-from primo.reasoning import ContinuousNodeFactory
-from primo.reasoning.density import ExponentialParameters
-from primo.reasoning.density import BetaParameters
-from primo.reasoning.density import GaussParameters
-from primo.reasoning.density import NDGauss
-from primo.reasoning import MCMC
+from primo.networks import BayesianNetwork
+from primo.nodes import ContinuousNodeFactory
+from primo.densities import ExponentialParameters
+from primo.densities import BetaParameters
+from primo.densities import GaussParameters
+from primo.densities import NDGauss
+from primo.inference.mcmc import MCMC
 
-from primo.reasoning import EvidenceEqual as EvEqual
-from primo.reasoning import EvidenceInterval as EvInterval
+from primo.evidence import EvidenceEqual as EvEqual
+from primo.evidence import EvidenceInterval as EvInterval
 
 import numpy
 
@@ -16,7 +16,7 @@ import numpy
 #it has grown up to (+noise)
 
 
-bn = BayesNet()
+bn = BayesianNetwork()
 cnf=ContinuousNodeFactory()
 
 #create the nodes

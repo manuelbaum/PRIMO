@@ -6,18 +6,17 @@ the probability of evidence.
 @author: djohn, mbaum
 """
 
-from  primo.core import BayesNet
-from  primo.reasoning import DiscreteNode
-from primo.reasoning.density import ProbabilityTable
-#from primo.reasoning.factorelemination import EasiestFactorElimination
-from primo.reasoning.factorelemination import FactorTreeFactory
-from primo.reasoning import MCMC
-from primo.reasoning import EvidenceEqual as EvEq
+from primo.networks import BayesianNetwork
+from primo.nodes import DiscreteNode
+from primo.densities import ProbabilityTable
+from primo.inference.factor import FactorTreeFactory
+from primo.inference.mcmc import MCMC
+from primo.evidence import EvidenceEqual as EvEq
 import numpy
 
 #==============================================================================
 #Builds the example BayesNet
-bn = BayesNet()
+bn = BayesianNetwork()
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
 alarm = DiscreteNode("Alarm", ["Ringing", "Silent"])
 earthquake = DiscreteNode("Earthquake", ["Shaking", "Calm"])
@@ -119,7 +118,7 @@ print "EarthquakeFT: " + str(factorTree.calculate_marginal([earthquake]))
 
 
 
-mcmc_ask=MCMC(bn)
+mcmc_ask=MCMC(bn,1000)
 
 print "====MCMC===="
 

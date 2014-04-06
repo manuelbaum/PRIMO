@@ -1,5 +1,6 @@
 import networkx as nx
 
+import primo.densities
 import primo.nodes
 
 class BayesianNetwork(object):
@@ -152,20 +153,20 @@ class BayesianDecisionNetwork(BayesianNetwork):
                 return False
         decisionNodeList = []
         for node in self.get_all_nodes():
-            if isinstance(node, DecisionNode):
+            if isinstance(node, primo.nodes.DecisionNode):
                 decisionNodeList.append(node)
 
         return all([nx.has_path(self.graph, x, y) == True for x in decisionNodeList for y in decisionNodeList])
 
     def add_node(self, node):
-        if isinstance(node, Node):
+        if isinstance(node, primo.nodes.Node):
             if node.name in self.node_lookup.keys():
                 raise Exception("Node name already exists in Bayesnet: "+node.name)
-            if isinstance(node, DiscreteNode):
+            if isinstance(node, primo.nodes.DiscreteNode):
                 self.random_nodes.append(node)
-            elif isinstance(node, UtilityNode):
+            elif isinstance(node, primo.nodes.UtilityNode):
                 self.utility_nodes.append(node)
-            elif isinstance(node, DecisionNode):
+            elif isinstance(node, primo.nodes.DecisionNode):
                 self.decision_nodes.append(node)
             else:
                 raise Exception("Tried to add a node which the Bayesian Decision Network can not work with")
@@ -193,9 +194,9 @@ class BayesianDecisionNetwork(BayesianNetwork):
         node_from -- Node from where the edge shall begin
         node_to -- Node where the edge shall end
         """
-        if isinstance(node_from, DecisionNode) and isinstance(node_to, DecisionNode):
+        if isinstance(node_from, primo.nodes.DecisionNode) and isinstance(node_to, primo.nodes.DecisionNode):
             raise Exception("Tried to add an edge from a DecisionNode to a DecisionNode")
-        if isinstance(node_from, UtilityNode) and isinstance(node_to, UtilityNode):
+        if isinstance(node_from, primo.nodes.UtilityNode) and isinstance(node_to, primo.nodes.UtilityNode):
             raise Exception("Tried to add an edge from a UtilityNode to a UtilityNode")
         if node_from in self.graph.nodes() and node_to in self.graph.nodes():
             self.graph.add_edge(node_from, node_to)
@@ -315,7 +316,7 @@ class TwoTBN(BayesianNetwork):
         new value.
         '''
         for (node, node_t) in self.__initial_nodes:
-            cpd = ProbabilityTable()
+            cpd = primo.densities.ProbabilityTable()
             cpd.add_variable(node)
             node.set_cpd(cpd)
             if not initial:

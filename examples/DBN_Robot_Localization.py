@@ -1,18 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from primo.core import BayesNet
-from primo.core import DynamicBayesNet
-from primo.core import TwoTBN
-from primo.reasoning import DiscreteNode
-import primo.reasoning.particlebased.ParticleFilterDBN as pf
-import numpy
-from primo.utils import XMLBIF
 import random
+
+import numpy
+
+from primo.networks import BayesianNetwork
+from primo.networks import DynamicBayesianNetwork
+from primo.networks import TwoTBN
+from primo.nodes import DiscreteNode
+import primo.inference.particlefilter as pf
+from primo.io import XMLBIF
+
 
 
 # Construct a DynmaicBayesianNetwork
-dbn = DynamicBayesNet()
-B0 = BayesNet()
+dbn = DynamicBayesianNetwork()
+B0 = BayesianNetwork()
 twoTBN = TwoTBN(XMLBIF.read("Robot_Localization.xmlbif"))
 
 # Configure TwoTBN

@@ -1,9 +1,7 @@
-
 import copy
 import random
 
-
-from primo.reasoning.convergence_test import ConvergenceTestSimpleCounting
+from primo.util import weighted_random
 
 
 class MCMC(object):
@@ -122,19 +120,6 @@ class MCMC(object):
         for var in self.bn.get_nodes_in_topological_sort():
             state[var]=var.sample_global(state, evidence)
         return state
-
-
-def weighted_random(weights):
-    '''
-    Implements roulette-wheel-sampling.
-    @param weights: A List of float-values.
-    @returns: Index of the selected entity
-    '''
-    counter = random.random() * sum(weights)
-    for i,w in enumerate(weights):
-        counter -= w
-        if counter <=0:
-            return i
 
 class GibbsTransitionModel(object):
     '''

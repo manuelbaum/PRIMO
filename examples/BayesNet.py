@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from  primo.core import BayesNet
-from  primo.reasoning import DiscreteNode
+from  primo.networks import BayesianNetwork
+from  primo.nodes import DiscreteNode
 import numpy
 
-bn = BayesNet()
+bn = BayesianNetwork()
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
 alarm = DiscreteNode("Alarm", ["Ringing", "Silent","Kaputt"])
 earthquake = DiscreteNode("Earthquake", ["Shaking", "Calm"])

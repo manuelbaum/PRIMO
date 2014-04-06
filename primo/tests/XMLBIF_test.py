@@ -1,15 +1,18 @@
+
+import os
 import unittest
 
-from primo.utils import XMLBIF
-from primo.core import BayesNet
-from primo.reasoning import DiscreteNode
 import numpy
-import os
+
+from primo.io import XMLBIF
+from primo.networks import BayesianNetwork
+from primo.nodes import DiscreteNode
+
 
 class ImportExportTest(unittest.TestCase):
     def setUp(self):
         # Create BayesNet
-        self.bn = BayesNet();
+        self.bn = BayesianNetwork();
         # Create Nodes
         weather0 = DiscreteNode("Weather0", ["Sun", "Rain"])
         weather = DiscreteNode("Weather", ["Sun", "Rain"])
@@ -39,17 +42,19 @@ class ImportExportTest(unittest.TestCase):
         # read BN
         bn2 = XMLBIF.read("test_out.xmlbif")
         for node1 in self.bn.get_nodes():
-            
             name_found = False
             cpd_equal = False
             value_range_equal = False
             str_equal = False
             pos_equal = False
             for node2 in bn2.get_nodes():
+                print(node2.name)
+                print(node2.get_cpd())
                 # Test node names
+                print(node2.name)
                 if node1.name == node2.name:
                     name_found = True
-                    cpd_equal = node1.get_cpd == node2.get_cpd
+                    cpd_equal = node1.get_cpd() == node2.get_cpd()
                     value_range_equal = node1.get_value_range() == node2.get_value_range()
                     str_equal = str(node1) == str(node2)
                     pos_equal = node1.pos == node2.pos

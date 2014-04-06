@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import xml.dom.minidom as minidom
-from primo.core import BayesNet
-from primo.core import Node
-from primo.reasoning import DiscreteNode
 import re
+import xml.dom.minidom as minidom
+
+import primo.networks
+import primo.nodes
 
 
 class XMLBIF(object):
@@ -35,7 +35,7 @@ class XMLBIF(object):
         self.newl = newl
         self.addindent = addindent
         self.root = minidom.Document()
-        if isinstance(network, BayesNet):
+        if isinstance(network, primo.networks.BayesianNetwork):
             self.network = network
         else:
             raise Exception("Given network is not a BayesNet.")
@@ -82,7 +82,7 @@ class XMLBIF(object):
 
         for node_name in self.network.node_lookup:
             current_node = self.network.node_lookup[node_name]
-            if not isinstance(current_node, DiscreteNode):
+            if not isinstance(current_node, primo.nodes.DiscreteNode):
                 raise Exception("Node " + str(current_node) + " is not a DiscreteNode.")
             node_tag = self.create_node_tag(current_node)
             tag_net.appendChild(node_tag)
@@ -139,7 +139,7 @@ class XMLBIF(object):
 
         Returns a XMLBIF conform "variable" tag
         '''
-        if not isinstance(node, Node):
+        if not isinstance(node, primo.nodes.Node):
             raise Exception("Node " + str(node) + " is not a Node.")
         tag_var = minidom.Element("VARIABLE")
         tag_own = minidom.Element("NAME")
@@ -228,7 +228,7 @@ class XMLBIF(object):
 
         This method is used internally. Do not call it outside this class.
         '''
-        network = BayesNet()
+        network = primo.networks.BayesianNetwork()
         bif_nodes = root.getElementsByTagName("BIF")
         if len(bif_nodes) != 1:
             raise Exception("More than one or none <BIF>-tag in document.")
@@ -248,7 +248,7 @@ class XMLBIF(object):
             for position_node in variable_node.getElementsByTagName("PROPERTY"):
                 position = XMLBIF.get_node_position_from_text(position_node.childNodes)
                 break
-            new_node = DiscreteNode(name, value_range)
+            new_node = primo.nodes.DiscreteNode(name, value_range)
             new_node.position = position
             network.add_node(new_node)
         definition_nodes = network_nodes[0].getElementsByTagName("DEFINITION")

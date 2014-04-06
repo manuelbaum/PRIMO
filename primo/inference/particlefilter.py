@@ -5,6 +5,7 @@ import random
 import time
 
 import primo.networks
+from primo.util import weighted_random
 
 class Particle(object):
     '''
@@ -37,13 +38,6 @@ class Particle(object):
         Implement this method to update the particle as required.
         '''
         pass
-
-def weighted_random(weights):
-    counter = random.random() * sum(weights)
-    for i, w in enumerate(weights):
-        counter -= w
-        if counter <= 0:
-            return i
 
 def wighted_sample_with_replacement(samples = [], weights = [], N = 0):
     '''
@@ -90,7 +84,7 @@ def weighted_sample(network, evidence = {}):
     '''
     w = 1.0
     state = {}
-    if not isinstance(network, primo.network.BayesianNetwork):
+    if not isinstance(network, primo.networks.BayesianNetwork):
         raise Exception("The given network is not an instance of BayesNet.")
 
     nodes = network.get_nodes_in_topological_sort()

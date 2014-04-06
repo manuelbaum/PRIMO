@@ -1,12 +1,12 @@
 import unittest
 
-from primo.core import BayesNet
-from primo.reasoning import DiscreteNode
+from primo.networks import BayesianNetwork
+from primo.nodes import DiscreteNode
 
 
 class NodeAddAndRemoveTestCase(unittest.TestCase):
     def setUp(self):
-        self.bn = BayesNet()
+        self.bn = BayesianNetwork()
 
     def tearDown(self):
         self.bn = None

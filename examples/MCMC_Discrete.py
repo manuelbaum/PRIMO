@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from  primo.core import BayesNet
-from  primo.reasoning import DiscreteNode
-from primo.reasoning.density import ProbabilityTable
-from primo.reasoning import MCMC
-from primo.reasoning import EvidenceEqual as EvEq
-from primo.reasoning import GibbsTransitionModel
+from primo.networks import BayesianNetwork
+from primo.nodes import DiscreteNode
+from primo.densities import ProbabilityTable
+from primo.inference.mcmc import MCMC
+from primo.evidence import EvidenceEqual as EvEq
+from primo.inference.mcmc import GibbsTransitionModel
 import numpy
 import pdb
 
@@ -19,7 +19,7 @@ import pdb
 #-Maximum a-posteriori hypothesis
 
 #Construct some simple BayesianNetwork
-bn = BayesNet()
+bn = BayesianNetwork()
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
 alarm = DiscreteNode("Alarm", ["Ringing", "Silent","Destroyed"])
 

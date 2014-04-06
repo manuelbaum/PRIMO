@@ -5,6 +5,7 @@ import re
 import scipy.stats
 
 import primo.densities
+import primo.inference.decision
 
 
 class Node(object):
@@ -376,7 +377,7 @@ class UtilityNode(Node):
         name -- The name of this node
         """
         super(UtilityNode, self).__init__(name)
-        self.ut = UtilityTable()
+        self.ut = primo.inference.decision.UtilityTable()
 
     def announce_parent(self, node):
         """

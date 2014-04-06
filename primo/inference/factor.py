@@ -1,3 +1,6 @@
+import copy
+import operator
+
 import networkx as nx
 
 import primo.densities
@@ -177,7 +180,7 @@ class FactorTreeFactory(object):
         for n in allNodes:
             sortNodeList.append((len(n.get_cpd().get_variables()),n))
         #sort node list
-        sortNodeList = sorted(sortNodeList,key=itemgetter(0),reverse=True)
+        sortNodeList = sorted(sortNodeList,key=operator.itemgetter(0),reverse=True)
         sortNodeList =  zip(*sortNodeList)
         sortNodeList = list(sortNodeList[1])
         #root node with the most variables

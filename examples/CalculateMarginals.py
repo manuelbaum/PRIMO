@@ -6,15 +6,15 @@ the probability of evidence.
 @author: djohn
 """
 
-from  primo.core import BayesNet
-from  primo.reasoning import DiscreteNode
-from primo.reasoning.factorelemination import EasiestFactorElimination
-from primo.reasoning.factorelemination import FactorTreeFactory
+from primo.networks import BayesianNetwork
+from primo.nodes import DiscreteNode
+from primo.inference.factor import EasiestFactorElimination
+from primo.inference.factor import FactorTreeFactory
 import numpy
 
 #==============================================================================
 #Builds the example BayesNet
-bn = BayesNet()
+bn = BayesianNetwork()
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
 alarm = DiscreteNode("Alarm", ["Ringing", "Silent"])
 earthquake = DiscreteNode("Earthquake", ["Shaking", "Calm"])

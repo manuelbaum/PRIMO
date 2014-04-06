@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-
 import copy
 import math
 import random
 
 import numpy
-from scipy.stats
+import scipy.stats
 
-from primo.nodes
+import primo.nodes
+from primo.util import weighted_random
 
 class Density(object):
     '''TODO: write doc'''
@@ -116,7 +116,7 @@ class Beta(Density):
         self.q=parameters.q
 
     def add_variable(self, variable):
-        if( not isinstance(variable,ContinuousNode.ContinuousNode)):
+        if( not isinstance(variable,primo.nodes.ContinuousNode)):
             raise Exception("Tried to add Variable as parent, but is not a ContinuousNode")
         self.p[variable]=0.0
         self.q[variable]=0.0
@@ -223,7 +223,7 @@ class Exponential(Density):
         to be parents because of their value range. Instead it should be evaluated
         if they can yield parameters for this distribution that are permitted. This
         can in any case happen under bad influence coefficients'''
-        if( not isinstance(variable,ContinuousNode.ContinuousNode)):
+        if( not isinstance(variable,primo.nodes.ContinuousNode)):
             raise Exception("Tried to add Variable as parent, but is not a ContinuousNode")
         self.b[variable]=0.0
 

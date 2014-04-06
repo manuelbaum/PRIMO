@@ -1,9 +1,10 @@
 import numpy
 
-from primo.core import BayesNet
-from primo.reasoning import GaussNode
+from primo.networks import BayesianNetwork
+from primo.nodes import ContinuousNodeFactory
 
-age = GaussNode("Plant_age")
+cnf = ContinuousNodeFactory()
+age = cnf.createGaussNode("Plant_age")
 
 #parameterization
 age_b0=numpy.array([4])

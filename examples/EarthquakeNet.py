@@ -6,12 +6,14 @@ This example shows how to create a BayesNet
 @author: djohn
 """
 
-from  primo.core import BayesNet
-from  primo.reasoning import DiscreteNode
 import numpy
 
+from  primo.networks import BayesianNetwork
+from  primo.nodes import DiscreteNode
+
+
 #initialize a new BayesNet
-bn = BayesNet()
+bn = BayesianNetwork()
 
 #create Nodes with Name and the possible values
 burglary = DiscreteNode("Burglary", ["Intruder","Safe"])
@@ -61,6 +63,6 @@ john_calls.set_probability(0.01,[(alarm,"Silent"),(john_calls,"Calling")])
 john_calls.set_probability(0.99,[(alarm,"Silent"),(john_calls,"Not Calling")])
 
 #draws the BayesNet
-#bn.draw()
+bn.draw()
 
 

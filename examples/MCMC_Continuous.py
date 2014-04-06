@@ -1,14 +1,15 @@
-from primo.core import BayesNet
-from primo.reasoning import ContinuousNodeFactory
-from primo.reasoning.density import ExponentialParameters
-from primo.reasoning.density import BetaParameters
-from primo.reasoning.density import GaussParameters
-from primo.reasoning.density import NDGauss
-from primo.reasoning import MCMC
-from primo.reasoning.convergence_test import ConvergenceTestSimpleCounting
+from primo.networks import BayesianNetwork
+from primo.nodes import ContinuousNode
+from primo.nodes import ContinuousNodeFactory
+from primo.densities import ExponentialParameters
+from primo.densities import BetaParameters
+from primo.densities import GaussParameters
+from primo.densities import NDGauss
+from primo.inference.mcmc import MCMC
+from primo.inference.mcmc import ConvergenceTestSimpleCounting
 
-from primo.reasoning import EvidenceEqual as EvEqual
-from primo.reasoning import EvidenceLower as EvLower
+from primo.evidence import EvidenceEqual as EvEqual
+from primo.evidence import EvidenceLower as EvLower
 
 import numpy
 
@@ -26,7 +27,7 @@ import numpy
 #Construct some simple BayesianNetwork. 
 
 #topology
-bn = BayesNet()
+bn = BayesianNetwork()
 cnf=ContinuousNodeFactory()
 age = cnf.createExponentialNode("Plant_age")
 height = cnf.createGaussNode("Plant_height")
