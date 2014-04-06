@@ -340,7 +340,7 @@ class TwoTBN(BayesianNetwork):
         '''
         super(TwoTBN, self).add_node(node)
         if initial:
-            self.set_initial_node(node, node_t)
+            self.set_initial_node(node.name, node_t.name)
 
     def set_initial_node(self, node_name, node_name_t):
         '''
